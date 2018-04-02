@@ -9,14 +9,14 @@ const MapListings = (props) => {
 	 		<div className='pa2 ph3-ns pb3-ns'>
 				<div className='dt w-100 mt1'>
 						<div className='dtc'>
-						<h4 className='f6 f5-ns mv0'>{[`${props.streetnumber}`]} {[`${props.streetname}`]} #{[`${props.unit}`]}</h4>
+						<h4 className='f6 f5-ns mv0'>{`${props.streetnumber}`} {`${props.streetname}`} #{`${props.unit}`}</h4>
 						</div>
 	  					<div className='dtc tr'>
-	    					<h2 className='f5 mv0'>{[`${props.price}`]}</h2>
+	    					<h2 className='f5 mv0'>{`${props.price}`}</h2>
 	  					</div>
 					</div>
 	  					<div className='dtc'>
-	    					<h6 className='f6 f6-ns mv0'>{[`${props.city}`]}, MA</h6>
+	    					<h6 className='f6 f6-ns mv0'>{`${props.city}`}, MA</h6>
 	  				</div>
 				    <p className='f6 lh-copy measure mt2 mid-gray'>
 

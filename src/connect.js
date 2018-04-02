@@ -1,23 +1,23 @@
 import React from 'react';
-import MapListings from './card'
-const GetListings = ({ listings }) => {
-	const cardComponent = listings.map((listings, i) => {
+// import ScrollLock from './scroll';
+import MapListings from './card';
+
+const GetListings = (props) => {
+	const cardComponent = props.map((listings, i) => {
+debugger;
 		return (
-			<MapListings
-			 	key={i} 
-			 	streetnumber={listings.StreetNumber} 
-			 	streetname={listings.StreetName} 
-			 	unit={listings.Unit} 
-			 	city={listings.City} 
-			 	beds={listings.Beds} 
-			 	baths={listings.Baths} 
-			 	available={listings.AvailableDate} 
-			 	price={listings.Price} 
-			 	pet={listings.Pet} 
-			 	includes={listings.RentIncludes} 
-			 	photo={listings.Photos.Photo}
-			 	listing_id={listings.ID}
-			/> 
+				<MapListings
+				 	key={i} 
+				 	streetnumber={listings.streetnumber[0]._text[0].value} 
+				 	streetname={listings.streetname[0]._text[0]} 
+				 	unit={listings.unit[0]._text[0]} 
+				 	city={listings.city[0]._text[0]} 
+				 	beds={listings.beds[0]._text[0]} 
+				 	baths={listings.baths[0]._text[0]} 
+				 	availabledate={listings.availabledate[0]._text[0]} 
+				 	price={listings.price[0]._text[0]} 
+				 	pet={listings.pet} 
+				/> 
 		);
 	})
 	return (
