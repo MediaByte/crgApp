@@ -2,13 +2,13 @@ import React from 'react';
 import MapListings from './card';
 
 const GetListings = ({ listings }) => {
-	// debugger;
 	const cardComponent = listings.map((listings) => {
 		return (
 			<MapListings
 			 	key={listings.ID._text} 
 			 	streetnumber={listings.StreetNumber._text} 
 			 	streetname={listings.StreetName._text} 
+			 	unit={listings.Unit.hasOwnProperty('_text') ? listings.Unit._text : '111'}
 			 	city={listings.City._text} 
 			 	beds={listings.Beds._text} 
 			 	baths={listings.Baths._text} 

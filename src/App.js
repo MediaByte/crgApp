@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GetListings from './connect';
+import ScrollLock from './scroll'
 
 
 class App extends Component {
@@ -40,7 +41,9 @@ class App extends Component {
         const listArray = this.state.listings.YGLResponse.Listings.Listing;
         return (
           <div>
+          <ScrollLock>
             <GetListings listings={listArray} />
+          </ScrollLock>
           </div>
         );
       }

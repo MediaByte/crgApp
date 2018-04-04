@@ -2,7 +2,7 @@ import React from 'react';
 import 'tachyons';
 import './connect';
 
-const MapListings = ({ streetnumber, streetname, price, city, photo }) => {
+const MapListings = ({ streetnumber, streetname, price, city, photo, unit }) => {
 	// debugger;
 	return (
 		<section className='mw7-ns center ph9-ns dib h-m br8 ba dark-gray b--black-10 mh1 mv0 w-100 w-50-m w-25-l shadow-5'>
@@ -10,10 +10,10 @@ const MapListings = ({ streetnumber, streetname, price, city, photo }) => {
 	 		<div className='pa2 ph3-ns pb3-ns'>
 				<div className='dt w-100 mt1'>
 						<div className='dtc'>
-						<h4 className='f6 f5-ns mv0'>{`${streetnumber}`} {`${streetname}`}</h4>
+						<h5 className='f6 f5-ns mv0'>{`${streetnumber}`} {`${streetname}`} {`#${unit}`} </h5>
 						</div>
 	  					<div className='dtc tr'>
-	    					<h2 className='f5 mv0'>{`${price}`}</h2>
+	    					<h3 className='f5 mv0'>{`$${price}`}</h3>
 	  					</div>
 					</div>
 	  					<div className='dtc'>
@@ -24,6 +24,7 @@ const MapListings = ({ streetnumber, streetname, price, city, photo }) => {
 				    </p>
 				</div>
 		</section>
+		
 	);
 }
 
