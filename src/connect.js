@@ -1,25 +1,23 @@
 import React from 'react';
-// import ScrollLock from './scroll';
 import MapListings from './card';
 
-const GetListings = (props) => {
-	const cardComponent = props.map((listings, i) => {
-debugger;
+const GetListings = ({ listings }) => {
+	// debugger;
+	const cardComponent = listings.map((listings) => {
 		return (
-				<MapListings
-				 	key={i} 
-				 	streetnumber={listings.streetnumber[0]._text[0].value} 
-				 	streetname={listings.streetname[0]._text[0]} 
-				 	unit={listings.unit[0]._text[0]} 
-				 	city={listings.city[0]._text[0]} 
-				 	beds={listings.beds[0]._text[0]} 
-				 	baths={listings.baths[0]._text[0]} 
-				 	availabledate={listings.availabledate[0]._text[0]} 
-				 	price={listings.price[0]._text[0]} 
-				 	pet={listings.pet} 
-				/> 
+			<MapListings
+			 	key={listings.ID._text} 
+			 	streetnumber={listings.StreetNumber._text} 
+			 	streetname={listings.StreetName._text} 
+			 	city={listings.City._text} 
+			 	beds={listings.Beds._text} 
+			 	baths={listings.Baths._text} 
+			 	price={listings.Price._text} 
+			 	photo={listings.hasOwnProperty('Photos') ? listings.Photos.Photo._text : 'https://image.freepik.com/free-vector/white-room-with-light-and-coming-soon-text_1017-5070.jpg'}
+			/> 
 		);
 	})
+	
 	return (
 		<div>
 			{cardComponent}
