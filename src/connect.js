@@ -1,6 +1,6 @@
 import React from 'react';
 import MapListings from './card';
-
+import 'tachyons';
 const GetListings = ({ listings }) => {
 	const cardComponent = listings.map((listings) => {
 		return (
@@ -17,12 +17,10 @@ const GetListings = ({ listings }) => {
 			/> 
 		);
 	})
-	
 	return (
-		<div>
+		<div className='self-center justify-center content-center'>
 			{cardComponent}
 		</div>
 	);
 }
-
 export default GetListings;

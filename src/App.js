@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import GetListings from './connect';
-import ScrollLock from './scroll'
+import LoadNav from './navigation';
 
-
-class App extends Component {
+class RentalApp extends Component {
   constructor() {
     super();
       this.state = {listings: []};
   }
-
   componentDidMount() {
   const convert = require('xml-js');
   const options = {
@@ -27,27 +25,27 @@ class App extends Component {
     .then(xml => convert.xml2js(xml, options))
     .then(data => this.setState({ listings: data }))
     .then(console.log);
-  }
+  } 
 
   render() {
     const listArray = this.state.listings;
-    if (listArray.length === 0) {
-      return (
-        <div>
-          <p className='tc'> LOADING APP... </p>
-        </div>
-      )
-    } else {
-        const listArray = this.state.listings.YGLResponse.Listings.Listing;
-        return (
-          <div>
-          <ScrollLock>
-            <GetListings listings={listArray} />
-          </ScrollLock>
-          </div>
-        );
-      }
+
+        if (listArray.length === 0) {
+          return (
+            <div>
+              <LoadNav />
+            </div>
+          )
+        } else {
+            const listArray = this.state.listings.YGLResponse.Listings.Listing;
+              return (
+                <div>
+                  <LoadNav />
+                    <GetListings listings={listArray} />
+                </div>
+              )
+        }
     }
 }
 
-export default App;
+export default RentalApp;
