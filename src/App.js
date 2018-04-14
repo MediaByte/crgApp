@@ -24,26 +24,24 @@ class RentalApp extends Component {
     .then(xml => xml.text())
     .then(xml => convert.xml2js(xml, options))
     .then(data => this.setState({ listings: data }))
-    .then(console.log);
   } 
-
   render() {
     const listArray = this.state.listings;
-
-        if (listArray.length === 0) {
-          return (
-            <div>
-              <LoadNav />
-            </div>
-          )
-        } else {
-            const listArray = this.state.listings.YGLResponse.Listings.Listing;
-              return (
-                <div>
-                  <LoadNav />
-                    <GetListings listings={listArray} />
-                </div>
-              )
+    console.log(listArray)
+      if (listArray.length === 0) {
+        return (
+          <div>
+            <LoadNav />
+          </div>
+        )
+      } else {
+          const listArray = this.state.listings.YGLResponse.Listings.Listing;
+            return (
+              <div>
+                <LoadNav />
+                  <GetListings listings={listArray} />
+              </div>
+            )
         }
     }
 }
