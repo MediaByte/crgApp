@@ -1,7 +1,6 @@
 import React from 'react';
 import MapListings from './card';
 import 'tachyons';
-
 const GetListings = ({ listings }) => {
 	const cardComponent = listings.map((listings, i) => {
 		return (
@@ -21,10 +20,9 @@ const GetListings = ({ listings }) => {
 		);
 	})
 	return (
-		<div className='flex flex-wrap justify-center no-gutters'>
+		<div className='flex flex-wrap justify-center'>
 			{cardComponent}
 		</div>
 	);
 }
-
 export default GetListings;
