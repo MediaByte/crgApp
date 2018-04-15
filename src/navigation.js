@@ -1,5 +1,6 @@
 import React from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import 'tachyons';
 
 export default class LoadNav extends React.Component {
   constructor(props) {
@@ -18,9 +19,9 @@ export default class LoadNav extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Navbar color='dark' dark>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+      <div className='shadow-5 avenir mb5'>
+        <Navbar fixed={`top`} color='dark' dark>
+          <NavbarToggler onClick={this.toggleNavbar} className="mr-3 grow shadow-5" />
           <NavbarBrand href="/" className="mr-auto white">reactstrap</NavbarBrand>
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>

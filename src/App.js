@@ -39,11 +39,10 @@ class RentalApp extends Component {
             return (
               <div>
                 <LoadNav />
-                  <GetListings listings={listArray} />
+                  <GetListings listings={listArray} /> 
               </div>
             )
         }
     }
 }
-
 export default RentalApp;
