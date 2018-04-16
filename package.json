@@ -1,5 +1,6 @@
 {
   "name": "crg",
+  "homepage": "https-MediaByte.github.io-RentalApp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
