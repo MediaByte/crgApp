@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import GetListings from './connect';
 import LoadNav from './navigation';
+import ScrollToTop from 'react-scroll-up'
+import { ic_arrow_upward } from 'react-icons-kit/md/ic_arrow_upward'; 
+import Icon from 'react-icons-kit';
 
 class RentalApp extends Component {
   constructor() {
@@ -40,6 +43,16 @@ class RentalApp extends Component {
               <div>
                 <LoadNav />
                   <GetListings listings={listArray} /> 
+                  <ScrollToTop showUnder={160}>
+                    <span className='br4 rounded'>
+                      <Icon
+                        style={{ color: '#FF0017' }} 
+                        className='border border-danger br4'
+                        size={40} 
+                        icon={ic_arrow_upward} 
+                      />
+                    </span>
+                  </ScrollToTop>
               </div>
             )
         }

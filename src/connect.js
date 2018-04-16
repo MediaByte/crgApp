@@ -5,7 +5,6 @@ const GetListings = ({ listings }) => {
 	const cardComponent = listings.map((listings, i) => {
 		return (
 			<div>
-
 				<MapListings
 					key={i} 
 					streetnumber={listings.StreetNumber._text} 
@@ -18,6 +17,10 @@ const GetListings = ({ listings }) => {
 					photo={listings.hasOwnProperty('Photos') ? listings.Photos.Photo._text : 'https://image.freepik.com/free-vector/white-room-with-light-and-coming-soon-text_1017-5070.jpg'}
 					lat={listings.Latitude._text} 
 					long={listings.Longitude._text}
+					includeselectric={listings.IncludeElectricity._text}
+					includesgas={listings.IncludeGas._text}
+					includesheat={listings.IncludeHeat._text}
+					includeshotwater={listings.IncludeHotWater._text}
 				/>
 			</div>
 		);
