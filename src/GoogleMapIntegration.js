@@ -21,7 +21,7 @@ class MapSnippet extends Component {
         <div>
           <Button className='grow shadow-5' color="white" onClick={this.toggle}> <div className='pt1 pr1 pl1' style={{ color: '#ED0036' }}><Icon size={20} icon={location2} /> </div></Button>
             <Modal className='shadow-5' size='lg' isOpen={this.state.modal} toggle={this.toggle}>
-              <ModalHeader size='sm' className='avenir shadow-5 bg-dark text-white br2' toggle={this.toggle}>{`Google Map: ${this.state.title} ${this.state.subTitle}`}</ModalHeader>
+              <ModalHeader size='sm' className='avenir shadow-5 bg-dark text-white br2' toggle={this.toggle}>{`Google Map`}</ModalHeader>
                   <div>   
                     <Map style={style} google={this.props.google} initialCenter={{lat: this.state.lat, lng: this.state.long}} zoom={15} onClick={this.onMapClicked}>
                       <Marker onClick={this.onMarkerClick} name={'Current location'}/>

@@ -1,69 +1,76 @@
 import React from 'react';
-import { Row, Collapse, Col, Navbar, Jumbotron, NavbarToggler, Nav, NavItem, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import 'tachyons';
+import LoadPriceSlider from './slider';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import LoadBedroomSlider from './beds-slider';
+import LoadBathroomSlider from './baths-slider';
+import AppBar from 'material-ui/AppBar';
+
 
 export default class LoadNav extends React.Component {
   constructor(props) {
     super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
+    this.state = {open: false};
   }
 
-  toggleNavbar() {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+  handleToggle = () => {
+    this.setState({open: !this.state.open});
   }
+
   render() {
     return (
-      <div className='shadow-5 avenir mb5 tc'>
-        <Navbar fixed={`top`} color='dark' dark>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-3 grow shadow-1" />
-            <Collapse isOpen={!this.state.collapsed} navbar>
-              <Nav navbar>
-                <NavItem>
-                  <div className='mt4'>
-                    <Jumbotron className='bg-dark shadow-1'> <hr className="my-6 shadow-5" color='gray' />
-                      <Form className='flex justify-center'>
-                        <Row className='white mt2'>
-                          <Col className='bg-dark' xs={6}> 
-                            <FormGroup>
-                              <Label for="bedroomSelect"className='lead dark mt1'>Bedrooms</Label>
-                                <Input invalid className='form-control-range shadow-1 mw4' type="select" name="select" id="bedroomSelect">
-                                  <option>Studio</option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                  <option>6</option>
-                                  <option>7</option>
-                                </Input>
-                            </FormGroup>
-                          </Col>
-                          <Col className='bg-dark' xs={6}>
-                            <FormGroup>
-                              <Label for="bedroomSelect" className='lead dark mt1'>Max Baths</Label>
-                                <Input invalid className='shadow-5 mw4' type="select" name="select" id="bedroomSelect">
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                </Input>
-                            </FormGroup>  
-                          </Col>
-                        </Row>
-                      </Form>
-                    </Jumbotron>
-                  </div>
-                </NavItem>
-              </Nav>
-            </Collapse>
-          </Navbar>
+      <div>
+        <div>
+          <AppBar
+            title="Apartments"
+            iconClassNameRight="muidocs-icon-navigation-expand-more"
+            onClick={this.handleToggle}
+            className='bg-dark white'
+          />
         </div>
+          <div>
+            <Drawer open={this.state.open} style={{  backgroundColor: '#333A40' }}>
+                <div>
+                  <Row>
+                    <Col xs={{size: 4, offset: 2}}>
+                      <div className='white lead avenir'>
+                      <LoadBedroomSlider />
+                      </div>
+                    </Col>
+                    <Col xs={{size: 4, offset: 2}}>
+                      <div className='white lead avenir'>
+                      <LoadBathroomSlider />
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+                <div>
+                  <Row>
+                    <Col xs={{ size: 10, offset: 1 }}>
+                      <div className='dark lead avenir'>
+                        <LoadPriceSlider />
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+                <div>
+                  <Row>
+                    <Col xs={{ size: 10, offset: 3 }}>
+                      <RaisedButton 
+                      backgroundColor="#FFFFFF"
+                      labelColor='#212121'
+                      label="Done"
+                      onClick={this.handleToggle}
+                    />
+                    </Col>
+                  </Row>
+                </div>
+            </Drawer>
+          </div>
+      </div>
     );
   }
 }

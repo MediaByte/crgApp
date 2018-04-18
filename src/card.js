@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './connect';
 import 'tachyons';
-import { Row, Col, Collapse, Card, CardBody, Button } from 'reactstrap';
+import { Row, Col, Card, CardBody } from 'reactstrap';
 import MapSnippet from './GoogleMapIntegration';
 import RequestShowingButton from './RequestShowing';
 import ShowListing from './ShowListings'
@@ -12,20 +12,6 @@ const MapListings = ({ lat, long, streetnumber, streetname, price, city, photo, 
 		return (
 			<div className="avenir ba ma3 dib br2 shadow-5">
 				<Card className='bg-dark text-white shadow-5 border border-secondary' style={{ width: '100%', height: '100%' }}> 
-					<CardBody className='flex justify-center border border-secondary border-top-0 border-right-0 border-left-0 pt3 pl0 pr0'>
-						<Row className='bg-dark' style={{ width: '100%', height: '100%' }}>
-							<Col className='flex justify-center border border-secondary border-top-0 border-bottom-0 border-left-0' xs={4}>
-								<ShowListing modalTitle ={`Listing Sheet: ${title} ${subTitle}`} /> 
-							</Col>
-							<Col className='flex justify-center border border-secondary border-top-0 border-bottom-0 border-left-0' xs={4}>
-								<RequestShowingButton modalTitle='Add to show list'/>
-							</Col>
-							<Col className='flex justify-center' xs={4}>
-								<MapSnippet lat={lat} long={long} modalTitle={title} modalSubTitle={subTitle}/>
-							</Col>
-						</Row>
-					</CardBody>
-
 					<CardBody>
 						<Row className='no-gutters'>
 							<Col className='ma0 pa0'>					
@@ -59,46 +45,60 @@ const MapListings = ({ lat, long, streetnumber, streetname, price, city, photo, 
 								Rent
 							</Col>
 						</Row>
-						<Row className='no-gutters bg-dark'>
+						<Row className='no-gutters bg-dark pb0'>
 							<Col className='flex justify-center' xs={4}>
 								<p>{beds}</p>
 							</Col>
 							<Col className='flex justify-center' xs={4}>
 								<p>{baths}</p>
 							</Col>
-							<Col className='flex justify-center' xs={4}>
+							<Col className='flex justify-center pb0' xs={4}>
 								<p>${price}</p>
 							</Col>
 						</Row>	
+					</CardBody>
+					<CardBody className='flex justify-center border border-secondary border-right-0 border-left-0 pl0 pr0'>
+						<Row className='bg-dark' style={{ width: '100%', height: '100%' }}>
+							<Col className='flex justify-center border border-secondary border-top-0 border-bottom-0 border-left-0' xs={4}>
+								<ShowListing modalTitle ={`Listing Sheet: ${title} ${subTitle}`} /> 
+							</Col>
+							<Col className='flex justify-center border border-secondary border-top-0 border-bottom-0 border-left-0' xs={4}>
+								<RequestShowingButton modalTitle='Add to show list'/>
+							</Col>
+							<Col className='flex justify-center' xs={4}>
+								<MapSnippet lat={lat} long={long} modalTitle={title} modalSubTitle={subTitle}/>
+							</Col>
+						</Row>
 					</CardBody>
 				</Card>
 			</div>		
 		);
 }
-class MoreInfo extends Component {
-	constructor(props) {
-		super(props);
-			this.toggle = this.toggle.bind(this);
-				this.state = { collapse: false };
-		}
-	toggle() {
-		this.setState({ collapse: !this.state.collapse });
-	}
-	render() {
-		return (
-			<div>
-				<Button className='shadow-5  avenir' color="danger" size="sm" block onClick={this.toggle} style={{ marginBottom: '1rem' }}>Details</Button>
-					<Collapse isOpen={this.state.collapse}>
-						<Card className='avenir bg-dark text-white pa0 ma0' style={{ width: '100%', height: '100%' }}>
-							<CardBody>
+
+// class MoreInfo extends Component {
+// 	constructor(props) {
+// 		super(props);
+// 			this.toggle = this.toggle.bind(this);
+// 				this.state = { collapse: false };
+// 		}
+// 	toggle() {
+// 		this.setState({ collapse: !this.state.collapse });
+// 	}
+// 	render() {
+// 		return (
+// 			<div>
+// 				<Button className='shadow-5  avenir' color="danger" size="sm" block onClick={this.toggle} style={{ marginBottom: '1rem' }}>Details</Button>
+// 					<Collapse isOpen={this.state.collapse}>
+// 						<Card className='avenir bg-dark text-white pa0 ma0' style={{ width: '100%', height: '100%' }}>
+// 							<CardBody>
 								
-									Content goes here
+// 									Content goes here
 								
-							</CardBody>
-						</Card>	
-				</Collapse>
-			</div>
-		);
-	}
-}
+// 							</CardBody>
+// 						</Card>	
+// 				</Collapse>
+// 			</div>
+// 		);
+// 	}
+// }
 export default MapListings;
