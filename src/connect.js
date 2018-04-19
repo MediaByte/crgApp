@@ -1,12 +1,14 @@
 import React from 'react';
 import MapListings from './card';
 import 'tachyons';
+import { Row, Col } from 'reactstrap'
+
 const GetListings = ({ listings }) => {
 	const cardComponent = listings.map((listings, i) => {
 		return (
 			<div>
 				<MapListings
-					key={i} 
+					key={i}
 					streetnumber={listings.StreetNumber._text} 
 					streetname={listings.StreetName._text} 
 					unit={listings.Unit.hasOwnProperty('_text') ? listings.Unit._text : '111'}
@@ -26,9 +28,11 @@ const GetListings = ({ listings }) => {
 		);
 	})
 	return (
-		<div className='flex flex-wrap justify-center'>
-			{cardComponent}
-		</div>
+
+				<div className='flex flex-wrap justify-center'>
+					{cardComponent}
+				</div>	
+
 	);
 }
 export default GetListings;
