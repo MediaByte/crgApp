@@ -1,7 +1,6 @@
 import React from 'react';
 import MapListings from './card';
 import 'tachyons';
-import { Row, Col } from 'reactstrap'
 
 const GetListings = ({ listings }) => {
 	const cardComponent = listings.map((listings, i) => {

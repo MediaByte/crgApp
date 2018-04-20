@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 import { Button, ModalHeader, Modal } from 'reactstrap';
 import 'tachyons';
-import Icon from 'react-icons-kit';
-import { location2 } from 'react-icons-kit/icomoon/location2';   
+import IconButton from 'material-ui/IconButton';
+import MapsPinDrop from '@material-ui/icons/Map';
 const style = {  width: '100%', height: '400px' }
 class MapSnippet extends Component {
     constructor(props) {
@@ -19,9 +19,11 @@ class MapSnippet extends Component {
     render() {
       return (
         <div>
-          <Button className='grow shadow-5' color="white" onClick={this.toggle}> <div className='pt1 pr1 pl1' style={{ color: '#ED0036' }}><Icon size={20} icon={location2} /> </div></Button>
+        <IconButton aria-label="Google Map" onClick={this.toggle}>
+				  <MapsPinDrop />
+			  </IconButton>
             <Modal className='shadow-5' size='lg' isOpen={this.state.modal} toggle={this.toggle}>
-              <ModalHeader size='sm' className='avenir shadow-5 bg-dark text-white br2' toggle={this.toggle}>{`Google Map`}</ModalHeader>
+              <ModalHeader size='xs' className='avenir shadow-5 bg-dark text-white br2' toggle={this.toggle}>{`Google Map`}</ModalHeader>
                   <div>   
                     <Map style={style} google={this.props.google} initialCenter={{lat: this.state.lat, lng: this.state.long}} zoom={15} onClick={this.onMapClicked}>
                       <Marker onClick={this.onMarkerClick} name={'Current location'}/>

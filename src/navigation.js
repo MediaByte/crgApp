@@ -15,21 +15,22 @@ import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+import { Row, Col } from 'reactstrap';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 3,
     height: '100%',
     zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
+    overflow: 'auto',
     display: 'flex',
     width: '100%',
+
   },
   appBar: {
-    position: 'top',
+    position: 'fixed',
     backgroundColor: '#333A40',
     
     marginLeft: drawerWidth,
@@ -47,17 +48,16 @@ const styles = theme => ({
     backgroundColor: '#333A40',
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
-      position: 'relative',
+      position: 'fixed',
     },
   },
   content: {
-    flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 1,  
   },
 });
 
-class ResponsiveDrawer extends React.Component {
+class AppArchitecture extends React.Component {
   constructor() {
     super();
       this.state = {
@@ -129,7 +129,7 @@ class ResponsiveDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" noWrap>
-                Responsive drawer
+                {/* Responsive drawer */}
               </Typography>
             </Toolbar>
           </AppBar>
@@ -162,18 +162,20 @@ class ResponsiveDrawer extends React.Component {
           </Hidden>
           <main className={classes.content}>
             <div className={classes.toolbar} />
-              <div>
-              <GetListings listings={listArray} /> 
-                <ScrollToTop showUnder={160}>
-                  <span>
-                    <Icon
-                      style={{ color: '#FF0017' }} 
-                      size={40} 
-                      icon={ic_arrow_upward} 
-                    />
-                  </span>
-                </ScrollToTop>
-            </div>
+                <Row>
+                  <Col xs={{size: 'auto'}} md={{size: 9, offset: 3}} lg={{ size: 9, offset: 3 }}>
+                    <GetListings listings={listArray} /> 
+                    <ScrollToTop showUnder={160}>
+                      <span>
+                        <Icon
+                          style={{ color: '#FF0017' }} 
+                          size={40} 
+                          icon={ic_arrow_upward} 
+                        />
+                      </span>
+                    </ScrollToTop>
+                  </Col>
+                </Row>
           </main>
         </div>
       );
@@ -182,10 +184,10 @@ class ResponsiveDrawer extends React.Component {
   }
 }
 
-ResponsiveDrawer.propTypes = {
+AppArchitecture.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default withStyles(styles, { withTheme: true })(AppArchitecture);
 
