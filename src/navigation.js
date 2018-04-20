@@ -15,16 +15,17 @@ import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import { mailFolderListItems, otherMailFolderListItems } from './tileData';
-import { Row, Col } from 'reactstrap';
+import { Grid, Row, Col } from 'react-material-responsive-grid';
+import 'tachyons';
 
-const drawerWidth = 240;
+const drawerWidth = 230;
 
 const styles = theme => ({
   root: {
     flexGrow: 3,
     height: '100%',
     zIndex: 1,
-    overflow: 'auto',
+    overflow: 'hidden',
     display: 'flex',
     width: '100%',
 
@@ -160,23 +161,30 @@ class AppArchitecture extends React.Component {
               {drawer}
             </Drawer>
           </Hidden>
-          <main className={classes.content}>
-            <div className={classes.toolbar} />
+            <main className={classes.content}>
+              <div className={classes.toolbar} />
+              <Grid>
                 <Row>
-                  <Col xs={{size: 'auto'}} md={{size: 9, offset: 3}} lg={{ size: 9, offset: 3 }}>
-                    <GetListings listings={listArray} /> 
-                    <ScrollToTop showUnder={160}>
-                      <span>
-                        <Icon
-                          style={{ color: '#FF0017' }} 
-                          size={40} 
-                          icon={ic_arrow_upward} 
-                        />
-                      </span>
-                    </ScrollToTop>
+                  <Col xs sm smOffset={1} md={11} mdOffset={2}>
+                    <div>
+                      <GetListings listings={listArray} /> 
+                    </div>
+                        <ScrollToTop showUnder={160}>
+                          <span>
+                            <Icon
+                              style={{ color: '#FF0017' }} 
+                              size={40} 
+                              icon={ic_arrow_upward} 
+                            />
+                          </span>
+                        </ScrollToTop>
+
                   </Col>
                 </Row>
-          </main>
+              </Grid>
+
+
+            </main>
         </div>
       );
     }
