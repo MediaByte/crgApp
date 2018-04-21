@@ -3,15 +3,12 @@ import 'antd/dist/antd.css';
 import { Slider, InputNumber, Row, Col } from 'antd';
 
 export default class BedSlider extends React.Component {
-
   constructor() {
     super();
     this.state = {
-      inputValue: 1
+      inputValue: 0
     };
-
   }
-
   onChange = value => {
     this.setState({
       inputValue: value
@@ -19,20 +16,21 @@ export default class BedSlider extends React.Component {
   };
   render() {
     return (
-      <Row>
-        <Col span={12}>
-          <Slider
-            min={1}
-            max={20}
-            onChange={this.onChange}
-            value={this.state.inputValue}
-          />
+      <Row type="flex" justify="center">
+        <Col md={24}>
+        <div style={{ width: '100%' }}>
+            <Slider
+              min={0}
+              max={8}
+              onChange={this.onChange}
+              value={this.state.inputValue}
+            />
+          </div>
         </Col>
-        <Col span={4}>
+        <Col span={12}>
           <InputNumber
-            min={1}
-            max={20}
-            style={{ marginLeft: 16 }}
+            min={0}
+            max={8}
             value={this.state.inputValue}
             onChange={this.onChange}
           />
