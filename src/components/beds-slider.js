@@ -1,10 +1,17 @@
-import "antd/dist/antd.css";
-import { Slider, InputNumber, Row, Col } from "antd";
+import React, { Component } from 'react';
+import 'antd/dist/antd.css';
+import { Slider, InputNumber, Row, Col } from 'antd';
 
-class IntegerStep extends React.Component {
-  state = {
-    inputValue: 1
-  };
+export default class BedSlider extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      inputValue: 1
+    };
+
+  }
+
   onChange = value => {
     this.setState({
       inputValue: value

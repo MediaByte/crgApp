@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import SwipeableDrawer from 'material-ui/SwipeableDrawer';
+import Drawer from 'material-ui/Drawer';
 import Button from 'material-ui/Button';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -52,7 +52,7 @@ class ListingFilters extends React.Component {
                     <MenuIcon />
                 </IconButton>
                 
-                <SwipeableDrawer open={this.state.left} onClose={this.toggleDrawer('left', false)} >
+                <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)} >
                     <div
                         tabIndex={0}
                         role="button"
@@ -61,7 +61,7 @@ class ListingFilters extends React.Component {
                     >
                         {sideList}
                     </div>
-                </SwipeableDrawer>
+                </Drawer>
             </div>
         );
   }
