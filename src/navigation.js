@@ -14,49 +14,26 @@ import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
 import Divider from 'material-ui/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
-import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 import { Grid, Row, Col } from 'react-material-responsive-grid';
 import 'tachyons';
+import Button from 'material-ui/Button';
+import ListingFilters from './components/filters';
 
-const drawerWidth = 230;
 
-const styles = theme => ({
+
+const styles = {
   root: {
-    flexGrow: 3,
-    height: '100%',
-    zIndex: 1,
-    overflow: 'hidden',
-    display: 'flex',
-    width: '100%',
-
+    flexGrow: 1,
+    backgroundColor: '#FFFFFF',
   },
-  appBar: {
-    position: 'fixed',
-    backgroundColor: '#333A40',
-    
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
+  flex: {
+    flex: 1,
   },
-  navIconHide: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
   },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    backgroundColor: '#333A40',
-    width: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      position: 'fixed',
-    },
-  },
-  content: {
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 1,  
-  },
-});
+};
 
 class AppArchitecture extends React.Component {
   constructor() {
@@ -67,8 +44,6 @@ class AppArchitecture extends React.Component {
         location: '',
         pets: '',
         open: false,
-        anchor: 'left',
-        mobileOpen: false,
         listings: [],
       }
   }
@@ -96,19 +71,10 @@ class AppArchitecture extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const listArray = this.state.listings;
     console.log(this.state.listings)
 
-    const drawer = (
-      <div>
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>{mailFolderListItems}</List>
-        <Divider />
-        <List>{otherMailFolderListItems}</List>
-      </div>
-    );
     if (listArray.length === 0) {
       return (
         <div>
@@ -116,59 +82,30 @@ class AppArchitecture extends React.Component {
         </div>
       )
     } else {
-      const listArray = this.state.listings.YGLResponse.Listings.Listing
-      return (
-        <div className={classes.root}>
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={this.handleDrawerToggle}
-                className={classes.navIconHide}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="title" color="inherit" noWrap>
-                {/* Responsive drawer */}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <Hidden mdUp>
-            <Drawer
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={this.state.mobileOpen}
-              onClose={this.handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden smDown implementation="css">
-            <Drawer
-              variant="permanent"
-              open
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-            <main className={classes.content}>
-              <div className={classes.toolbar} />
-              <Grid>
-                <Row>
-                  <Col xs sm smOffset={1} md={11} mdOffset={2}>
-                    <div>
-                      <GetListings listings={listArray} /> 
-                    </div>
+        const listArray = this.state.listings.YGLResponse.Listings.Listing
+          return (
+            <div className={classes.root}>
+              <div>
+                <AppBar position="fixed" color='#FFFFFFF'>
+                  <Toolbar>
+                      <ListingFilters />
+                    <Typography variant="title" color="inherit" className={classes.flex}>
+                      Rentals
+                    </Typography>
+                    <Button color="inherit">
+                      Sign up
+                    </Button>
+                  </Toolbar>
+                </AppBar>
+              </div>
+              <div className='mt5'>
+                <Grid>
+                  <Row>
+                    <Col>
+                      <div>
+                        <GetListings listings={listArray} />
+                      </div>
+                      <div> 
                         <ScrollToTop showUnder={160}>
                           <span>
                             <Icon
@@ -178,24 +115,19 @@ class AppArchitecture extends React.Component {
                             />
                           </span>
                         </ScrollToTop>
-
-                  </Col>
-                </Row>
-              </Grid>
-
-
-            </main>
-        </div>
-      );
+                      </div>
+                    </Col>
+                  </Row>
+                </Grid>
+              </div>
+            </div>
+          );
     }
     
   }
 }
-
 AppArchitecture.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
-
 export default withStyles(styles, { withTheme: true })(AppArchitecture);
-
