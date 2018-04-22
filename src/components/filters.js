@@ -7,43 +7,37 @@ import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { mailFolderListItems, otherMailFolderListItems } from '../containers/tileData';
+import { RentalController } from '../containers/tileData';
 
 
 const styles = {
   fullList: {
-    width: '260',
+    width: '300',
   },
   list: {
-    width: 260,
+    width: 300,
   },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
   },
 };
-
 class ListingFilters extends React.Component {
   constructor() {
     super();
         this.state = {
-            left: false,
+            left: true,
         };
-
   }
-
-
   toggleDrawer = (side, open) => () => {
     this.setState({[side]: open});
   };
-
   render() {
     const { classes } = this.props;
     const sideList = (
         <div className={classes.list}>
-          <List>{mailFolderListItems}</List>
+          <List>{RentalController}</List>
           <Divider />
-          <List>{otherMailFolderListItems}</List>
         </div>
       );
         return (
@@ -56,7 +50,6 @@ class ListingFilters extends React.Component {
                     <div
                         tabIndex={0}
                         role="button"
-                        onClick={this.toggleDrawer('left', false)}
                         onKeyDown={this.toggleDrawer('left', false)}
                     >
                         {sideList}

@@ -10,9 +10,9 @@ import ReportIcon from '@material-ui/icons/Report';
 import BedSlider from '../components/beds-slider'
 
 
-export const mailFolderListItems = (
+export const RentalController = (
   <div>
-    <ListItem>
+    <ListItem button>
       <BedSlider />
     </ListItem>
     <ListItem button>
@@ -32,29 +32,6 @@ export const mailFolderListItems = (
         <DraftsIcon />
       </ListItemIcon>
       <ListItemText primary="Drafts" />
-    </ListItem>
-  </div>
-);
-
-export const otherMailFolderListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <MailIcon />
-      </ListItemIcon>
-      <ListItemText primary="All mail" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DeleteIcon />
-      </ListItemIcon>
-      <ListItemText primary="Trash" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ReportIcon />
-      </ListItemIcon>
-      <ListItemText primary="Spam" />
     </ListItem>
   </div>
 );
