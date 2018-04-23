@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import AppArchitecture from './navigation';
+import AppArchitecture from './components/architecture';
+import { BackTop } from 'antd';
 
 class RentalApp extends Component {
-  
   render() {  
     return (
       <div>
-        <AppArchitecture />
+        <div>
+          <AppArchitecture />
+          <BackTop />
+        </div>
       </div>
     )
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
-import { Slider, InputNumber, Row, Col } from 'antd';
+import { Slider, Row, Col } from 'antd';
 
 export default class BedSlider extends Component {
   constructor() {
