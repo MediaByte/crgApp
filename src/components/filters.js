@@ -26,7 +26,7 @@ class ListingFilters extends React.Component {
   constructor() {
     super();
         this.state = {
-            left: true,
+            left: false,
         };
   }
   toggleDrawer = (side, open) => () => {
