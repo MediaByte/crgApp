@@ -69,9 +69,13 @@ class AppArchitecture extends React.Component {
 
     if (listArray.length === 0) {
       return (
-        <Row justify={'center'} align={'middle'}>
+        <Row>
           <div className='mt6'>
-            <Col offset={11} span={1}>
+            <Col offset={10} span={6}>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
               <Spin color='' size='large' spinning={this.state.loading} tip={'Loading...'} />
             </Col>
           </div>
