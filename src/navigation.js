@@ -60,7 +60,7 @@ class AppArchitecture extends React.Component {
       nativeType: true,
       trim: true
     };
-      fetch('https://www.yougotlistings.com/api/rentals/search.php?key=1cY2iaM5eLEWXp7wmtUvgSPsozCJqQDubZ0BNKnk&include_mls=1')
+      fetch('https://crg-server.herokuapp.com/rentals')
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => this.setState({ listings: data }))

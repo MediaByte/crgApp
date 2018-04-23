@@ -7,20 +7,43 @@ export default class BedSlider extends Component {
     super();
     this.state = {
       inputValue: 0,
-      defaultValue: 0
+      defaultValue: 0,
+      beds: 0,
+      minBed: 0,
     };
+  }
+
+  componentDidMount() {
+      const convert = require('xml-js');
+      const options = {
+        ignoreComment: true, 
+        compact: true,
+        ignoreDeclaration: true,
+        alwaysArray: false,
+        ignoreAttributes: true,
+        ignoreCdata: true,
+        alwaysChildren: false,
+        nativeType: true,
+        trim: true
+      };
+        fetch(`https://www.yougotlistings.com/api/rentals/search.php?key=1cY2iaM5eLEWXp7wmtUvgSPsozCJqQDubZ0BNKnk&include_mls=1&beds=${this.state.beds}`)
+        .then(xml => xml.text())
+        .then(xml => convert.xml2js(xml, options))
+        .then(data => this.setState({ beds: data }))
+
   }
   onChange = value => {
     this.setState({
       inputValue: value
     });
   };
+
   render() {
     return (
       <div>
         <Row>
           <Col xs={24}>
-            <div style={{ float: 'left', marginLeft: 70, }}>
+            <div style={{ float: 'left', marginLeft: 10, }}>
               <h6> 
                   Bedrooms
               </h6>      
