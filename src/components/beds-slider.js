@@ -43,14 +43,12 @@ export default class BedSlider extends Component {
                   onChange={this.onChange}
                   step={5}
                   marks={{
-                    0: '0', //studio
-                    5: '1', //one bedroom
-                    10: '2', //two bedroom
-                    15: '3', //three bedroom
-                    20: '4', //four bedroom
-                    25: { //5+ Bedrooms
-                          label: <strong>5+</strong>
-                        }
+                     0: { label: <strong>0</strong> },
+                     5: { label: <strong>1</strong> },
+                    10: { label: <strong>2</strong> },
+                    15: { label: <strong>3</strong> },
+                    20: { label: <strong>4</strong> },
+                    25: { label: <strong>5+</strong> }
                   }}
                 />
               </div>

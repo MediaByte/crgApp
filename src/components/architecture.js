@@ -71,7 +71,7 @@ class AppArchitecture extends React.Component {
       return (
         <Row justify={'center'} align={'middle'}>
           <div className='mt6'>
-            <Col offset={11} span={2}>
+            <Col offset={11} span={1}>
               <Spin color='' size='large' spinning={this.state.loading} tip={'Loading...'} />
             </Col>
           </div>
