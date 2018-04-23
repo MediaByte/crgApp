@@ -9,6 +9,9 @@ import { Row, Col } from 'antd'
 import 'tachyons';
 import Button from 'material-ui/Button';
 import ListingFilters from './filters';
+import { Spin } from 'antd';
+import 'tachyons';
+import 'antd/dist/antd.css';
 
 const styles = {
   root: {
@@ -66,9 +69,13 @@ class AppArchitecture extends React.Component {
 
     if (listArray.length === 0) {
       return (
-        <div>
-          Loading...
-        </div>
+        <Row justify={'center'} align={'middle'}>
+          <div className='mt6'>
+            <Col offset={11} span={2}>
+              <Spin color='' size='large' spinning={this.state.loading} tip={'Loading...'} />
+            </Col>
+          </div>
+        </Row>
       )
     } else {
         const listArray = this.state.listings.YGLResponse.Listings.Listing
