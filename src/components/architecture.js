@@ -86,31 +86,30 @@ class AppArchitecture extends Component {
 
   render() {
     const { classes } = this.props;
-    const { listings } = this.state
+    const listArray = this.state.listings;
     console.log(this.state.listings)
 
-    if (listings.length === 0) {
+    if (listArray.length === 0) {
       return (
         <Row>
           <div className='mt6'>
             <Col offset={10} span={6}>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-                <Spin color='' size='large' spinning={this.state.loading} tip={'Loading...'} />
-          </Col>
-        </div>
-      </Row>
-        
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+              <Spin color='' size='large' spinning={this.state.loading} tip={'Loading...'} />
+            </Col>
+          </div>
+        </Row>
       )
-   
     } else {
-      return (
-        <div className={classes.root}>
-          <div>
-            <AppBar position="fixed" color='#FFFFFFF'>
-              <Toolbar>
+      const listArray = this.state.listings.YGLResponse.Listings.Listing
+          return (
+            <div className={classes.root}>
+              <div>
+                <AppBar position="fixed" color='#FFFFFFF'>
+                  <Toolbar>
                 <div>
                   <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
                       <MenuIcon />
@@ -141,7 +140,6 @@ class AppArchitecture extends Component {
                                           min={0}
                                           max={25}
                                           onChange={this.onChange}
-                                          value={this.state.inputValue}
                                           step={5}
                                           marks={{
                                             0: { label: <strong>0</strong> },
@@ -164,30 +162,28 @@ class AppArchitecture extends Component {
                       </div>
                   </Drawer>
               </div>
-                <Typography variant="title" color="inherit" className={classes.flex}>
-                  Rentals
-                </Typography>
-                <Button color="inherit">
-                  Sign up
-                </Button>
-              </Toolbar>
-            </AppBar>
-          </div>
-          <div className='mt5'>
-            <Row>
-              <Col>
-                <div>
-                  <GetListings listings={this.state.listings.YGLResponse.Listings.Listing} />
-                </div>
-              </Col>
-            </Row>
-          </div>
+              <Typography variant="title" color="inherit" className={classes.flex}>
+                Rentals
+              </Typography>
+              <Button color="inherit">
+                Sign up
+              </Button>
+            </Toolbar>
+          </AppBar>
         </div>
+        <div className='mt5'>
+          <Row>
+            <Col>
+              <div>
+                <GetListings listings={listArray} />
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
       );
-
-    }
-        
-    }
+    }      
+  }
   
 
   componentDidMount() {
