@@ -30,7 +30,7 @@ class MapSnippet extends Component {
             <Modal className='shadow-5 mt5 pa2' size='lg' isOpen={this.state.modal} toggle={this.toggle}>
               <div>  
                 <div>   
-                  <Map style={style} google={this.props.google} initialCenter={{lat: this.state.lat, lng: this.state.long}} zoom={15} onClick={this.onMapClicked}>
+                  <Map style={style} google={this.props.google} initialCenter={{lat: this.state.lat, lng: this.state.long}} zoom={14} onClick={this.onMapClicked}>
                     <Marker onClick={this.onMarkerClick} name={'Current location'} />
                     <InfoWindow onOpen={this.windowHasOpened} onClose={this.windowHasClosed} visible={this.state.showingInfoWindow}>
                       <div>

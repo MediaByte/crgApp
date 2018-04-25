@@ -3,6 +3,7 @@ import MapListings from './card';
 import 'tachyons';
 
 const GetListings = ({ listings }) => {
+	console.log(listings)
 	const cardComponent = listings.map((listings, i) => {
 		return (
 			<div>
