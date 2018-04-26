@@ -17,8 +17,9 @@ import { Slider } from 'antd';
 import AlertDialog from '../containers/AlertDialog';
 import 'tachyons';
 import 'antd/dist/antd.css';
-
-
+const convert = require('xml-js');
+const options = {ignoreComment: true, compact: true, ignoreDeclaration: true, alwaysArray: false, ignoreAttributes: true, ignoreCdata: true, alwaysChildren: false, nativeType: true, trim: true};
+var listArray = 0
 
 const styles = {
   root: { flexGrow: 1, backgroundColor: '#FFFFFF'},
@@ -34,47 +35,73 @@ class AppArchitecture extends Component {
     this.setState({[side]: open});
   };
 
-  onChange = (value) => {
-
+  onChange = (beds) => {
     
       this.setState({
-        inputValue: value
+        inputValue: beds
       });
-      console.log(value + ' ' + this.state.inputValue)
-      switch (value) {
-        case 0:
-          this.setState({ minBeds: 0, maxBeds: 0 });
-            break;
-        case 5:
-          this.setState({ minBeds: 1, maxBeds: 1 });
-            break;
-        case 10:
-          this.setState({ minBeds: 2, maxBeds: 2 });
-            break;
-        case 15:
-          this.setState({ minBeds: 3, maxBeds: 3 });
-            break;
-        case 20:
-          this.setState({ minBeds: 4, maxBeds: 4 });
-            break;
-        case 25:
-          this.setState({ minBeds: 5, maxBeds: 8 });
-            break;
-        default:
+      console.log(beds + ' ' + this.state.inputValue)
+      if (beds === 0) {
+        listArray = 0
+        this.setState({ minBeds: 0, maxBeds: 0 });
+        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=0&max_bed=0`)
+        .then(xml => xml.text())
+        .then(xml => convert.xml2js(xml, options))
+        .then(data => { this.setState({ listings: data })})
+
+      } else if (beds === 5) {
+        listArray = 0
+        this.setState({ minBeds: 1, maxBeds: 1 });
+        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=1&max_bed=1`)
+        .then(xml => xml.text())
+        .then(xml => convert.xml2js(xml, options))
+        .then(data => { this.setState({ listings: data })})
+      } else if (beds === 10) {
+        listArray = 0
+        this.setState({ minBeds: 2, maxBeds: 2 });
+        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=2&max_bed=2`)
+        .then(xml => xml.text())
+        .then(xml => convert.xml2js(xml, options))
+        .then(data => { this.setState({ listings: data })})
+        
+      } else if ( beds === 15) {
+        listArray = 0
+        this.setState({ minBeds: 3, maxBeds: 3 }); 
+        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=3&max_bed=3`)
+        .then(xml => xml.text())
+        .then(xml => convert.xml2js(xml, options))
+        .then(data => { this.setState({ listings: data })})
+        
+      }else if (beds === 20) {
+        listArray = 0
+        this.setState({ minBeds: 4, maxBeds: 4 });
+        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=4&max_bed=4`)
+        .then(xml => xml.text())
+        .then(xml => convert.xml2js(xml, options))
+        .then(data => { this.setState({ listings: data })})
+        
+      } else if (beds === 25){
+        listArray = 0
+        this.setState({ minBeds: 5, maxBeds: 5 });
+        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=5&max_bed=5`)
+        .then(xml => xml.text())
+        .then(xml => convert.xml2js(xml, options))
+        .then(data => { this.setState({ listings: data })})
+      } else
           return <AlertDialog title='Server' message='Something went wrong in your bedroom search parameters and the server was not able to return any listings. Please check your bedroom settings and I will see if there is anything available in your criteria' />
       }
     
-  };
+  
 
   constructor() {
     super();
       this.state = {
         inputValue: 0,
         defaultValue: 0,
-        maxBeds: 2,
+        minBeds: 0,
+        maxBeds: 0,
         bathroom: 1,
-        minBeds: 2,
-        city: 'Cambridge',
+        city: 'Somerville',
         pets: '',
         open: false,
         listings: [],
@@ -82,11 +109,12 @@ class AppArchitecture extends Component {
         left: false,
       }
     this.onChange = this.onChange.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   render() {
     const { classes } = this.props;
-    const listArray = this.state.listings;
+    listArray = this.state.listings;
     console.log(this.state.listings)
 
     if (listArray.length === 0) {
@@ -98,13 +126,12 @@ class AppArchitecture extends Component {
             <br/>
             <br/>
             <br/>
-              <Spin color='' size='large' spinning={this.state.loading} tip={'Loading...'} />
+              <Spin color='' size='large' spinning={true} tip={'Loading...'} />
             </Col>
           </div>
         </Row>
       )
-    } else {
-      const listArray = this.state.listings.YGLResponse.Listings.Listing
+    } else if (listArray !== '') {
           return (
             <div className={classes.root}>
               <div>
@@ -139,6 +166,7 @@ class AppArchitecture extends Component {
                                           style={{ color: '#f50', justify: 'center'}}
                                           min={0}
                                           max={25}
+                                          value={this.state.inputValue}
                                           onChange={this.onChange}
                                           step={5}
                                           marks={{
@@ -175,7 +203,7 @@ class AppArchitecture extends Component {
           <Row>
             <Col>
               <div>
-                <GetListings listings={listArray} />
+                <GetListings listings={this.state.listings.YGLResponse.Listings.Listing} />
               </div>
             </Col>
           </Row>
@@ -185,17 +213,17 @@ class AppArchitecture extends Component {
     }      
   }
   
-
+  
   componentDidMount() {
-    const convert = require('xml-js');
-    const options = {ignoreComment: true, compact: true, ignoreDeclaration: true, alwaysArray: false, ignoreAttributes: true, ignoreCdata: true, alwaysChildren: false, nativeType: true, trim: true};
+
+    
     
     fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}`)
     .then(xml => xml.text())
     .then(xml => convert.xml2js(xml, options))
-    .then(data => this.setState({ listings: data }))
+    .then(data => { this.setState({ listings: data })})
 
-    console.log(this.state.listings)
+    console.log('component did mount ' + this.state.minBeds + ' ' + this.state.maxBeds)
 
 
   }
