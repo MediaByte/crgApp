@@ -17,8 +17,8 @@ const GetListings = ({ listings }) => {
 					baths={listings.Baths._text} 
 					price={listings.Price._text} 
 					photo={listings.hasOwnProperty('Photos') ? listings.Photos.Photo._text : 'https://image.freepik.com/free-vector/white-room-with-light-and-coming-soon-text_1017-5070.jpg'}
-					lat={listings.Latitude._text} 
-					long={listings.Longitude._text}
+					lat={listings.hasOwnProperty('Latitude') ? listings.Latitude._text : '42.3736158'} 
+					long={listings.hasOwnProperty('Longitude') ? listings.Longitude._text : '-71.1097335'}
 					includeselectric={listings.IncludeElectricity._text}
 					includesgas={listings.IncludeGas._text}
 					includesheat={listings.IncludeHeat._text}
