@@ -84,15 +84,6 @@ const styles = theme => ({
 			  </Typography>
 			</CardContent>
 			<CardActions className={classes.actions} disableActionSpacing>
-				<IconButton aria-label="Add to favorites">
-					<FavoriteIcon />
-			  	</IconButton>
-				{/* <Button size="small" color="primary">
-						Google Map
-					</Button>
-					<Button size="small" color="primary">
-						Learn More
-				</Button> */}
 			  	<MapSnippet title={title} subTitle={subTitle} lat={lat} long={long}/>
 			  <IconButton
 				className={classnames(classes.expand, {

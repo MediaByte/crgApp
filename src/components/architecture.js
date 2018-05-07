@@ -10,17 +10,13 @@ const convert = require('xml-js');
 const options = {ignoreComment: true, compact: true, ignoreDeclaration: true, alwaysArray: false, ignoreAttributes: true, ignoreCdata: true, alwaysChildren: false, nativeType: true, trim: true};
 var listArray = 0
 
-
 export default class AppArchitecture extends Component {
 
   onChangeBed = (beds) => {
-      this.setState({
-        bedSlider: beds
-      });
-      console.log(beds + ' ' + this.state.bedSlider)
+
       if (beds === 0) {
         listArray = 0
-        this.setState({ minBeds: 0, maxBeds: 0 });
+        this.setState({ minBeds: 0, maxBeds: 0, bedSlider: beds });
         fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=0&max_bed=0`)
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
@@ -28,14 +24,14 @@ export default class AppArchitecture extends Component {
 
       } else if (beds === 5) {
         listArray = 0
-        this.setState({ minBeds: 1, maxBeds: 1 });
+        this.setState({ minBeds: 1, maxBeds: 1, bedSlider: beds });
         fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=1&max_bed=1`)
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
         .then(data => { this.setState({ listings: data })})
       } else if (beds === 10) {
         listArray = 0
-        this.setState({ minBeds: 2, maxBeds: 2 });
+        this.setState({ minBeds: 2, maxBeds: 2, bedSlider: beds });
         fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=2&max_bed=2`)
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
@@ -43,7 +39,7 @@ export default class AppArchitecture extends Component {
         
       } else if ( beds === 15) {
         listArray = 0
-        this.setState({ minBeds: 3, maxBeds: 3 }); 
+        this.setState({ minBeds: 3, maxBeds: 3, bedSlider: beds }); 
         fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=3&max_bed=3`)
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
@@ -51,7 +47,7 @@ export default class AppArchitecture extends Component {
         
       }else if (beds === 20) {
         listArray = 0
-        this.setState({ minBeds: 4, maxBeds: 4 });
+        this.setState({ minBeds: 4, maxBeds: 4, bedSlider: beds });
         fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=4&max_bed=4`)
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
@@ -59,7 +55,7 @@ export default class AppArchitecture extends Component {
         
       } else if (beds === 25){
         listArray = 0
-        this.setState({ minBeds: 5, maxBeds: 5 });
+        this.setState({ minBeds: 5, maxBeds: 5, bedSlider: beds });
         fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=5&max_bed=5`)
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
@@ -68,31 +64,6 @@ export default class AppArchitecture extends Component {
           return <AlertDialog title='Server' message='Something went wrong in your bedroom search parameters and the server was not able to return any listings. Please check your bedroom settings and I will see if there is anything available in your criteria' />
       }
 
-      onChangeBath = (baths) => {
-    
-        this.setState({
-          bathSlider: baths
-        });
-        console.log(baths + ' ' + this.state.bathSlider)
-        if (baths === 0) {
-          listArray = 0
-          this.setState({ baths: 1 });
-          fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&baths=1`)
-          .then(xml => xml.text())
-          .then(xml => convert.xml2js(xml, options))
-          .then(data => { this.setState({ listings: data })})
-  
-        } else if (baths === 10) {
-          listArray = 0
-          this.setState({ baths: 2 });
-          fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&baths=2`)
-          .then(xml => xml.text())
-          .then(xml => convert.xml2js(xml, options))
-          .then(data => { this.setState({ listings: data })})
-          .catch(err => console.log(err))
-        } else
-            return <AlertDialog title='Server' message='Something went wrong in your bedroom search parameters and the server was not able to return any listings. Please check your bedroom settings and I will see if there is anything available in your criteria' />
-        }
 
   constructor() {
     super();
@@ -110,7 +81,6 @@ export default class AppArchitecture extends Component {
         left: false,
       }
     this.onChangeBed = this.onChangeBed.bind(this)
-    this.onChangeBath = this.onChangeBath.bind(this)
   }
 
   render() {
@@ -122,7 +92,7 @@ export default class AppArchitecture extends Component {
     } else {
         return (
           <div>
-            <Layout />
+            <Layout onChangeBed={this.onChangeBed} bedValue={this.state.bedSlider} />
               <div className='pt5'>
                 <Row>
                   <Col>
@@ -136,8 +106,7 @@ export default class AppArchitecture extends Component {
         );
       }      
   }
-  
-  
+
   componentDidMount() {
     fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&baths=${this.state.baths}`)
     .then(xml => xml.text())
