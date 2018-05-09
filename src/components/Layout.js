@@ -12,7 +12,10 @@ import List from 'material-ui/List';
 import { Slider } from 'antd';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
+import Divider from 'material-ui/Divider';
 import 'antd/dist/antd.css';
+import logo from './logo.jpg'
+import Budget from '../containers/Budget'
 
 const styles = {
     root: { flexGrow: 1, backgroundColor: '#FFFFFF'},
@@ -45,11 +48,27 @@ render() {
                     <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
 
                         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
-                            <div tabIndex={0} role="button" onKeyDown={this.toggleDrawer('left', false)}>
+                            <div tabIndex={0} role="button">
                                 <div className={classes.list}>
 
                                     <List>
-
+                                        <Row>
+                                            <Col span={5}>
+                                                <div style={{ float: 'left', marginLeft: 10, paddingTop: 10}}>
+                                                    <h6>Rent</h6>  
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col span={24}>
+                                                <div style={{ marginLeft: 50 }}>
+                                                    <Budget /> 
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        <br/>
+                                        <Divider />
+                                        <br/>
                                         <Row>
                                             <Col span={24}>
                                                 <div style={{ float: 'left', marginLeft: 10, }}>
@@ -61,19 +80,30 @@ render() {
                                         <Row>
                                             <Col span={22} offset={2}>
                                                 <div style={{ float: 'left', height: 50, width: 220, marginLeft: 10 }}>
-                                                    <Slider included={false} style={{ color: '#f50', justify: 'center'}} min={0} max={25} value={bedValue} onChange={onChangeBed} step={5} marks={{ 0: { label: <strong>0</strong> }, 5: { label: <strong>1</strong> }, 10: { label: <strong>2</strong> }, 15: { label: <strong>3</strong> }, 20: { label: <strong>4</strong> }, 25: { label: <strong>5+</strong> } }} />
+                                                    <Slider included={false} style={{ paddingBottom: 20, color: '#f50', justify: 'center'}} min={0} max={25} value={bedValue} onChange={onChangeBed} step={5} marks={{ 0: { label: <strong>0</strong> }, 5: { label: <strong>1</strong> }, 10: { label: <strong>2</strong> }, 15: { label: <strong>3</strong> }, 20: { label: <strong>4</strong> }, 25: { label: <strong>5+</strong> } }} />
                                                 </div>
+                                                
                                             </Col>
                                         </Row>
-                                        
+                                        <br/>
+                                        <Divider />
+                                        <br/>
                                         <Row>
                                             <Col span={24}>
-                                                <div style={{ float: 'left', height: 50, width: 100, marginLeft: 10 }}>
-                                                    <Locations />
+                                                <div style={{ float: 'left', marginLeft: 10, }}>
+                                                    <h6>Neighborhood</h6>      
                                                 </div>
                                             </Col>
                                         </Row>
 
+                                        <Row>
+                                            <Col span={22} offset={2}>
+                                                <div className='pr3'>
+                                                    <Locations />
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        
                                     </List>
                                 </div>
                             </div>
