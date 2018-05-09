@@ -23,9 +23,8 @@ class Budget extends React.Component {
   
     constructor() {
         super();
-        
             this.state = {
-                amount: 0,
+                amount: '',
             };
     }
 
