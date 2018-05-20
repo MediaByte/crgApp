@@ -12,6 +12,12 @@ var listArray = 0
 
 export default class AppArchitecture extends Component {
 
+  handleChange = (event) => {
+    this.setState({ amount: event.target.value });
+    console.log(event.target.value);
+  };
+
+
   onChangeBed = (beds) => {
 
       if (beds === 0) {
@@ -45,7 +51,7 @@ export default class AppArchitecture extends Component {
         .then(xml => convert.xml2js(xml, options))
         .then(data => { this.setState({ listings: data })})
         
-      }else if (beds === 20) {
+      } else if (beds === 20) {
         listArray = 0
         this.setState({ minBeds: 4, maxBeds: 4, bedSlider: beds });
         fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=4&max_bed=4`)
@@ -79,8 +85,10 @@ export default class AppArchitecture extends Component {
         open: false,
         listings: [],
         left: false,
+        amount: 1500,
       }
     this.onChangeBed = this.onChangeBed.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   render() {
@@ -92,7 +100,7 @@ export default class AppArchitecture extends Component {
     } else {
         return (
           <div>
-            <Layout onChangeBed={this.onChangeBed} bedValue={this.state.bedSlider} />
+            <Layout onChangeBed={this.onChangeBed} bedValue={this.state.bedSlider} handleChange={this.handleChange} amount={this.state.amount} />
               <div className='pt5'>
                 <Row>
                   <Col>

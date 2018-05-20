@@ -20,30 +20,17 @@ const styles = theme => ({
 });
 
 class Budget extends React.Component {
-  
-    constructor() {
-        super();
-            this.state = {
-                amount: '',
-            };
-    }
-
-
-  handleChange = prop => event => {
-    this.setState({ [prop]: event.target.value });
-    console.log(event.target.value)
-  };
-
 
   render() {
-    const { classes } = this.props;
+    const { classes, amount } = this.props;
+    const { handleChange } = this.props;
 
     return (
       <div className={classes.root}>
         <Input
           id="adornment-amount"
-          value={this.state.amount}
-          onChange={this.handleChange('amount')}
+          value={amount}
+          onChange={handleChange}
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
         />
       </div>

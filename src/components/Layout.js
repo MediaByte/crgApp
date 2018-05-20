@@ -39,7 +39,7 @@ const styles = {
     
 render() {
     const { classes } = this.props;
-    const { onChangeBed, bedValue} = this.props;
+    const { onChangeBed, bedValue, handleChange, amount } = this.props;
         return (
             <AppBar position="fixed" color='white'>
 
@@ -62,7 +62,7 @@ render() {
                                         <Row>
                                             <Col span={24}>
                                                 <div style={{ marginLeft: 50 }}>
-                                                    <Budget /> 
+                                                    <Budget handleChange={handleChange} amount={amount} /> 
                                                 </div>
                                             </Col>
                                         </Row>
@@ -118,6 +118,8 @@ render() {
     toggleDrawer = (side, open) => () => {
         this.setState({[side]: open});
       };
+
+
 
 }          
 
