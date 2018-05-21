@@ -8,7 +8,7 @@ import 'tachyons';
 import 'antd/dist/antd.css';
 const convert = require('xml-js');
 const options = {ignoreComment: true, compact: true, ignoreDeclaration: true, alwaysArray: false, ignoreAttributes: true, ignoreCdata: true, alwaysChildren: false, nativeType: true, trim: true};
-var listArray = 0
+let listArray = 0
 
 export default class AppArchitecture extends Component {
 
@@ -116,10 +116,12 @@ export default class AppArchitecture extends Component {
   }
 
   componentDidMount() {
+
     fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&baths=${this.state.baths}`)
-    .then(xml => xml.text())
-    .then(xml => convert.xml2js(xml, options))
-    .then(data => { this.setState({ listings: data })})
-    .catch(err => console.log(err))
+      .then(xml => xml.text())
+      .then(xml => convert.xml2js(xml, options))
+      .then(data => { this.setState({ listings: data })})
+      .catch(err => console.log(err))
+
   }
 }

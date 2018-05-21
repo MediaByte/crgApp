@@ -14,7 +14,6 @@ import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
 import 'antd/dist/antd.css';
-import logo from './logo.jpg'
 import Budget from '../containers/Budget'
 
 const styles = {

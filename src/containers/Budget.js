@@ -22,9 +22,8 @@ const styles = theme => ({
 class Budget extends React.Component {
 
   render() {
-    const { classes, amount } = this.props;
-    const { handleChange } = this.props;
-
+    const { classes, amount, handleChange } = this.props;
+    
     return (
       <div className={classes.root}>
         <Input
