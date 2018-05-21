@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import GetListings from '../containers/connect';
 import Loading from '../containers/Loading'
 import { Row, Col } from 'antd'
@@ -6,8 +6,21 @@ import AlertDialog from '../containers/AlertDialog';
 import Layout from './Layout';
 import 'tachyons';
 import 'antd/dist/antd.css';
+
 const convert = require('xml-js');
-const options = {ignoreComment: true, compact: true, ignoreDeclaration: true, alwaysArray: false, ignoreAttributes: true, ignoreCdata: true, alwaysChildren: false, nativeType: true, trim: true};
+
+const options = {
+  ignoreComment: true, 
+  compact: true, 
+  ignoreDeclaration: true, 
+  alwaysArray: false, 
+  ignoreAttributes: true, 
+  ignoreCdata: true, 
+  alwaysChildren: false, 
+  nativeType: true, 
+  trim: true
+};
+
 let listArray = 0
 
 export default class AppArchitecture extends Component {
@@ -19,7 +32,6 @@ export default class AppArchitecture extends Component {
 
 
   onChangeBed = (beds) => {
-
       if (beds === 0) {
         listArray = 0
         this.setState({ minBeds: 0, maxBeds: 0, bedSlider: beds });
@@ -27,7 +39,6 @@ export default class AppArchitecture extends Component {
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
         .then(data => { this.setState({ listings: data })})
-
       } else if (beds === 5) {
         listArray = 0
         this.setState({ minBeds: 1, maxBeds: 1, bedSlider: beds });
@@ -42,7 +53,6 @@ export default class AppArchitecture extends Component {
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
         .then(data => { this.setState({ listings: data })})
-        
       } else if ( beds === 15) {
         listArray = 0
         this.setState({ minBeds: 3, maxBeds: 3, bedSlider: beds }); 
@@ -50,7 +60,6 @@ export default class AppArchitecture extends Component {
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
         .then(data => { this.setState({ listings: data })})
-        
       } else if (beds === 20) {
         listArray = 0
         this.setState({ minBeds: 4, maxBeds: 4, bedSlider: beds });
@@ -58,7 +67,6 @@ export default class AppArchitecture extends Component {
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
         .then(data => { this.setState({ listings: data })})
-        
       } else if (beds === 25){
         listArray = 0
         this.setState({ minBeds: 5, maxBeds: 5, bedSlider: beds });
@@ -66,10 +74,8 @@ export default class AppArchitecture extends Component {
         .then(xml => xml.text())
         .then(xml => convert.xml2js(xml, options))
         .then(data => { this.setState({ listings: data })})
-      } else
-          return <AlertDialog title='Server' message='Something went wrong in your bedroom search parameters and the server was not able to return any listings. Please check your bedroom settings and I will see if there is anything available in your criteria' />
+      } else return <AlertDialog title='Server' message='Something went wrong in your bedroom search parameters and the server was not able to return any listings. Please check your bedroom settings and I will see if there is anything available in your criteria' />
       }
-
 
   constructor() {
     super();
@@ -92,6 +98,7 @@ export default class AppArchitecture extends Component {
   }
 
   render() {
+
     listArray = this.state.listings;
     console.log(this.state.listings)
 
@@ -100,7 +107,12 @@ export default class AppArchitecture extends Component {
     } else {
         return (
           <div>
-            <Layout onChangeBed={this.onChangeBed} bedValue={this.state.bedSlider} handleChange={this.handleChange} amount={this.state.amount} />
+            <Layout 
+              onChangeBed={this.onChangeBed} 
+              bedValue={this.state.bedSlider} 
+              handleChange={this.handleChange} 
+              amount={this.state.amount} 
+            />
               <div className='pt5'>
                 <Row>
                   <Col>
@@ -116,12 +128,10 @@ export default class AppArchitecture extends Component {
   }
 
   componentDidMount() {
-
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&baths=${this.state.baths}`)
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err))
-
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Input, { InputAdornment } from 'material-ui/Input';
 
 const styles = theme => ({
   root: {
@@ -23,7 +23,7 @@ class Budget extends React.Component {
 
   render() {
     const { classes, amount, handleChange } = this.props;
-    
+
     return (
       <div className={classes.root}>
         <Input

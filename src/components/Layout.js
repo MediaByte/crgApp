@@ -11,7 +11,6 @@ import Locations from '../containers/Locations';
 import List from 'material-ui/List';
 import { Slider } from 'antd';
 import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
 import Divider from 'material-ui/Divider';
 import 'antd/dist/antd.css';
 import Budget from '../containers/Budget'
@@ -108,7 +107,6 @@ render() {
                             </div>
                         </Drawer>
                     <Typography variant="title" color="inherit" className={classes.flex}>Rentals</Typography>
-                    <Button color="inherit">Sign up</Button>
                 </Toolbar>
             </AppBar>
         )
