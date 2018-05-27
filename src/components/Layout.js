@@ -4,7 +4,6 @@ import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Drawer from 'material-ui/Drawer';
 import { Row, Col } from 'antd'
-import Typography from 'material-ui/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import PropTypes from 'prop-types';
 import Locations from '../containers/Locations';
@@ -39,16 +38,12 @@ render() {
     const { classes } = this.props;
     const { onChangeBed, bedValue, handleChange, amount } = this.props;
         return (
-            <AppBar position="fixed" color='white'>
-
+            <AppBar position="fixed" color='primary'>
                 <Toolbar>
-
                     <IconButton onClick={this.toggleDrawer('left', true)} className={classes.menuButton} color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
-
                         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
                             <div tabIndex={0} role="button">
                                 <div className={classes.list}>
-
                                     <List>
                                         <Row>
                                             <Col span={5}>
@@ -60,6 +55,7 @@ render() {
                                         <Row>
                                             <Col span={24}>
                                                 <div style={{ marginLeft: 50 }}>
+                                                    <Budget handleChange={handleChange} amount={amount} /> 
                                                     <Budget handleChange={handleChange} amount={amount} /> 
                                                 </div>
                                             </Col>
@@ -74,7 +70,6 @@ render() {
                                                 </div>
                                             </Col>
                                         </Row>
-
                                         <Row>
                                             <Col span={22} offset={2}>
                                                 <div style={{ float: 'left', height: 50, width: 220, marginLeft: 10 }}>
@@ -93,7 +88,6 @@ render() {
                                                 </div>
                                             </Col>
                                         </Row>
-
                                         <Row>
                                             <Col span={22} offset={2}>
                                                 <div className='pr3'>
@@ -101,12 +95,10 @@ render() {
                                                 </div>
                                             </Col>
                                         </Row>
-                                        
                                     </List>
                                 </div>
                             </div>
                         </Drawer>
-                    <Typography variant="title" color="inherit" className={classes.flex}>Rentals</Typography>
                 </Toolbar>
             </AppBar>
         )
@@ -115,9 +107,6 @@ render() {
     toggleDrawer = (side, open) => () => {
         this.setState({[side]: open});
       };
-
-
-
 }          
 
 Layout.propTypes = {
