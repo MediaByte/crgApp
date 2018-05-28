@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
-import GetListings from '../containers/connect';
-import Loading from '../containers/Loading'
-import { Row, Col } from 'antd'
+
+//Project Components
+import GetListings from '../controllers/connect';
+import Loading from '../components/Loading'
 import Layout from './Layout';
+
+//Styles and Designs
 import 'tachyons';
 
+//Converts XML response to an JS array
 const convert = require('xml-js');
-
 const options = {
-  ignoreComment: true, 
-  compact: true, 
-  ignoreDeclaration: true, 
-  alwaysArray: true, 
-  ignoreAttributes: true, 
-  ignoreCdata: true, 
-  alwaysChildren: false, 
-  nativeType: true, 
-  trim: true
+    ignoreComment: true, 
+    compact: true, 
+    ignoreDeclaration: true, 
+    alwaysArray: true, 
+    ignoreAttributes: true, 
+    ignoreCdata: true, 
+    alwaysChildren: false, 
+    nativeType: true, 
+    trim: true
 };
+
 
 let listArray = 0
 
@@ -104,20 +108,9 @@ export default class AppArchitecture extends Component {
     } else {
         return (
           <div>
-            <Layout 
-              onChangeBed={this.onChangeBed} 
-              bedValue={this.state.bedSlider} 
-              handleChange={this.handleChange} 
-              amount={this.state.amount} 
-            />
+            <Layout onChangeBed={this.onChangeBed} bedValue={this.state.bedSlider} handleChange={this.handleChange} amount={this.state.amount} />
               <div className='pt5'>
-                <Row>
-                  <Col>
-                    <div>
-                      <GetListings listings={this.state.listings.YGLResponse[0].hasOwnProperty("Listings") ? this.state.listings.YGLResponse[0].Listings[0].Listing : alert('no listings found')} />
-                    </div>
-                  </Col>
-                </Row>
+                  <GetListings listings={this.state.listings.YGLResponse[0].hasOwnProperty("Listings") ? this.state.listings.YGLResponse[0].Listings[0].Listing : alert('no listings found')} />
               </div>
           </div>
         );

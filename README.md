@@ -1,1 +1,1 @@
-Web app for Common Realty Group
+Web Application for Common Realty Group.

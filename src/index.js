@@ -1,16 +1,15 @@
-//ReactJS framework
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 
-//Theme and Styling
+//Material-UI theme and style components
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import red from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-//Project Components
-import RentalApp from './App';
+//Project components
+import RentalApp from './components/App';
 
 //Initialize theme colors 
 //and pushes it down the component tree
