@@ -1,11 +1,23 @@
+//ReactJS
 import React, { Component } from 'react';
-import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
-import { Modal } from 'reactstrap';
-import IconButton from 'material-ui/IconButton';
+
+//Google Map Components
+import { Map, Marker, InfoWindow, GoogleApiWrapper } from 'google-maps-react';
+
+//Material-UI Components
 import MapsPinDrop from '@material-ui/icons/Map';
+import IconButton from 'material-ui/IconButton';
+
+//Bootstrap Modal
+import { Modal } from 'reactstrap';
+
+//CSS & styling
 import 'tachyons';
 
-const style = {  width: '100%', height: '350px' }
+const style = {  
+  width: '100%', 
+  height: '350px' 
+}
 
 class MapSnippet extends Component {
     constructor(props) {

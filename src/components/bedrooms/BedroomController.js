@@ -1,3 +1,4 @@
+//ReactJS
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -16,7 +17,10 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 
-//Matertial-UI Styles
+//Project Components
+import PaperSheet from './BedPaper';
+
+//Styles
 const styles = {
   appBar: {
     position: 'relative',
@@ -30,7 +34,7 @@ const Transition = (props) => {
   return <Slide direction="up" {...props} />;
 }
 
-class RentalController extends Component {
+class BedroomController extends Component {
 
   constructor(props) {
     super(props)
@@ -40,28 +44,40 @@ class RentalController extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, bedChange, bedValue } = this.props;
     return (
       <div>
         <List>
           <ListItem button onClick={this.handleClickOpen}>
-            <ListItemText primary="Update Bedrooms" secondary="2 Bedrooms" />
+            <ListItemText primary="Update Bedrooms" secondary={`${bedValue} Bedrooms`} />
           </ListItem>
           <Divider />
         </List>
-        <Dialog fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
+        <Dialog 
+          fullScreen 
+          open={this.state.open} 
+          onClose={this.handleClose} 
+          TransitionComponent={Transition}
+        >
           <AppBar className={classes.appBar}>
             <Toolbar>
-              <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
+              <IconButton 
+                color="inherit" 
+                onClick={this.handleClose} 
+                aria-label="Close"
+              >
                 <CloseIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" className={classes.flex}>Bedrooms</Typography>
+              <Typography variant="title" color="inherit" className={classes.flex}></Typography>
               <Button color="inherit" onClick={this.handleClose}>Update</Button>
             </Toolbar>
           </AppBar>
-{              
-          //content goes here
-}
+            <PaperSheet 
+              bedValue={bedValue} 
+              bedChange={bedChange} 
+              paragraph={'Use the slider below.'} 
+              headline={'Bedrooms'} 
+            />
         </Dialog>
       </div>
     );
@@ -76,8 +92,8 @@ class RentalController extends Component {
   };
 }
 
-RentalController.propTypes = {
+BedroomController.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RentalController);
+export default withStyles(styles)(BedroomController);

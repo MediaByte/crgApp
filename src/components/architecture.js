@@ -27,88 +27,52 @@ let listArray = 0
 
 export default class AppArchitecture extends Component {
 
-  handleChange = (event) => {
+  budgetHandleChange = (event) => {
     this.setState({ amount: event.target.value });
     console.log(event.target.value);
   };
 
-  onChangeBed = (beds) => {
-      if (beds === 0) {
-        listArray = 0
-        this.setState({ minBeds: 0, maxBeds: 0, bedSlider: beds });
-        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=0&max_bed=0&include_mls=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
-        .then(data => { this.setState({ listings: data })})
-      } else if (beds === 5) {
-        listArray = 0
-        this.setState({ minBeds: 1, maxBeds: 1, bedSlider: beds });
-        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=1&max_bed=1&include_mls=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
-        .then(data => { this.setState({ listings: data })})
-      } else if (beds === 10) {
-        listArray = 0
-        this.setState({ minBeds: 2, maxBeds: 2, bedSlider: beds });
-        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=2&max_bed=2&include_mls=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
-        .then(data => { this.setState({ listings: data })})
-      } else if ( beds === 15) {
-        listArray = 0
-        this.setState({ minBeds: 3, maxBeds: 3, bedSlider: beds }); 
-        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=3&max_bed=3&include_mls=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
-        .then(data => { this.setState({ listings: data })})
-      } else if (beds === 20) {
-        listArray = 0
-        this.setState({ minBeds: 4, maxBeds: 4, bedSlider: beds });
-        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=4&max_bed=4&include_mls=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
-        .then(data => { this.setState({ listings: data }) })
-      } else if (beds === 25){
-        listArray = 0
-        this.setState({ minBeds: 5, maxBeds: '', bedSlider: beds });
-        fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=5&include_mls=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
-        .then(data => { this.setState({ listings: data })})
+  onChangeBed = (event, value) => {
+    listArray = 0
+    this.setState({ minBeds: value, maxBeds: value, bedSlider: value });
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${value}&max_bed=${value}&include_mls=1`)
+      .then(xml => xml.text())
+      .then(xml => convert.xml2js(xml, options))
+      .then(data => { this.setState({ listings: data })})
+      .catch(err => console.log(err));
   }
-}
 
-  constructor() {
-    super();
+
+  constructor(props) {
+    super(props);
       this.state = {
-        bathSlider: 1,
-        bedSlider: 0,
-        defaultValue: 0,
+        bedSlider: 2,
         minBeds: 3,
         maxBeds: 3,
-        baths: 1,
         city: 'Somerville',
-        pets: '',
         open: false,
         listings: [],
         left: false,
         amount: 1500,
-      }
-    this.onChangeBed = this.onChangeBed.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+      };
+    this.onChangeBed = this.onChangeBed.bind(this);
   }
 
   render() {
 
     listArray = this.state.listings;
-    console.log(this.state.listings)
+    console.log(this.state.listings);
 
     if (listArray.length === 0) {
       return <Loading />
     } else {
         return (
           <div>
-            <Layout onChangeBed={this.onChangeBed} bedValue={this.state.bedSlider} handleChange={this.handleChange} amount={this.state.amount} />
+            <Layout 
+              //Bedroom Components
+              onChangeBed={this.onChangeBed} 
+              bedValue={this.state.bedSlider}
+            />
               <div className='pt5'>
                   <GetListings listings={this.state.listings.YGLResponse[0].hasOwnProperty("Listings") ? this.state.listings.YGLResponse[0].Listings[0].Listing : alert('no listings found')} />
               </div>

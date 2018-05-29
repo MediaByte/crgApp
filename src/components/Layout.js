@@ -1,3 +1,4 @@
+//ReactJS
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,7 +13,7 @@ import { withStyles } from 'material-ui/styles';
 // import StarIcon from '@material-ui/icons/Star';
 
 //Project Components
-import RentalController from './RentalController'
+import BedroomController from './bedrooms/BedroomController';
 
 
 //Material-UI styles
@@ -36,17 +37,13 @@ const styles = {
     constructor(props) {
         super(props);
         this.state = {
-            bathSlider: 1,
-            defaultValue: 0,
-            inputValue: 0,
             openDrawer: false,
             leftSide: false,
         }
     }
 
 render() {
-// const { onChangeBed, bedValue, handleChange, amount } = this.props;
-const { classes } = this.props;
+const { classes, onChangeBed, bedValue } = this.props;
     return (
         <AppBar position="fixed" color='primary'>
             <Toolbar>
@@ -57,7 +54,10 @@ const { classes } = this.props;
                     <div tabIndex={0} role="button">
                         <div className={classes.list}>
                             <List>
-                                <RentalController />
+                                <BedroomController 
+                                    bedChange={onChangeBed} 
+                                    bedValue={bedValue} 
+                                />
                             </List>
                         </div>
                     </div>
