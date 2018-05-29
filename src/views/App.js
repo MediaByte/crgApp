@@ -1,5 +1,10 @@
+//ReactJS
 import React, { Component } from 'react';
-import AppArchitecture from './architecture';
+
+//Project Components
+import AppArchitecture from '../controllers/architecture';
+
+//Ant Design UI
 import { BackTop } from 'antd';
 import 'antd/dist/antd.css';
 

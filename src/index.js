@@ -1,3 +1,4 @@
+//ReactJS
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
@@ -9,10 +10,10 @@ import red from '@material-ui/core/colors/red';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 //Project components
-import RentalApp from './components/App';
+import RentalApp from './views/App';
 
 //Initialize theme colors 
-//and pushes it down the component tree
+//and push down component tree
 const theme = createMuiTheme({
   palette: {
     primary: {

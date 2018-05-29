@@ -1,5 +1,5 @@
 import React from 'react';
-import MapListings from '../components/CardComponent';
+import MapListings from '../components/card/CardComponent';
 import 'tachyons';
 
 const GetListings = ({ listings }) => {

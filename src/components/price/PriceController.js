@@ -40,7 +40,7 @@ const Transition = (props) => {
   return <Slide direction="up" {...props} />;
 }
 
-class BedroomController extends Component {
+class PriceController extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -54,13 +54,13 @@ render() {
       <div>
         <List>
           <ListItem button onClick={this.handleClickOpen}>
-            <ListItemText primary="Update Bedrooms" secondary={`${bedValue} Bedrooms`} />
+            <ListItemText primary="Update Price" secondary={`min:$1500, max:$9000 `} />
           </ListItem>
           <Divider />
         </List>
 
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
-            <DialogTitle id="confirmation-dialog-title">Update Bedrooms</DialogTitle>
+            <DialogTitle id="confirmation-dialog-title">Update Neighborhoods?</DialogTitle>
             
             <Grid container>
               <Grid xs={12} justify={'center'}>
@@ -93,8 +93,8 @@ render() {
   };
 }
 
-BedroomController.propTypes = {
+PriceController.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BedroomController);
+export default withStyles(styles)(PriceController);

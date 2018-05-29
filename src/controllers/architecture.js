@@ -1,9 +1,10 @@
+
 import React, { Component } from 'react';
 
 //Project Components
 import GetListings from '../controllers/connect';
 import Loading from '../components/Loading'
-import Layout from './Layout';
+import Layout from '../components/Layout';
 
 //Styles and Designs
 import 'tachyons';
@@ -46,7 +47,7 @@ export default class AppArchitecture extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        bedSlider: 2,
+        bedSlider: 3,
         minBeds: 3,
         maxBeds: 3,
         city: 'Somerville',
@@ -69,12 +70,14 @@ export default class AppArchitecture extends Component {
         return (
           <div>
             <Layout 
-              //Bedroom Components
+              //Bedroom Component Arguements
               onChangeBed={this.onChangeBed} 
               bedValue={this.state.bedSlider}
+              //Pricing Component Arguements
             />
               <div className='pt5'>
-                  <GetListings listings={this.state.listings.YGLResponse[0].hasOwnProperty("Listings") ? this.state.listings.YGLResponse[0].Listings[0].Listing : alert('no listings found')} />
+                  <GetListings 
+                  listings={this.state.listings.YGLResponse[0].hasOwnProperty("Listings") ? this.state.listings.YGLResponse[0].Listings[0].Listing : alert('no listings found')} />
               </div>
           </div>
         );

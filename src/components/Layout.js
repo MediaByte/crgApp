@@ -14,6 +14,8 @@ import { withStyles } from 'material-ui/styles';
 
 //Project Components
 import BedroomController from './bedrooms/BedroomController';
+import NeighborhoodController from './neighborhoods/NeighborhoodController';
+import PriceController from './price/PriceController';
 
 
 //Material-UI styles
@@ -22,7 +24,7 @@ const styles = {
         width: 'auto' 
     },
     list: { 
-        width: 300 
+        width: 280 
     },
     flex: { 
         flex: 1 
@@ -47,17 +49,14 @@ const { classes, onChangeBed, bedValue } = this.props;
     return (
         <AppBar position="fixed" color='primary'>
             <Toolbar>
-                <IconButton onClick={this.toggleDrawer('leftSide', true)} className={classes.menuButton} color="inherit" aria-label="Menu">
-                    <MenuIcon />
-                </IconButton>
+                <IconButton onClick={this.toggleDrawer('leftSide', true)} className={classes.menuButton} color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
                 <Drawer open={this.state.leftSide} onClose={this.toggleDrawer('leftSide', false)}>
                     <div tabIndex={0} role="button">
                         <div className={classes.list}>
                             <List>
-                                <BedroomController 
-                                    bedChange={onChangeBed} 
-                                    bedValue={bedValue} 
-                                />
+                                <BedroomController bedChange={onChangeBed} bedValue={bedValue} />
+                                <NeighborhoodController bedChange={onChangeBed} bedValue={bedValue} />
+                                <PriceController bedChange={onChangeBed} bedValue={bedValue} />
                             </List>
                         </div>
                     </div>
