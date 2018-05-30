@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 //Material-UI Components
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import Drawer from 'material-ui/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import MenuIcon from '@material-ui/icons/Menu';
-import List from 'material-ui/List';
-import { withStyles } from 'material-ui/styles';
+import List from '@material-ui/core/List';
+import { withStyles } from '@material-ui/core/styles';
 // import StarIcon from '@material-ui/icons/Star';
 
 //Project Components
@@ -50,17 +50,17 @@ const { classes, onChangeBed, bedValue } = this.props;
         <AppBar position="fixed" color='primary'>
             <Toolbar>
                 <IconButton onClick={this.toggleDrawer('leftSide', true)} className={classes.menuButton} color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
-                <Drawer onkeydown={this.toggleDrawer('leftSide', false)} open={this.state.leftSide} onClose={this.toggleDrawer('leftSide', false)}>
+                <SwipeableDrawer onkeydown={this.toggleDrawer('leftSide', false)} open={this.state.leftSide} onClose={this.toggleDrawer('leftSide', false)}>
                     <div tabIndex={0} role="button">
                         <div className={classes.list}>
                             <List>
                                 <BedroomController bedChange={onChangeBed} bedValue={bedValue} />
                                 <NeighborhoodController />
-                                <PriceController bedChange={onChangeBed} bedValue={bedValue} />
+                                <PriceController  />
                             </List>
                         </div>
                     </div>
-                </Drawer>
+                </SwipeableDrawer>
             </Toolbar>
         </AppBar>
     )

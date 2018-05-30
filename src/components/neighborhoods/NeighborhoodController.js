@@ -59,11 +59,11 @@ render() {
         </List>
 
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
-            <DialogTitle id="confirmation-dialog-title">Update Neighborhoods?</DialogTitle>
+          <DialogTitle id="confirmation-dialog-title">Update Neighborhoods?</DialogTitle>
 
             <DialogContent>
-              <Grid container>
-                <Grid xs={12} justify={'center'}>
+              <Grid container justify={'center'}>
+                <Grid item xs={12} >
                   <div className={classes.slider}>
                     <IntegrationDownshift />
                   </div>

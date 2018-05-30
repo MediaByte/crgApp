@@ -60,7 +60,7 @@ render() {
         </List>
 
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
-            <DialogTitle id="confirmation-dialog-title">Update Bedrooms?</DialogTitle>
+          <DialogTitle id="confirmation-dialog-title">Update Bedrooms?</DialogTitle>
             
             <Grid container>
               <Grid xs={12} justify={'center'}>

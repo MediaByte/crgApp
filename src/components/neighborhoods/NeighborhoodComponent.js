@@ -1,12 +1,19 @@
+//ReactJS
 import React from 'react';
 import PropTypes from 'prop-types';
+
+//Autocomplete Component
 import keycode from 'keycode';
 import Downshift from 'downshift';
+
+//Material-UI Components
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Chip from '@material-ui/core/Chip';
+
+//Project Components
 
 const suggestions = [
   { label: "Cambridge" },
