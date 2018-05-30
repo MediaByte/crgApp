@@ -31,7 +31,7 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
 	<MuiThemeProvider theme={theme}>
-	<CssBaseline />
+    <CssBaseline />
 		<RentalApp />
 	</MuiThemeProvider>
 , document.getElementById('root'));

@@ -50,12 +50,12 @@ const { classes, onChangeBed, bedValue } = this.props;
         <AppBar position="fixed" color='primary'>
             <Toolbar>
                 <IconButton onClick={this.toggleDrawer('leftSide', true)} className={classes.menuButton} color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
-                <Drawer open={this.state.leftSide} onClose={this.toggleDrawer('leftSide', false)}>
+                <Drawer onkeydown={this.toggleDrawer('leftSide', false)} open={this.state.leftSide} onClose={this.toggleDrawer('leftSide', false)}>
                     <div tabIndex={0} role="button">
                         <div className={classes.list}>
                             <List>
                                 <BedroomController bedChange={onChangeBed} bedValue={bedValue} />
-                                <NeighborhoodController bedChange={onChangeBed} bedValue={bedValue} />
+                                <NeighborhoodController />
                                 <PriceController bedChange={onChangeBed} bedValue={bedValue} />
                             </List>
                         </div>

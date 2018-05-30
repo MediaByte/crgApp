@@ -1,4 +1,4 @@
-//ReactJS
+//ReactJS//ReactJS
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,17 +8,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import Slider from '@material-ui/lab/Slider';
 import Grid from '@material-ui/core/Grid';
 
 //Project Components
+import IntegrationDownshift from './NeighborhoodComponent'
 
 //Styles in JSS
 const styles = theme => ({
@@ -49,7 +48,7 @@ class NeighborhoodController extends Component {
   }
 
 render() {
-  const { classes, bedChange, bedValue } = this.props;
+  const { classes } = this.props;
     return (
       <div>
         <List>
@@ -61,19 +60,15 @@ render() {
 
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
             <DialogTitle id="confirmation-dialog-title">Update Neighborhoods?</DialogTitle>
-            
-            <Grid container>
-              <Grid xs={12} justify={'center'}>
-                <div className={classes.slider}>
-                  <Slider value={bedValue} min={0} max={5} step={1} onChange={bedChange} />
-                </div>
-              </Grid>
-            </Grid>
 
             <DialogContent>
-              <Typography align="center" variant="title">
-                { bedValue < 1 ? 'Studio' : bedValue }
-              </Typography>
+              <Grid container>
+                <Grid xs={12} justify={'center'}>
+                  <div className={classes.slider}>
+                    <IntegrationDownshift />
+                  </div>
+                </Grid>
+              </Grid>
             </DialogContent>
 
             <DialogActions>

@@ -44,7 +44,7 @@ class PriceController extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false
+      open: false,
     };
   }
 
@@ -60,7 +60,7 @@ render() {
         </List>
 
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
-            <DialogTitle id="confirmation-dialog-title">Update Neighborhoods?</DialogTitle>
+            <DialogTitle id="confirmation-dialog-title">Update Price?</DialogTitle>
             
             <Grid container>
               <Grid xs={12} justify={'center'}>
