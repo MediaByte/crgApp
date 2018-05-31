@@ -45,7 +45,8 @@ const styles = {
     }
 
 render() {
-const { classes, onChangeBed, bedValue, locationParams } = this.props;
+    const { classes, onChangeBed, bedValue, city, handleCityChange } = this.props;
+
     return (
         <AppBar position="fixed" color='primary'>
             <Toolbar>
@@ -55,7 +56,7 @@ const { classes, onChangeBed, bedValue, locationParams } = this.props;
                         <div className={classes.list}>
                             <List>
                                 <BedroomController bedChange={onChangeBed} bedValue={bedValue} />
-                                <NeighborhoodController locationParams={locationParams} />
+                                <NeighborhoodController city={city} handleCityChange={handleCityChange} />
                                 <PriceController  />
                             </List>
                         </div>

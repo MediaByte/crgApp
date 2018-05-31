@@ -43,15 +43,17 @@ export default class AppArchitecture extends Component {
       .catch(err => console.log(err));
   }
 
-  locationParams = (event, value) => {
+  handleCityChange = (event) => {
     listArray = 0
-    this.setState({ city: value });
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${value}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
+    this.setState({ city: event, });
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
-  }
+  };
+
+
 
   constructor(props) {
     super(props);
@@ -64,8 +66,10 @@ export default class AppArchitecture extends Component {
         listings: [],
         left: false,
         amount: 1500,
+        multiLabel: null,
       };
     this.onChangeBed = this.onChangeBed.bind(this);
+    this.handleCityChange = this.handleCityChange.bind(this);
   }
 
   render() {
@@ -83,7 +87,8 @@ export default class AppArchitecture extends Component {
               onChangeBed={this.onChangeBed} 
               bedValue={this.state.bedSlider}
             //Location Component Arguments
-              locationParams={this.locationParams}
+              handleCityChange={this.handleCityChange}
+              city={this.state.city}
             //Pricing Component Arguements
             />
               <div className='pt5'>

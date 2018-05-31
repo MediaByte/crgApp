@@ -48,7 +48,7 @@ class NeighborhoodController extends Component {
   }
 
 render() {
-  const { classes } = this.props;
+  const { classes, handleCityChange, city } = this.props;
     return (
       <div>
         <List>
@@ -65,7 +65,7 @@ render() {
               <Grid container justify={'center'}>
                 <Grid item xs={12} >
                   <div className={classes.slider}>
-                    <IntegrationDownshift />
+                    <IntegrationDownshift city={city} handleCityChange={handleCityChange}/>
                   </div>
                 </Grid>
               </Grid>
