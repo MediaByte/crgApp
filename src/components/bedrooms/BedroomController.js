@@ -20,6 +20,7 @@ import Grid from '@material-ui/core/Grid';
 
 //Project Components
 
+
 //Styles in JSS
 const styles = theme => ({
 
@@ -30,9 +31,9 @@ const styles = theme => ({
     width: 400,
   }),
   slider: {
-    margin: 60,
     width: 250,
     padding: 10,
+    margin: 60
   },
 });
 
@@ -52,6 +53,7 @@ render() {
   const { classes, bedChange, bedValue } = this.props;
     return (
       <div>
+
         <List>
           <ListItem button onClick={this.handleClickOpen}>
             <ListItemText primary="Update Bedrooms" secondary={`${bedValue} Bedrooms`} />
@@ -80,6 +82,7 @@ render() {
               <Button onClick={this.handleClose} color="primary">Done</Button>
             </DialogActions>
         </Dialog>
+
       </div>
     );
   }

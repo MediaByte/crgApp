@@ -43,6 +43,15 @@ export default class AppArchitecture extends Component {
       .catch(err => console.log(err));
   }
 
+  locationParams = (event, value) => {
+    listArray = 0
+    this.setState({ city: value });
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${value}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
+      .then(xml => xml.text())
+      .then(xml => convert.xml2js(xml, options))
+      .then(data => { this.setState({ listings: data })})
+      .catch(err => console.log(err));
+  }
 
   constructor(props) {
     super(props);
@@ -70,10 +79,12 @@ export default class AppArchitecture extends Component {
         return (
           <div>
             <Layout 
-              //Bedroom Component Arguements
+            //Bedroom Component Arguements
               onChangeBed={this.onChangeBed} 
               bedValue={this.state.bedSlider}
-              //Pricing Component Arguements
+            //Location Component Arguments
+              locationParams={this.locationParams}
+            //Pricing Component Arguements
             />
               <div className='pt5'>
                   <GetListings 

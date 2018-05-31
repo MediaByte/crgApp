@@ -121,7 +121,8 @@ class DownshiftMultiple extends React.Component {
   handleInputChange = event => {
     this.setState({ inputValue: event.target.value });
   };
-
+  
+  //Fecth function here
   handleChange = item => {
     let { selectedItem } = this.state;
 
@@ -133,6 +134,7 @@ class DownshiftMultiple extends React.Component {
       inputValue: '',
       selectedItem,
     });
+    console.log(selectedItem)
   };
 
   handleDelete = item => () => {
