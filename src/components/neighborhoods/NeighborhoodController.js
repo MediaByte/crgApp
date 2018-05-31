@@ -53,7 +53,7 @@ render() {
       <div>
         <List>
           <ListItem button onClick={this.handleClickOpen}>
-            <ListItemText primary="Update Neighborhoods" secondary={`Cambridge:Central`} />
+            <ListItemText primary="Update Neighborhoods" secondary={`${city}`} />
           </ListItem>
           <Divider />
         </List>

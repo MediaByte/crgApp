@@ -16,8 +16,10 @@
     "prop-types": "^15.6.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-number-format": "^3.3.4",
     "react-scripts": "^1.1.4",
     "react-select": "^1.2.1",
+    "react-text-mask": "^5.4.1",
     "reactstrap": "^5.0.0",
     "tachyons": "^4.9.1",
     "xml-js": "^1.6.2"

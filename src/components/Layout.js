@@ -45,7 +45,7 @@ const styles = {
     }
 
 render() {
-    const { classes, onChangeBed, bedValue, city, handleCityChange } = this.props;
+    const { classes, onChangeBed, bedValue, city, handleCityChange, handlePriceChange, minPrice, maxPrice } = this.props;
 
     return (
         <AppBar position="fixed" color='primary'>
@@ -57,7 +57,7 @@ render() {
                             <List>
                                 <BedroomController bedChange={onChangeBed} bedValue={bedValue} />
                                 <NeighborhoodController city={city} handleCityChange={handleCityChange} />
-                                <PriceController  />
+                                <PriceController handlePriceChange={handlePriceChange} minPrice={minPrice} maxPrice={maxPrice} />
                             </List>
                         </div>
                     </div>

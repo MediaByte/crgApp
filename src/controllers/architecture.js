@@ -28,11 +28,6 @@ let listArray = 0
 
 export default class AppArchitecture extends Component {
 
-  budgetHandleChange = (event) => {
-    this.setState({ amount: event.target.value });
-    console.log(event.target.value);
-  };
-
   onChangeBed = (event, value) => {
     listArray = 0
     this.setState({ minBeds: value, maxBeds: value, bedSlider: value });
@@ -53,6 +48,19 @@ export default class AppArchitecture extends Component {
       .catch(err => console.log(err));
   };
 
+  handlePriceChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+    setTimeout(() => {
+    listArray = 0
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${this.state.minPrice}&max_rent=${this.state.maxPrice}&include_mls=1`)
+      .then(xml => xml.text())
+      .then(xml => convert.xml2js(xml, options))
+      .then(data => { this.setState({ listings: data })})
+      .catch(err => console.log(err));
+    }, 4000);
+  };
 
 
   constructor(props) {
@@ -65,11 +73,12 @@ export default class AppArchitecture extends Component {
         open: false,
         listings: [],
         left: false,
-        amount: 1500,
-        multiLabel: null,
+        minPrice: '',
+        maxPrice: '',
       };
     this.onChangeBed = this.onChangeBed.bind(this);
     this.handleCityChange = this.handleCityChange.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
   render() {
@@ -90,6 +99,10 @@ export default class AppArchitecture extends Component {
               handleCityChange={this.handleCityChange}
               city={this.state.city}
             //Pricing Component Arguements
+              handlePriceChange={this.handlePriceChange}
+              minPrice={this.state.minPrice}
+              maxPrice={this.state.maxPrice}
+
             />
               <div className='pt5'>
                   <GetListings 

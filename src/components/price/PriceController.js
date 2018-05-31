@@ -8,17 +8,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import Slider from '@material-ui/lab/Slider';
 import Grid from '@material-ui/core/Grid';
 
 //Project Components
+import PriceComponent from './PriceComponent';
 
 //Styles in JSS
 const styles = theme => ({
@@ -49,12 +47,12 @@ class PriceController extends Component {
   }
 
 render() {
-  const { classes, bedChange, bedValue } = this.props;
+  const { classes, handlePriceChange, minPrice, maxPrice } = this.props;
     return (
       <div>
         <List>
           <ListItem button onClick={this.handleClickOpen}>
-            <ListItemText primary="Update Price" secondary={`min:$1500, max:$9000 `} />
+            <ListItemText primary="Update Price" secondary={`min:$${minPrice}, max:$${maxPrice}`} />
           </ListItem>
           <Divider />
         </List>
@@ -62,19 +60,13 @@ render() {
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
             <DialogTitle id="confirmation-dialog-title">Update Price?</DialogTitle>
             
-            <Grid container>
-              <Grid xs={12} justify={'center'}>
+            <Grid container justify={'center'}>
+              <Grid item xs={12}>
                 <div className={classes.slider}>
-                  <Slider value={bedValue} min={0} max={5} step={1} onChange={bedChange} />
+                  <PriceComponent handlePriceChange={handlePriceChange} minPrice={minPrice} maxPrice={maxPrice} />
                 </div>
               </Grid>
             </Grid>
-
-            <DialogContent>
-              <Typography align="center" variant="title">
-                { bedValue < 1 ? 'Studio' : bedValue }
-              </Typography>
-            </DialogContent>
 
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">Done</Button>
