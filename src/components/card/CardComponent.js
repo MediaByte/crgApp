@@ -1,3 +1,4 @@
+//ReactJS
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -33,20 +34,24 @@ function MapListings(props) {
 		// baths,  
 
 	const title = `${streetnumber} ${streetname}`
-	const subTitle = `${city} MA`
+	const subTitle = `${city}`
 
   return (
     <div>
       <Card className={classes.card}>
 
-        <CardMedia className={classes.media} image={photo} title={`${title} #${unit}, ${subTitle}`} />
+        <CardMedia className={classes.media} image={photo} title={`${title} #${unit}, ${subTitle} MA`} />
 
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
             {title}
           </Typography>
           <Typography component="p">
-          	{`This ${city} ${beds} bedroom apartment is for rent and available 9/1.  This unit features Granite counter tops, stainless steel appliances and hardwood floors.`}
+          	{`
+            This ${city} ${beds} bedroom apartment is for rent and available 9/1.  
+            This unit features Granite counter tops, stainless steel appliances 
+            and hardwood floors.
+            `}
           </Typography>
         </CardContent>
 
