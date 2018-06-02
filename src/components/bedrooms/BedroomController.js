@@ -64,8 +64,8 @@ render() {
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <DialogTitle id="confirmation-dialog-title">Update Bedrooms?</DialogTitle>
             
-            <Grid container>
-              <Grid xs={12} justify={'center'}>
+            <Grid container justify={'center'}>
+              <Grid item xs={12}>
                 <div className={classes.slider}>
                   <Slider value={bedValue} min={0} max={5} step={1} onChange={bedChange} />
                 </div>
