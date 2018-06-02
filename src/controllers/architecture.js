@@ -52,14 +52,12 @@ export default class AppArchitecture extends Component {
     this.setState({
       [name]: event.target.value
     });
-    setTimeout(() => {
     listArray = 0
     fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${this.state.minPrice}&max_rent=${this.state.maxPrice}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
-    }, 4000);
   };
 
 
