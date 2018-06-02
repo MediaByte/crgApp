@@ -13,10 +13,8 @@ class RentalApp extends Component {
   render() {  
     return (
       <div>
-        <div>
-          <AppArchitecture />
-          <BackTop />
-        </div>
+        <AppArchitecture />
+        <BackTop />
       </div>
     )
   }

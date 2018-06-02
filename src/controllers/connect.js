@@ -12,7 +12,7 @@ const GetListings = ({ listings }) => {
 					streetname={listing.StreetName[0]._text[0]} 
 					unit={listing.Unit[0].hasOwnProperty('_text') ? listing.Unit[0]._text[0] : '111'}
 					city={listing.City[0]._text[0]} 
-					beds={listing.Beds._text} 
+					beds={listing.Beds[0]._text[0]} 
 					baths={listing.Baths._text} 
 					price={listing.Price._text} 
 					photo={listing.hasOwnProperty("Photos") ? listing.Photos[0].Photo[0]._text[0] : 'https://image.freepik.com/free-vector/white-room-with-light-and-coming-soon-text_1017-5070.jpg'}

@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 
 //Project Components
 import GetListings from '../controllers/connect';
-import Loading from '../components/Loading'
-import Layout from '../components/Layout';
+import Layout from '../views/Layout';
+import ProgressComponent from '../components/progress/ProgressComponent';
 
 //Styles and Designs
 import 'tachyons';
 
-//Converts XML response to an JS array
+//Converts XML response to JS array
 const convert = require('xml-js');
 const options = {
     ignoreComment: true, 
@@ -87,7 +87,7 @@ export default class AppArchitecture extends Component {
     console.log(this.state.listings);
 
     if (listArray.length === 0) {
-      return <Loading />
+      return <ProgressComponent />
     } else {
         return (
           <div>
@@ -102,7 +102,6 @@ export default class AppArchitecture extends Component {
               handlePriceChange={this.handlePriceChange}
               minPrice={this.state.minPrice}
               maxPrice={this.state.maxPrice}
-
             />
               <div className='pt5'>
                   <GetListings 

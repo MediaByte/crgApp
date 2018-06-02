@@ -13,9 +13,9 @@ import { withStyles } from '@material-ui/core/styles';
 // import StarIcon from '@material-ui/icons/Star';
 
 //Project Components
-import BedroomController from './bedrooms/BedroomController';
-import NeighborhoodController from './neighborhoods/NeighborhoodController';
-import PriceController from './price/PriceController';
+import BedroomController from '../components/bedrooms/BedroomController';
+import NeighborhoodController from '../components/neighborhoods/NeighborhoodController';
+import PriceController from '../components/price/PriceController';
 
 
 //Material-UI styles
