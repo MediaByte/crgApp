@@ -47,7 +47,7 @@ class PriceController extends Component {
   }
 
 render() {
-  const { classes, handlePriceChange, minPrice, maxPrice } = this.props;
+  const { classes, handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice } = this.props;
     return (
       <div>
         <List>
@@ -63,7 +63,7 @@ render() {
             <Grid container justify={'center'}>
               <Grid item xs={12}>
                 <div className={classes.slider}>
-                  <PriceComponent handlePriceChange={handlePriceChange} minPrice={minPrice} maxPrice={maxPrice} />
+                  <PriceComponent handleMaxPriceChange={handleMaxPriceChange} handleMinPriceChange={handleMinPriceChange} minPrice={minPrice} maxPrice={maxPrice} />
                 </div>
               </Grid>
             </Grid>

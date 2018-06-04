@@ -78,7 +78,7 @@ class PriceComponent extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { minPrice, maxPrice, handlePriceChange } = this.props;
+    const { minPrice, maxPrice, handleMinPriceChange, handleMaxPriceChange } = this.props;
 
     return (
       <div className={classes.container}>
@@ -86,7 +86,7 @@ class PriceComponent extends React.Component {
           className={classes.formControl}
           label="Min"
           value={minPrice}
-          onChange={handlePriceChange("minPrice")}
+          onChange={handleMinPriceChange}
           id="formatted-numberformat-input"
           InputProps={{
             inputComponent: NumberFormatCustom
@@ -96,7 +96,7 @@ class PriceComponent extends React.Component {
           className={classes.formControl}
           label="Max"
           value={maxPrice}
-          onChange={handlePriceChange("maxPrice")}
+          onChange={handleMaxPriceChange}
           id="formatted-numberformat-input"
           InputProps={{
             inputComponent: NumberFormatCustom

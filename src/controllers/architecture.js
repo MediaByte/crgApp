@@ -48,25 +48,38 @@ export default class AppArchitecture extends Component {
       .catch(err => console.log(err));
   };
 
-  handlePriceChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-    listArray = 0
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${this.state.minPrice}&max_rent=${this.state.maxPrice}&include_mls=1`)
+  handleMaxPriceChange = (event) => {
+    this.setState({ maxPrice: event.target.value });
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${this.state.minPrice}&max_rent=${event.target.value}&include_mls=1`)
+      .then(xml => xml.text())
+      .then(xml => convert.xml2js(xml, options))
+      .then(data => { this.setState({ listings: data })})
+      .catch(err => console.log(err));
+  }
+
+  handleMinPriceChange = (event) => {
+    this.setState({ minPrice: event.target.value});
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${event.target.value}&max_rent=${this.state.maxPrice}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
   };
 
+  doWeHaveListings = (responseYGL) => {
+    if (responseYGL.hasOwnProperty('Listings')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   constructor(props) {
     super(props);
       this.state = {
-        bedSlider: 3,
-        minBeds: 3,
-        maxBeds: 3,
+        bedSlider: 1,
+        minBeds: 1,
+        maxBeds: 1,
         city: 'Somerville',
         open: false,
         listings: [],
@@ -76,13 +89,16 @@ export default class AppArchitecture extends Component {
       };
     this.onChangeBed = this.onChangeBed.bind(this);
     this.handleCityChange = this.handleCityChange.bind(this);
-    this.handlePriceChange = this.handlePriceChange.bind(this);
+    this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
+    this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
+    this.doWeHaveListings = this.doWeHaveListings.bind(this);
   }
 
   render() {
 
     listArray = this.state.listings;
     console.log(this.state.listings);
+    const { doWeHaveListings } = this
 
     if (listArray.length === 0) {
       return <ProgressComponent />
@@ -97,13 +113,13 @@ export default class AppArchitecture extends Component {
               handleCityChange={this.handleCityChange}
               city={this.state.city}
             //Pricing Component Arguements
-              handlePriceChange={this.handlePriceChange}
+              handleMinPriceChange={this.handleMinPriceChange}
+              handleMaxPriceChange={this.handleMaxPriceChange}
               minPrice={this.state.minPrice}
               maxPrice={this.state.maxPrice}
             />
               <div className='pt5'>
-                  <GetListings 
-                  listings={this.state.listings.YGLResponse[0].hasOwnProperty("Listings") ? this.state.listings.YGLResponse[0].Listings[0].Listing : alert('no listings found')} />
+                  { doWeHaveListings(this.state.listings.YGLResponse[0]) ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
               </div>
           </div>
         );

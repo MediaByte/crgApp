@@ -27,10 +27,10 @@ const styles = {
 };
 
 function MapListings(props) {
-  	const { classes, streetnumber, streetname, city, photo, unit, beds, } = props
+  	const { classes, price, movedate, streetnumber, streetname, city, photo, unit, beds, } = props
 		// lat, 
 		// long, 
-		// price,
+		// 
 		// baths,  
 
 	const title = `${streetnumber} ${streetname}`
@@ -48,9 +48,8 @@ function MapListings(props) {
           </Typography>
           <Typography component="p">
           	{`
-            This ${city} ${beds} bedroom apartment is for rent and available 9/1.  
-            This unit features Granite counter tops, stainless steel appliances 
-            and hardwood floors.
+            This ${city} ${beds} bedroom apartment is available ${movedate}, for rent 
+            starting at ${price}.
             `}
           </Typography>
         </CardContent>
