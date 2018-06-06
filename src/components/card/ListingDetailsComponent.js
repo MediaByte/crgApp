@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import Grid from '@material-ui/core/Grid';
 
 //Project Components
 import CarouselComponent from './CarouselComponent';
@@ -20,9 +21,6 @@ import MapSnippet from './MapSnippet'
 
 //Styles
 const styles = {
-  appBar: {
-    position: 'relative',
-  },
   flex: {
     flex: 1,
   },
@@ -51,13 +49,12 @@ class ListingDetails extends React.Component {
 
   render() {
     const { classes, photoArray, lat, long } = this.props;
-    
 
     return (
       <div>
         <Button size="small" color="secondary" onClick={this.handleClickOpen}>Details</Button>
         <Dialog fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
-          <AppBar className={classes.appBar}>
+          <AppBar position='fixed'>
             <Toolbar>
               <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">
                 <CloseIcon />
@@ -70,8 +67,16 @@ class ListingDetails extends React.Component {
               </Button>
             </Toolbar>
           </AppBar>
-            <CarouselComponent photoArray={photoArray}/>
-            <MapSnippet lat={lat} long={long} />
+          <Grid container>
+            <Grid item xs={12}>
+              <CarouselComponent photoArray={photoArray}/>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+              <MapSnippet lat={lat} long={long} />
+            </Grid>
+          </Grid>
         </Dialog>
       </div>
     );
