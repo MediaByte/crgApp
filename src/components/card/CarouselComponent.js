@@ -50,7 +50,7 @@ export default class CarouselComponent extends Component {
     const slides = photoArray.map((item, i) => {
       return (
         <CarouselItem className="custom-tag" tag="div" onExiting={this.onExiting} onExited={this.onExited} key={item._text[0]}>
-          <div className={'flex flex-wrap justify-center'}>
+          <div style={{padding: '15px'}} className={'flex flex-wrap justify-center'}>
             <img height={'400px'} src={item._text[0]} alt={'Test'} />
           </div>
         </CarouselItem>
@@ -62,9 +62,8 @@ export default class CarouselComponent extends Component {
         <style>
           {`.custom-tag {
                 max-width: 100%;
-                height: 450px;
+                height: 470px;
                 background: black;
-                margin-top: 55px;
             }`
           }
         </style>

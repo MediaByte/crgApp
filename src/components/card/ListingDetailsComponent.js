@@ -12,11 +12,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import Grid from '@material-ui/core/Grid';
 
 //Project Components
-import CarouselComponent from './CarouselComponent';
-import MapSnippet from './MapSnippet'
+import DetailsComponent from './DetailsComponent'
 
 
 //Styles
@@ -24,6 +22,9 @@ const styles = {
   flex: {
     flex: 1,
   },
+  content: {
+    marginTop: 70,
+  }
 };
 
 function Transition(props) {
@@ -67,16 +68,9 @@ class ListingDetails extends React.Component {
               </Button>
             </Toolbar>
           </AppBar>
-          <Grid container>
-            <Grid item xs={12}>
-              <CarouselComponent photoArray={photoArray}/>
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={12}>
-              <MapSnippet lat={lat} long={long} />
-            </Grid>
-          </Grid>
+          <div className={classes.content}>
+            <DetailsComponent lat={lat} long={long} photoArray={photoArray} />
+          </div>
         </Dialog>
       </div>
     );

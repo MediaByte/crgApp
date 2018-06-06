@@ -9,14 +9,14 @@ import 'tachyons';
 
 const style = {  
   width: '100%', 
-  height: '500px' 
+  height: '400px' 
 }
 
 class MapSnippet extends Component {
   render() {
     return (
       <div>   
-        <Map style={style} google={this.props.google} initialCenter={{lat: this.props.lat, lng: this.props.long}} zoom={15} onClick={this.onMapClicked}>
+        <Map style={style} google={this.props.google} initialCenter={{lat: this.props.lat, lng: this.props.long}} zoom={15}>
           <Marker onClick={this.onMarkerClick} />
         </Map>
       </div> 
