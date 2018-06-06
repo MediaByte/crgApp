@@ -13,6 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 
+//Project Components
+import CarouselComponent from './CarouselComponent';
+import MapSnippet from './MapSnippet'
+
+
 //Styles
 const styles = {
   appBar: {
@@ -28,9 +33,13 @@ function Transition(props) {
 }
 
 class ListingDetails extends React.Component {
-  state = {
-    open: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      ListingDetails: [],
+    };
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -41,7 +50,9 @@ class ListingDetails extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, photoArray, lat, long } = this.props;
+    
+
     return (
       <div>
         <Button size="small" color="secondary" onClick={this.handleClickOpen}>Details</Button>
@@ -59,7 +70,8 @@ class ListingDetails extends React.Component {
               </Button>
             </Toolbar>
           </AppBar>
-            content
+            <CarouselComponent photoArray={photoArray}/>
+            <MapSnippet lat={lat} long={long} />
         </Dialog>
       </div>
     );

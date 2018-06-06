@@ -27,14 +27,24 @@ const styles = {
 };
 
 function MapListings(props) {
-  	const { classes, price, movedate, streetnumber, streetname, city, photo, unit, beds, } = props
-		// lat, 
-		// long, 
-		// 
-		// baths,  
+  	const { 
+      classes, 
+      price, 
+      movedate, 
+      streetnumber, 
+      streetname, 
+      city, 
+      photo, 
+      unit, 
+      beds,
+      photoArray, 
+      lat,
+      long,
+    } = props 
 
-	const title = `${streetnumber} ${streetname}`
+	const title = `${streetnumber} ${streetname}, ${unit}`
 	const subTitle = `${city}`
+  console.log(photoArray)
 
   return (
     <div>
@@ -55,7 +65,11 @@ function MapListings(props) {
         </CardContent>
 
         <CardActions>
-          <ListingDetails />
+          <ListingDetails 
+            photoArray={photoArray}
+            lat={lat}
+            long={long}
+          />
         </CardActions>
 
       </Card>

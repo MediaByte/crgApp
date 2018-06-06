@@ -31,7 +31,7 @@ export default class AppArchitecture extends Component {
   onChangeBed = (event, value) => {
     listArray = 0
     this.setState({ minBeds: value, maxBeds: value, bedSlider: value });
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${value}&max_bed=${value}&include_mls=1`)
+    fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${value}&max_bed=${value}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
@@ -41,7 +41,7 @@ export default class AppArchitecture extends Component {
   handleCityChange = (event) => {
     listArray = 0
     this.setState({ city: event, });
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
+    fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
@@ -50,7 +50,7 @@ export default class AppArchitecture extends Component {
 
   handleMaxPriceChange = (event) => {
     this.setState({ maxPrice: event.target.value });
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${this.state.minPrice}&max_rent=${event.target.value}&include_mls=1`)
+    fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${this.state.minPrice}&max_rent=${event.target.value}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
@@ -59,7 +59,7 @@ export default class AppArchitecture extends Component {
 
   handleMinPriceChange = (event) => {
     this.setState({ minPrice: event.target.value});
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${event.target.value}&max_rent=${this.state.maxPrice}&include_mls=1`)
+    fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${event.target.value}&max_rent=${this.state.maxPrice}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
@@ -127,7 +127,7 @@ export default class AppArchitecture extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1&detail_level=2`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
