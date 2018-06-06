@@ -24,6 +24,7 @@ const styles = {
   },
   content: {
     marginTop: 70,
+    overflow: 'hidden',
   }
 };
 
