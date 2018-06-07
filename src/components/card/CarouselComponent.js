@@ -2,11 +2,33 @@
 import React, { Component } from 'react';
 
 //Bootstrap Carousel
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators,} from 'reactstrap';
+import { 
+  Carousel, 
+  CarouselItem, 
+  CarouselControl, 
+  CarouselIndicators,} 
+from 'reactstrap';
+
+//Material-UI
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
 var items = [];
 
-export default class CarouselComponent extends Component {
+const styles = theme => ({
+  root: theme.mixins.gutters({
+    paddingTop: 16,
+    marginTop: theme.spacing.unit * 1,
+    height: '470px',
+    marginRight: 15,
+    marginLeft: 15,
+    marginBottom: 15,
+  }),
+});
+
+class CarouselComponent extends Component {
+
   constructor(props) {
     super(props);
     this.state = { activeIndex: 0 };
@@ -44,14 +66,15 @@ export default class CarouselComponent extends Component {
 
   render() {
     const { activeIndex } = this.state;
-    const { photoArray } = this.props;
+    const { classes, photoArray } = this.props;
+
     items = photoArray
 
     const slides = photoArray.map((item, i) => {
       return (
         <CarouselItem className="custom-tag" tag="div" onExiting={this.onExiting} onExited={this.onExited} key={item._text[0]}>
           <div style={{padding: '15px'}} className={'flex flex-wrap justify-center'}>
-            <img height={'400px'} src={item._text[0]} alt={'Test'} />
+            <img height={'380px'} src={item._text[0]} alt={'Test'} />
           </div>
         </CarouselItem>
       );
@@ -59,10 +82,14 @@ export default class CarouselComponent extends Component {
 
     return (
       <div>
+        <Paper className={classes.root} elevation={20}>
+          <Typography variant="headline" component="h3">
+            Photos
+          </Typography>
         <style>
           {`.custom-tag {
                 max-width: 100%;
-                height: 470px;
+                height: 400px;
                 background: black;
             }`
           }
@@ -77,7 +104,11 @@ export default class CarouselComponent extends Component {
           <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
           <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
         </Carousel>
-      </div>
+        </Paper>   
+        </div> 
     );
   }
 }
+
+
+export default withStyles(styles)(CarouselComponent);

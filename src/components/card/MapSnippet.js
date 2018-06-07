@@ -10,29 +10,27 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-
-//CSS & styling
-import 'tachyons';
-
 const styles = theme => ({
   root: theme.mixins.gutters({
-    paddingTop: 16,
+    paddingTop: 20,
     marginTop: theme.spacing.unit * 1,
-    height: '450px',
-    marginBottom: 100
+    height: '470px',
+    marginRight: 10,
+    marginLeft: 10,
+    marginBottom: 15,
   }),
 });
 
 class MapSnippet extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, lat, long } = this.props;
     return (
       <div>
-        <Paper className={classes.root} elevation={6}>
+        <Paper className={classes.root} elevation={20}>
           <Typography variant="headline" component="h3">
-            Google Map
+            Google Maps
           </Typography>
-
+          <MapComponent lat={lat} long={long} isMarkerShown />
         </Paper>   
       </div> 
     );

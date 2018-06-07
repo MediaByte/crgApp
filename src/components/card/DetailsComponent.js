@@ -2,88 +2,79 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-//Material-UI Components
+//Material-UI
 import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 
 //Project Components
 import CarouselComponent from './CarouselComponent';
 import MapSnippet from './MapSnippet'
 
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 const styles = theme => ({
   root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0,
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
-  map: {
-    marginTop: 2,
-    overflow: 'hidden',
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
   },
 });
 
 class DetailsComponent extends React.Component {
   state = {
-    expanded: null,
+    value: 0,
   };
 
-  handleChange = panel => (event, expanded) => {
-    this.setState({
-      expanded: expanded ? panel : false,
-    });
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
 
   render() {
-    const { classes, photoArray, lat, long } = this.props;
-    const { expanded } = this.state;
+    const { classes, photoArray, lat, long  } = this.props;
+    const { value } = this.state;
 
     return (
       <div className={classes.root}>
-        <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Listing Details</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <Typography>
-              Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-              diam eros in elit. Pellentesque convallis laoreet laoreet.
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Photos</Typography>
-            <Typography className={classes.secondaryHeading}>
-              {photoArray.length} photos available
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
+        <AppBar>
+          <Tabs centered value={value} onChange={this.handleChange}>
+            <Tab label="Photos" />
+            <Tab label="Details" />
+            <Tab label="Google Map" />
+          </Tabs>
+        </AppBar>
+        {value === 0 && 
+          <TabContainer>
             <Grid container>
               <Grid item xs={12}>
                 <CarouselComponent photoArray={photoArray}/>
               </Grid>
             </Grid>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <div className={classes.map}>  
-          <Grid container justify='center'>
-            <Grid item xs={12}>
-              <MapSnippet lat={lat} long={long}/>
+          </TabContainer>}
+        {value === 1 && 
+          <TabContainer>
+
+          </TabContainer>}
+        {value === 2 && 
+          <TabContainer>
+            <Grid container justify='center'>
+              <Grid item xs={12}>
+                <MapSnippet lat={lat} long={long}/>
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
+          </TabContainer>}
       </div>
     );
   }
@@ -94,3 +85,8 @@ DetailsComponent.propTypes = {
 };
 
 export default withStyles(styles)(DetailsComponent);
+
+
+
+
+
