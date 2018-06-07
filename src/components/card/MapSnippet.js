@@ -13,10 +13,7 @@ import Typography from '@material-ui/core/Typography';
 const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 20,
-    marginTop: theme.spacing.unit * 1,
     height: '470px',
-    marginRight: 10,
-    marginLeft: 10,
     marginBottom: 15,
   }),
 });
