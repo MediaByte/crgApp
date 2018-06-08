@@ -18,9 +18,11 @@ var items = [];
 
 const styles = theme => ({
   root: theme.mixins.gutters({
-    paddingTop: 16,
+    paddingTop: 10,
     height: '470px',
-    marginBottom: 15,
+    marginBottom: 20,
+    borderRadius: '9px',
+    marginTop: 5,
   }),
 });
 

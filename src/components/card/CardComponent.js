@@ -69,6 +69,13 @@ function MapListings(props) {
             photoArray={photoArray}
             lat={lat}
             long={long}
+            price={price}
+            movedate={movedate}
+            city={city}
+            unit={unit}
+            beds={beds}
+            streetnumber={streetnumber}
+            streetname={streetname}
           />
         </CardActions>
 
