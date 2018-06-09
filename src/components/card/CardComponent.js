@@ -76,6 +76,8 @@ function MapListings(props) {
             beds={beds}
             streetnumber={streetnumber}
             streetname={streetname}
+            title={title}
+            subTitle={subTitle}
           />
         </CardActions>
 

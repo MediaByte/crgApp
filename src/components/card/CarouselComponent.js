@@ -22,7 +22,6 @@ const styles = theme => ({
     height: '470px',
     marginBottom: 20,
     borderRadius: '9px',
-    marginTop: 5,
   }),
 });
 

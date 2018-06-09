@@ -26,7 +26,27 @@ const options = {
 
 let listArray = 0
 
-export default class AppArchitecture extends Component {
+class AppArchitecture extends Component {
+
+  constructor(props) {
+    super(props);
+      this.state = {
+        bedSlider: 1,
+        minBeds: 0,
+        maxBeds: 0,
+        city: 'Somerville',
+        open: false,
+        listings: [],
+        left: false,
+        minPrice: '',
+        maxPrice: '',
+      };
+    this.onChangeBed = this.onChangeBed.bind(this);
+    this.handleCityChange = this.handleCityChange.bind(this);
+    this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
+    this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
+    this.doWeHaveListings = this.doWeHaveListings.bind(this);
+  }
 
   onChangeBed = (event, value) => {
     listArray = 0
@@ -74,26 +94,6 @@ export default class AppArchitecture extends Component {
     }
   }
 
-  constructor(props) {
-    super(props);
-      this.state = {
-        bedSlider: 1,
-        minBeds: 1,
-        maxBeds: 1,
-        city: 'Somerville',
-        open: false,
-        listings: [],
-        left: false,
-        minPrice: '',
-        maxPrice: '',
-      };
-    this.onChangeBed = this.onChangeBed.bind(this);
-    this.handleCityChange = this.handleCityChange.bind(this);
-    this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
-    this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
-    this.doWeHaveListings = this.doWeHaveListings.bind(this);
-  }
-
   render() {
 
     listArray = this.state.listings;
@@ -135,4 +135,5 @@ export default class AppArchitecture extends Component {
   }
 }
 
+export default AppArchitecture;
 

@@ -17,7 +17,8 @@ import Paper from '@material-ui/core/Paper';
 
 //Project Components
 import CarouselComponent from './CarouselComponent';
-import MapSnippet from './MapSnippet'
+import MapSnippet from './MapSnippet';
+import DetailsComponent from './DetailsComponent';
 
 
 //Styles
@@ -26,10 +27,10 @@ const styles = theme => ({
     flex: 1,
   },
   content: theme.mixins.gutters({
-    marginTop: 80,
-    marginBottom: 20,
-    marginRight: 20,
-    marginLeft: 20,
+    marginTop: 68,
+    marginBottom: 5,
+    marginRight: 5,
+    marginLeft: 5,
     paddingTop: 15,
     borderRadius: '8px',
   }),
@@ -57,7 +58,21 @@ class ListingDetails extends React.Component {
   };
 
   render() {
-    const { classes, photoArray, lat, long } = this.props;
+    const { 
+      classes, 
+      photoArray, 
+      lat, 
+      long, 
+      price, 
+      movedate, 
+      city, 
+      unit, 
+      beds, 
+      streetnumber, 
+      streetname,
+      subTitle,
+      title,
+    } = this.props;
 
     return (
       <div>
@@ -77,10 +92,28 @@ class ListingDetails extends React.Component {
             </Toolbar>
           </AppBar>
         <Paper className={classes.content} elevation={10}>
-          <Typography variant="headline" component="h3">
-            Listing Details
+          <Typography variant="headline" component="h4">
+            {title}
+          </Typography>
+          <Typography variant="subheading" component="h4">
+            {subTitle}, MA
           </Typography>
           <div>
+          <Grid container>
+            <Grid item xs={12}>
+              <DetailsComponent 
+                price={price} 
+                movedate={movedate} 
+                city={city} 
+                unit={unit} 
+                beds={beds}
+                streetnumber={streetnumber}
+                streetname={streetname}
+                subTitle={subTitle}
+                title={title}
+              />
+            </Grid>
+          </Grid>
           <Grid container>
             <Grid item xs={12}>
               <CarouselComponent photoArray={photoArray}/>

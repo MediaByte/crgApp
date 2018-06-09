@@ -7,7 +7,7 @@ const GetListings = ({ listings }) => {
 		return (
 			<div>
 				<MapListings
-					key={i}
+					key={listing.ID[0]._text[0]}
 					listingid={listing.ID[0]._text[0]}
 					streetnumber={listing.StreetNumber[0]._text[0]}
 					movedate={listing.hasOwnProperty('AvailableDate') ? listing.AvailableDate[0]._text[0] : 'for immediate move-in'} 
@@ -21,6 +21,10 @@ const GetListings = ({ listings }) => {
 					photoArray={listing.hasOwnProperty("Photos") ? listing.Photos[0].Photo : 'https://image.freepik.com/free-vector/white-room-with-light-and-coming-soon-text_1017-5070.jpg'}
 					lat={listing.hasOwnProperty("Latitude") ? listing.Latitude[0]._text[0] : '42.3736158'}  
 					long={listing.hasOwnProperty("Longitude") ? listing.Longitude[0]._text[0] : '-71.1097335'}
+					electric={listing.IncludeElectricity[0]._text[0]}
+					gas={listing.IncludeGas[0]._text[0]}
+					heat={listing.IncludeHeat[0]._text[0]}
+					hotwater={listing.IncludeHotWater[0]._text[0]}
 				/>
 			</div>
 		);
