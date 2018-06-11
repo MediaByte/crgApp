@@ -31,9 +31,9 @@ class AppArchitecture extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        bedSlider: 1,
-        minBeds: 0,
-        maxBeds: 0,
+        bedValue: 1,
+        minBeds: 1,
+        maxBeds: 1,
         city: 'Somerville',
         open: false,
         listings: [],
@@ -48,10 +48,9 @@ class AppArchitecture extends Component {
     this.doWeHaveListings = this.doWeHaveListings.bind(this);
   }
 
-  onChangeBed = (event, value) => {
-    listArray = 0
-    this.setState({ minBeds: value, maxBeds: value, bedSlider: value });
-    fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${value}&max_bed=${value}&include_mls=1`)
+  onChangeBed = (event) => {
+    this.setState({ minBeds: event.target.value, maxBeds: event.target.value, bedValue: event.target.value });
+    fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${event.target.value}&max_bed=${event.target.value}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
@@ -108,7 +107,7 @@ class AppArchitecture extends Component {
             <Layout 
             //Bedroom Component Arguements
               onChangeBed={this.onChangeBed} 
-              bedValue={this.state.bedSlider}
+              bedValue={this.state.bedValue}
             //Location Component Arguments
               handleCityChange={this.handleCityChange}
               city={this.state.city}
