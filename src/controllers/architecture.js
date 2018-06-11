@@ -31,6 +31,8 @@ class AppArchitecture extends Component {
   constructor(props) {
     super(props);
       this.state = {
+        from: '',
+        to: '',
         bedValue: 1,
         minBeds: 1,
         maxBeds: 1,
@@ -47,6 +49,15 @@ class AppArchitecture extends Component {
     this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
     this.doWeHaveListings = this.doWeHaveListings.bind(this);
   }
+
+  handleDateChange = name => event => {
+    this.setState({ [name]: event.target.value });
+   fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&avail_from=${name === 'from' ? event.target.value : this.state.from}&avail_to=${name === 'to' ? event.target.value : this.state.to}&city_neighborhood=${this.state.city}&min_bed=${event.target.value}&max_bed=${event.target.value}&include_mls=1`)
+      .then(xml => xml.text())
+      .then(xml => convert.xml2js(xml, options))
+      .then(data => { this.setState({ listings: data })})
+      .catch(err => console.log(err));
+  };
 
   onChangeBed = (event) => {
     this.setState({ minBeds: event.target.value, maxBeds: event.target.value, bedValue: event.target.value });
@@ -105,6 +116,10 @@ class AppArchitecture extends Component {
         return (
           <div>
             <Layout 
+            //Date Component Arguements
+              handleDateChange={this.handleDateChange}
+              from={this.state.from}
+              to={this.state.to}
             //Bedroom Component Arguements
               onChangeBed={this.onChangeBed} 
               bedValue={this.state.bedValue}

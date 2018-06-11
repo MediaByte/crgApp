@@ -16,6 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import BedroomController from '../components/bedrooms/BedroomController';
 import NeighborhoodController from '../components/neighborhoods/NeighborhoodController';
 import PriceController from '../components/price/PriceController';
+import DateController from '../components/moveDate/DateController';
 
 
 //Material-UI styles
@@ -45,7 +46,7 @@ const styles = {
     }
 
 render() {
-    const { classes, onChangeBed, bedValue, city, handleCityChange, handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice } = this.props;
+    const { classes, onChangeBed, bedValue, city, handleCityChange, handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice, handleDateChange } = this.props;
 
     return (
         <AppBar position="fixed" color='primary'>
@@ -55,6 +56,7 @@ render() {
                     <div tabIndex={0} role="button">
                         <div className={classes.list}>
                             <List>
+                                <DateController handleDateChange={handleDateChange} to={this.props.to} from={this.props.from}/>
                                 <BedroomController bedChange={onChangeBed} bedValue={bedValue} />
                                 <NeighborhoodController city={city} handleCityChange={handleCityChange} />
                                 <PriceController handleMaxPriceChange={handleMaxPriceChange} handleMinPriceChange={handleMinPriceChange} minPrice={minPrice} maxPrice={maxPrice} />
