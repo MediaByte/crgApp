@@ -52,7 +52,7 @@ class AppArchitecture extends Component {
 
   handleDateChange = name => event => {
     this.setState({ [name]: event.target.value });
-   fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&avail_from=${name === 'from' ? event.target.value : this.state.from}&avail_to=${name === 'to' ? event.target.value : this.state.to}&city_neighborhood=${this.state.city}&min_bed=${event.target.value}&max_bed=${event.target.value}&include_mls=1`)
+   fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&avail_from=${name === 'from' ? event.target.value : this.state.from}&avail_to=${name === 'to' ? event.target.value : this.state.to}&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
