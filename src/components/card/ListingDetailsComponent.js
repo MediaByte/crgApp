@@ -65,6 +65,10 @@ class ListingDetails extends React.Component {
       long, 
       subTitle,
       title,
+      price,
+      movedate,
+      beds, 
+      features,
     } = this.props;
 
     return (
@@ -94,7 +98,7 @@ class ListingDetails extends React.Component {
           <div>
           <Grid container>
             <Grid item xs={12}>
-              <DetailsComponent {...this.props}/>
+            <DetailsComponent price={price} movedate={movedate} beds={beds} features={features} />
             </Grid>
           </Grid>
           <Grid container>

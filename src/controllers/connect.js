@@ -5,9 +5,8 @@ import 'tachyons';
 const GetListings = ({ listings }) => {
 	const cardComponent = listings.map((listing, i) => {
 		return (
-			<div>
+			<div key={i}>
 				<MapListings
-					key={listing.ID[0]._text[0]}
 					listingid={listing.ID[0]._text[0]}
 					streetnumber={listing.StreetNumber[0]._text[0]}
 					movedate={listing.hasOwnProperty('AvailableDate') ? listing.AvailableDate[0]._text[0] : 'for immediate move-in'} 

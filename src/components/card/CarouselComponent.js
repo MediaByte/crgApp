@@ -14,7 +14,6 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
-var items = [];
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -47,13 +46,13 @@ class CarouselComponent extends Component {
 
   next() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
+    const nextIndex = this.state.activeIndex === this.props.photoArray.length - 1 ? 0 : this.state.activeIndex + 1;
     this.setState({ activeIndex: nextIndex });
   }
 
   previous() {
     if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
+    const nextIndex = this.state.activeIndex === 0 ? this.props.length - 1 : this.state.activeIndex - 1;
     this.setState({ activeIndex: nextIndex });
   }
 
@@ -66,15 +65,14 @@ class CarouselComponent extends Component {
     const { activeIndex } = this.state;
     const { classes, photoArray } = this.props;
 
-    items = photoArray
-
     const slides = photoArray.map((item, i) => {
+
       return (
-        <CarouselItem className="custom-tag" tag="div" onExiting={this.onExiting} onExited={this.onExited} key={i}>
-          <div style={{padding: '15px'}} className={'flex flex-wrap justify-center'}>
-            <img height={'380px'} src={item.hasOwnProperty('_text') ? item._text[0] : item} alt={'Test'} />
-          </div>
-        </CarouselItem>
+          <CarouselItem key={i} className="custom-tag" tag="div" onExiting={this.onExiting} onExited={this.onExited}>
+            <div style={{padding: '15px'}} className={'flex flex-wrap justify-center'}>
+              <img height={'380px'} src={item.hasOwnProperty('_text') ? item._text[0] : item} alt={'Photos'} />
+            </div>
+          </CarouselItem>
       );
     });
 
@@ -97,7 +95,7 @@ class CarouselComponent extends Component {
           next={this.next}
           previous={this.previous}
         >
-          <CarouselIndicators items={photoArray} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+          <CarouselIndicators items={slides} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
             {slides}
           <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
           <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />

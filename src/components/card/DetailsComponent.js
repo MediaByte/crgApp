@@ -71,7 +71,7 @@ class MapSnippet extends Component {
             </Grid>
           </Grid>
 
-          <Grid container justify={'left'}>
+          <Grid container justify={'flex-start'}>
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
               <br/>
               <ChipsComponent features={features}/>
