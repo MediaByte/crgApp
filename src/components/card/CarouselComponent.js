@@ -70,9 +70,9 @@ class CarouselComponent extends Component {
 
     const slides = photoArray.map((item, i) => {
       return (
-        <CarouselItem className="custom-tag" tag="div" onExiting={this.onExiting} onExited={this.onExited} key={item._text[0]}>
+        <CarouselItem className="custom-tag" tag="div" onExiting={this.onExiting} onExited={this.onExited} key={i}>
           <div style={{padding: '15px'}} className={'flex flex-wrap justify-center'}>
-            <img height={'380px'} src={item._text[0]} alt={'Test'} />
+            <img height={'380px'} src={item.hasOwnProperty('_text') ? item._text[0] : item} alt={'Test'} />
           </div>
         </CarouselItem>
       );

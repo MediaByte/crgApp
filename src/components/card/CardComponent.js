@@ -44,7 +44,8 @@ function MapListings(props) {
 
 	const title = `${streetnumber} ${streetname}, ${unit}`
 	const subTitle = `${city}`
-  console.log(photoArray)
+
+  const features = [props.heat, props.hotwater, props.electric]
 
   return (
     <div>
@@ -58,8 +59,8 @@ function MapListings(props) {
           </Typography>
           <Typography component="p">
           	{`
-            This ${city} ${beds} bedroom apartment is available ${movedate}, for rent 
-            starting at ${price}.
+              This ${city} ${beds} bedroom apartment is available ${movedate}, for rent 
+              starting at ${price}.
             `}
           </Typography>
         </CardContent>
@@ -78,6 +79,7 @@ function MapListings(props) {
             streetname={streetname}
             title={title}
             subTitle={subTitle}
+            features={features}
           />
         </CardActions>
 

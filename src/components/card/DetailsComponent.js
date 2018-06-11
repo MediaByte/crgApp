@@ -34,6 +34,7 @@ class MapSnippet extends Component {
       price,
       movedate,
       beds,
+      features,
     } = this.props;
 
     return (
@@ -73,7 +74,7 @@ class MapSnippet extends Component {
           <Grid container justify={'left'}>
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
               <br/>
-              <ChipsComponent />
+              <ChipsComponent features={features}/>
             </Grid>
           </Grid>
       

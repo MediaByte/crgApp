@@ -63,13 +63,6 @@ class ListingDetails extends React.Component {
       photoArray, 
       lat, 
       long, 
-      price, 
-      movedate, 
-      city, 
-      unit, 
-      beds, 
-      streetnumber, 
-      streetname,
       subTitle,
       title,
     } = this.props;
@@ -101,17 +94,7 @@ class ListingDetails extends React.Component {
           <div>
           <Grid container>
             <Grid item xs={12}>
-              <DetailsComponent 
-                price={price} 
-                movedate={movedate} 
-                city={city} 
-                unit={unit} 
-                beds={beds}
-                streetnumber={streetnumber}
-                streetname={streetname}
-                subTitle={subTitle}
-                title={title}
-              />
+              <DetailsComponent {...this.props}/>
             </Grid>
           </Grid>
           <Grid container>

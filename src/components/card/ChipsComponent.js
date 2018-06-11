@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+//Material-UI Components
 import { withStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
 import Chip from "@material-ui/core/Chip";
-import TagFacesIcon from "@material-ui/icons/TagFaces";
 import Typography from '@material-ui/core/Typography';
 
 
@@ -21,41 +21,24 @@ const styles = theme => ({
 });
 
 class ChipsComponent extends React.Component {
-  state = {
-    chipData: [
-      { key: 0, label: "Heat" },
-      { key: 1, label: "Hot water" },
-      { key: 2, label: "Electricity" },
-      { key: 3, label: "Pet OK" },
-    ]
-  };
 
   render() {
-    const { classes } = this.props;
+    const { classes, features } = this.props;
 
     return (
       <div className={classes.root}>
-        <Typography variant="title">Rent includes</Typography>
-        {this.state.chipData.map(data => {
-          let avatar = null;
-
-          if (data.label === "Pet OK") {
-            avatar = (
-              <Avatar>
-                <TagFacesIcon className={classes.svgIcon} />
-              </Avatar>
+        <Typography variant="title">Utilities</Typography>
+          
+          {features.map((data, i) => {
+            return (
+              <Chip
+                key={i}
+                label={data}
+                className={classes.chip}
+              />
             );
-          }
-
-          return (
-            <Chip
-              key={data.key}
-              avatar={avatar}
-              label={data.label}
-              className={classes.chip}
-            />
-          );
         })}
+
       </div>
     );
   }
