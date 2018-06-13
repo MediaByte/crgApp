@@ -9,7 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
+import Paper from '@material-ui/core/Paper';
 //Components
 import ListingDetails from './ListingDetailsComponent';
 
@@ -24,9 +24,13 @@ const styles = {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
+  actions: {
+    marginBottom: 10,
+    marginLeft: 190,
+  },
 };
 
-function MapListings(props) {
+const MapListings = (props) => {
   	const { 
       classes, 
       price, 
@@ -65,23 +69,27 @@ function MapListings(props) {
           </Typography>
         </CardContent>
 
-        <CardActions>
-          <ListingDetails 
-            photoArray={photoArray}
-            lat={lat}
-            long={long}
-            price={price}
-            movedate={movedate}
-            city={city}
-            unit={unit}
-            beds={beds}
-            streetnumber={streetnumber}
-            streetname={streetname}
-            title={title}
-            subTitle={subTitle}
-            features={features}
-          />
-        </CardActions>
+        
+          <CardActions className={classes.actions}>
+            <Paper elevation={10}>
+              <ListingDetails 
+                photoArray={photoArray}
+                lat={lat}
+                long={long}
+                price={price}
+                movedate={movedate}
+                city={city}
+                unit={unit}
+                beds={beds}
+                streetnumber={streetnumber}
+                streetname={streetname}
+                title={title}
+                subTitle={subTitle}
+                features={features}
+              />
+            </Paper>
+          </CardActions>
+        
 
       </Card>
     </div>

@@ -73,7 +73,10 @@ class ListingDetails extends React.Component {
 
     return (
       <div>
-        <Button size="small" color="secondary" onClick={this.handleClickOpen}>Details</Button>
+        <Grid container>
+            <Button variant="raised" size="large" color="secondary" onClick={this.handleClickOpen}>details</Button>
+        </Grid>
+        
         <Dialog fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <AppBar position='fixed'>
             <Toolbar>
