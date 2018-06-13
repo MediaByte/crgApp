@@ -1,4 +1,4 @@
-
+//ReactJS
 import React, { Component } from 'react';
 
 //Project Components
@@ -31,8 +31,8 @@ class AppArchitecture extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        from: '',
-        to: '',
+        from: '08/01/2018',
+        to: '09/01/2018',
         bedValue: 1,
         minBeds: 1,
         maxBeds: 1,
@@ -133,7 +133,7 @@ class AppArchitecture extends Component {
               maxPrice={this.state.maxPrice}
             />
               <div className='pt5'>
-                  { doWeHaveListings(this.state.listings.YGLResponse[0]) ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
+                { doWeHaveListings(this.state.listings.YGLResponse[0]) ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
               </div>
           </div>
         );
@@ -141,7 +141,7 @@ class AppArchitecture extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1&detail_level=2`)
+    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
       .then(xml => xml.text())
       .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})

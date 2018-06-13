@@ -26,7 +26,7 @@ const styles = {
   },
   actions: {
     marginBottom: 10,
-    marginLeft: 190,
+    marginLeft: 195,
   },
 };
 
