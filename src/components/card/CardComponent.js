@@ -71,7 +71,7 @@ const MapListings = (props) => {
 
         
           <CardActions className={classes.actions}>
-            <Paper elevation={10}>
+            <Paper elevation={8}>
               <ListingDetails 
                 photoArray={photoArray}
                 lat={lat}

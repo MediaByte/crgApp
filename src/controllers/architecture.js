@@ -9,7 +9,7 @@ import ProgressComponent from '../components/progress/ProgressComponent';
 //Styles and Designs
 import 'tachyons';
 
-//Converts XML response to JS array
+//Converts XML handling
 const convert = require('xml-js');
 const options = {
     ignoreComment: true, 
@@ -100,7 +100,7 @@ class AppArchitecture extends Component {
     if (responseYGL.hasOwnProperty('Listings')) {
       return true;
     } else {
-      return false;
+        return false;
     }
   }
 
