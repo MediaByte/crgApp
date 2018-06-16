@@ -22,18 +22,27 @@ function HeaderLinks({ ...props }) {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <Button
-          href="/login"
+          href="/"
           color="transparent"
           className={classes.navLink}
-        >Login
+        >Home
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button
-          href="/register"
+          href="http://careers.commonrealtygroup.com"
+          target="_blank"
           color="transparent"
           className={classes.navLink}
-        >Register
+        >Join Our Team
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button
+          href="/rentals"
+          color="transparent"
+          className={classes.navLink}
+        >Find A Rental
         </Button>
       </ListItem>
     </List>

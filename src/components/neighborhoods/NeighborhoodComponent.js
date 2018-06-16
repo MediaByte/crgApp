@@ -119,7 +119,7 @@ const ITEM_HEIGHT = 48;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 250,
+
   },
   chip: {
     margin: theme.spacing.unit / 4,
@@ -244,7 +244,7 @@ class IntegrationReactSelect extends React.Component {
           onChange={handleCityChange}
           placeholder="Select multiple countries"
           name="react-select-chip-label"
-          label="With label"
+          label="City/Neighborhood"
           InputLabelProps={{
             shrink: true,
           }}

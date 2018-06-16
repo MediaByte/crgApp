@@ -1,0 +1,1 @@
+export const LOC_CITY = 'LOC_CITY';

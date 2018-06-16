@@ -1,7 +1,6 @@
 //ReactJS
 import React from 'react';
 import PropTypes from 'prop-types';
-
 //Material-UI Dependencies
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -29,7 +28,6 @@ const styles = {
     marginLeft: 195,
   },
 };
-
 const MapListings = (props) => {
   	const { 
       classes, 
@@ -45,52 +43,44 @@ const MapListings = (props) => {
       lat,
       long,
     } = props 
-
-	const title = `${streetnumber} ${streetname}, ${unit}`
-	const subTitle = `${city}`
-
-  const features = [props.heat, props.hotwater, props.electric]
+  	const title = `${streetnumber} ${streetname}, ${unit}`
+  	const subTitle = `${city}`
+    const features = [props.heat, props.hotwater, props.electric]
 
   return (
     <div>
       <Card className={classes.card}>
-
         <CardMedia className={classes.media} image={photo} title={`${title} #${unit}, ${subTitle} MA`} />
-
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
             {title}
           </Typography>
           <Typography component="p">
           	{`
-              This ${city} ${beds} bedroom apartment is available ${movedate}, for rent 
-              starting at ${price}.
+              Located in ${city}, this ${beds} bedroom rental is available ${movedate},
+              starting at $${price}.
             `}
           </Typography>
         </CardContent>
-
-        
-          <CardActions className={classes.actions}>
-            <Paper elevation={8}>
-              <ListingDetails 
-                photoArray={photoArray}
-                lat={lat}
-                long={long}
-                price={price}
-                movedate={movedate}
-                city={city}
-                unit={unit}
-                beds={beds}
-                streetnumber={streetnumber}
-                streetname={streetname}
-                title={title}
-                subTitle={subTitle}
-                features={features}
-              />
-            </Paper>
-          </CardActions>
-        
-
+        <CardActions className={classes.actions}>
+          <Paper elevation={8}>
+            <ListingDetails 
+              photoArray={photoArray}
+              lat={lat}
+              long={long}
+              price={price}
+              movedate={movedate}
+              city={city}
+              unit={unit}
+              beds={beds}
+              streetnumber={streetnumber}
+              streetname={streetname}
+              title={title}
+              subTitle={subTitle}
+              features={features}
+            />
+          </Paper>
+        </CardActions>
       </Card>
     </div>
   );

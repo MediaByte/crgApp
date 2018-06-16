@@ -3,38 +3,27 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 //Material-UI Components
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Drawer from '@material-ui/core/Drawer';
-import MenuIcon from '@material-ui/icons/Menu';
-import List from '@material-ui/core/List';
 import { withStyles } from '@material-ui/core/styles';
-// import StarIcon from '@material-ui/icons/Star';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import Paper from '@material-ui/core/Paper';
 
 //Project Components
 import BedroomController from '../components/bedrooms/BedroomController';
 import NeighborhoodController from '../components/neighborhoods/NeighborhoodController';
 import PriceController from '../components/price/PriceController';
 import DateController from '../components/moveDate/DateController';
+import Header from "../components/Header/Header.jsx";
+import HeaderLinks from "../components/Header/HeaderLinks.jsx";
 
 
 //Material-UI styles
 const styles = {
-    drawerlist: { 
-        width: 'auto' 
-    },
-    list: { 
-        width: 280 
-    },
-    flex: { 
-        flex: 1 
-    },
-    menuButton: { 
-        marginLeft: -12, 
-        marginRight: 20 
+    root: {
+        marginTop: 70,
     },
   };
+
+const dashboardRoutes = [];
 
  class Layout extends Component {
     constructor(props) {
@@ -42,36 +31,78 @@ const styles = {
         this.state = {
             openDrawer: false,
             leftSide: false,
+            value: 0,
         }
     }
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
 
 render() {
-    const { classes, onChangeBed, bedValue, city, handleCityChange, handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice, handleDateChange } = this.props;
+    const { value } = this.state;
+    const { 
+        classes, 
+        onChangeBed, 
+        bedValue, 
+        city, 
+        handleCityChange, 
+        handleMaxPriceChange, 
+        handleMinPriceChange, 
+        minPrice, 
+        maxPrice, 
+        handleDateChange,
+        ...rest
+    } = this.props;
 
     return (
-        <AppBar position="fixed" color='primary'>
-            <Toolbar>
-                <IconButton onClick={this.toggleDrawer('leftSide', true)} className={classes.menuButton} color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
-                <Drawer onKeyDown={this.toggleDrawer('leftSide', true)} open={this.state.leftSide} onClose={this.toggleDrawer('leftSide', false)}>
-                    <div tabIndex={0} role="button">
-                        <div className={classes.list}>
-                            <List>
-                                <DateController handleDateChange={handleDateChange} to={this.props.to} from={this.props.from}/>
-                                <BedroomController bedChange={onChangeBed} bedValue={bedValue} />
-                                <NeighborhoodController city={city} handleCityChange={handleCityChange} />
-                                <PriceController handleMaxPriceChange={handleMaxPriceChange} handleMinPriceChange={handleMinPriceChange} minPrice={minPrice} maxPrice={maxPrice} />
-                            </List>
-                        </div>
-                    </div>
-                </Drawer>
-            </Toolbar>
-        </AppBar>
+        <div>
+            <Header
+              color="white"
+              routes={dashboardRoutes}
+              brand="Common Realty Group"
+              rightLinks={<HeaderLinks />}
+              fixed
+              changeColorOnScroll={{
+                height: 400,
+                color: "white"
+              }}
+              {...rest}
+            />
+            <Paper elevation={15}>
+                  <BottomNavigation
+                    value={value}
+                    onChange={this.handleChange}
+                    showLabels
+                    className={classes.root}
+                  >
+                    <DateController 
+                        handleDateChange={handleDateChange} 
+                        to={this.props.to} 
+                        from={this.props.from}
+                    />
+                    <BedroomController
+                        bedChange={onChangeBed} 
+                        bedValue={bedValue} 
+                    />
+                    <NeighborhoodController 
+                        city={city} 
+                        handleCityChange={handleCityChange} 
+                    />
+                    <PriceController 
+                        handleMaxPriceChange={handleMaxPriceChange} 
+                        handleMinPriceChange={handleMinPriceChange} 
+                        minPrice={minPrice} 
+                        maxPrice={maxPrice} 
+                    />
+                </BottomNavigation>
+            </Paper>
+        </div>
     )
 }
 
-toggleDrawer = (side, open) => () => {
-    this.setState({[side]: open});
-};
+    toggleDrawer = (side, open) => () => {
+        this.setState({[side]: open});
+    };
 
 }          
 

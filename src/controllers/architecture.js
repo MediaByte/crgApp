@@ -6,9 +6,6 @@ import GetListings from '../controllers/connect';
 import Layout from '../views/Layout';
 import ProgressComponent from '../components/progress/ProgressComponent';
 
-//Styles and Designs
-import 'tachyons';
-
 //Converts XML handling
 const convert = require('xml-js');
 const options = {
@@ -23,11 +20,7 @@ const options = {
     trim: true
 };
 
-
-let listArray = 0
-
 class AppArchitecture extends Component {
-
   constructor(props) {
     super(props);
       this.state = {
@@ -48,6 +41,7 @@ class AppArchitecture extends Component {
     this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
     this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
     this.doWeHaveListings = this.doWeHaveListings.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
   }
 
   handleDateChange = name => event => {
@@ -69,7 +63,6 @@ class AppArchitecture extends Component {
   }
 
   handleCityChange = (event) => {
-    listArray = 0
     this.setState({ city: event, });
     fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
       .then(xml => xml.text())
@@ -97,17 +90,13 @@ class AppArchitecture extends Component {
   };
 
   doWeHaveListings = (responseYGL) => {
-    if (responseYGL.hasOwnProperty('Listings')) {
+    if (this.state.listings.YGLResponse[0].hasOwnProperty('Listings')) {
       return true;
-    } else {
-        return false;
-    }
+    } else return false;
   }
 
   render() {
-
-    listArray = this.state.listings;
-    console.log(this.state.listings);
+    let listArray = this.state.listings;
     const { doWeHaveListings } = this
 
     if (listArray.length === 0) {
@@ -132,8 +121,8 @@ class AppArchitecture extends Component {
               minPrice={this.state.minPrice}
               maxPrice={this.state.maxPrice}
             />
-              <div className='pt5'>
-                { doWeHaveListings(this.state.listings.YGLResponse[0]) ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
+              <div>
+                { doWeHaveListings() ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
               </div>
           </div>
         );

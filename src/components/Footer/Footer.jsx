@@ -28,27 +28,24 @@ function Footer({ ...props }) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/"
+                href="/"
                 className={classes.block}
-                target="_blank"
               >
                 Common Realty Group
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation"
+                href="/about"
                 className={classes.block}
-                target="_blank"
               >
                 About us
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="/"
+                href="/licenses"
                 className={classes.block}
-                target="_blank"
               >
                 Licenses
               </a>

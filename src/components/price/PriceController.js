@@ -4,16 +4,14 @@ import PropTypes from 'prop-types';
 
 //Material-UI v1 Components
 import { withStyles } from '@material-ui/core/styles';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItem from '@material-ui/core/ListItem';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import Slide from '@material-ui/core/Slide';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Grid from '@material-ui/core/Grid';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import MonetizationOn from '@material-ui/icons/MonetizationOn';
 
 //Project Components
 import PriceComponent from './PriceComponent';
@@ -50,13 +48,7 @@ render() {
   const { classes, handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice } = this.props;
     return (
       <div>
-        <List>
-          <ListItem button onClick={this.handleClickOpen}>
-            <ListItemText primary="Update Price" secondary={`min:$${minPrice}, max:$${maxPrice}`} />
-          </ListItem>
-          <Divider />
-        </List>
-
+        <BottomNavigationAction onClick={this.handleClickOpen} label="Budget" icon={<MonetizationOn />} />
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
             <DialogTitle id="confirmation-dialog-title">Update Price?</DialogTitle>
             
@@ -69,7 +61,7 @@ render() {
             </Grid>
 
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">Done</Button>
+              <Button onClick={this.handleClose} color="secondary">Done</Button>
             </DialogActions>
         </Dialog>
       </div>

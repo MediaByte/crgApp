@@ -52,9 +52,9 @@ class LandingPage extends React.Component {
                 <Button
                   color="danger"
                   size="lg"
-                  href="/login"
+                  href="/rentals"
                   rel="noopener noreferrer"
-                >Sign Up for Free
+                >Find a Rental
                 </Button>
               </GridItem>
             </GridContainer>
@@ -62,10 +62,8 @@ class LandingPage extends React.Component {
         </Parallax>
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
-            <InfoSection />
-          </div>
-          <div className={classes.container}>
             <GoogleMapComponent />
+            <InfoSection />
           </div>
         </div>
           <Footer />
