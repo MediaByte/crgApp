@@ -49,10 +49,9 @@ render() {
   const { classes, handleDateChange } = this.props;
     return (
       <div>
-      <BottomNavigationAction onClick={this.handleClickOpen} label="Move-in" icon={<RestoreIcon />} />
+      <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Move Date" icon={<RestoreIcon />} />
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <DialogTitle id="confirmation-dialog-title">Update Move-in Date?</DialogTitle>
-            
             <Grid container justify={'center'}>
               <Grid item xs={12}>
                 <div className={classes.content}>
@@ -60,7 +59,6 @@ render() {
                 </div>
               </Grid>
             </Grid>
-
             <DialogActions>
               <Button onClick={this.handleClose} color="secondary">Done</Button>
             </DialogActions>

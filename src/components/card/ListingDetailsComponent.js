@@ -19,6 +19,7 @@ import Paper from '@material-ui/core/Paper';
 import CarouselComponent from './CarouselComponent';
 import MapSnippet from './MapSnippet';
 import DetailsComponent from './DetailsComponent';
+import ContactForm from '../../views/LandingPage/Sections/ContactForm';
 
 
 //Styles
@@ -86,9 +87,6 @@ class ListingDetails extends React.Component {
               <Typography variant="title" color="inherit" className={classes.flex}>
 
               </Typography>
-              <Button color="inherit" onClick={this.handleClose}>
-                Request Showing
-              </Button>
             </Toolbar>
           </AppBar>
         <Paper className={classes.content} elevation={10}>
@@ -112,6 +110,11 @@ class ListingDetails extends React.Component {
           <Grid container>
             <Grid item xs={12}>
               <MapSnippet lat={lat} long={long} />
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+            	<ContactForm />
             </Grid>
           </Grid>
           </div>

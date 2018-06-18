@@ -48,7 +48,7 @@ render() {
   const { classes, handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice } = this.props;
     return (
       <div>
-        <BottomNavigationAction onClick={this.handleClickOpen} label="Budget" icon={<MonetizationOn />} />
+        <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Budget" icon={<MonetizationOn />} />
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
             <DialogTitle id="confirmation-dialog-title">Update Price?</DialogTitle>
             

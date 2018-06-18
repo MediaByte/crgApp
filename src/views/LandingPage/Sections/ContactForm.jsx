@@ -5,30 +5,24 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Button from "components/CustomButtons/Button.jsx";
+import GridContainer from "../../../components/Grid/GridContainer.jsx";
+import GridItem from "../../../components/Grid/GridItem.jsx";
+import CustomInput from "../../../components/CustomInput/CustomInput.jsx";
+import Button from "../../../components/CustomButtons/Button.jsx";
 
-import workStyle from "assets/jss/material-kit-react/views/landingPageSections/workStyle.jsx";
+import workStyle from "../../../assets/jss/material-kit-react/views/landingPageSections/workStyle.jsx";
 
-class WorkSection extends React.Component {
+class ContactForm extends React.Component {
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.section}>
         <GridContainer justify="center">
           <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title}>Work with us</h2>
-            <h4 className={classes.description}>
-              Divide details about your product or agency work into parts. Write
-              a few lines about each one and contact us about any further
-              collaboration. We will responde get back to you in a couple of
-              hours.
-            </h4>
-            <form>
+            <h2 className={classes.title}>Inquire about this Listing</h2>
+            <div>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Your Name"
                     id="name"
@@ -37,10 +31,19 @@ class WorkSection extends React.Component {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Your Email"
                     id="email"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Phone"
+                    id="phone"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -65,11 +68,11 @@ class WorkSection extends React.Component {
                     md={4}
                     className={classes.textCenter}
                   >
-                    <Button color="primary">Send Message</Button>
+                    <Button color="danger">Send Message</Button>
                   </GridItem>
                 </GridContainer>
               </GridContainer>
-            </form>
+            </div>
           </GridItem>
         </GridContainer>
       </div>
@@ -77,4 +80,4 @@ class WorkSection extends React.Component {
   }
 }
 
-export default withStyles(workStyle)(WorkSection);
+export default withStyles(workStyle)(ContactForm);

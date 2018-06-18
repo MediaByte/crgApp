@@ -49,7 +49,7 @@ render() {
   const { classes, bedChange, bedValue } = this.props;
     return (
       <div>
-        <BottomNavigationAction onClick={this.handleClickOpen} label="Bedrooms" icon={<SupervisorAccount />} />
+        <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Bedrooms" icon={<SupervisorAccount />} />
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <DialogTitle id="confirmation-dialog-title">Update Bedrooms?</DialogTitle>
             

@@ -33,7 +33,7 @@ class InfoSection extends React.Component {
             <GridItem xs={12} sm={12} md={4}>
               <InfoArea
                 title="Filter Locations"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+                description="Search our extensive database of listings, which we update daily. We offer a diverse selection of apartments for rent in Cambridge and Somerville."
                 icon={Map}
                 iconColor="info"
                 vertical
@@ -42,7 +42,7 @@ class InfoSection extends React.Component {
             <GridItem xs={12} sm={12} md={4}>
               <InfoArea
                 title="Pet Friendly"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+                description="We know that our pets are a member of our families and finding a home for them is as important as finding one for ourselves."
                 icon={Pets}
                 iconColor="success"
                 vertical
@@ -51,7 +51,7 @@ class InfoSection extends React.Component {
             <GridItem xs={12} sm={12} md={4}>
               <InfoArea
                 title="Points of Interest"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+                description="Cambridge and Somerville boast many interesting neighborhoods – and Common Realty Group knows all of them, because this is our home."
                 icon={Subway}
                 iconColor="danger"
                 vertical

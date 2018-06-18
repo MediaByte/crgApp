@@ -224,12 +224,12 @@ const styles = theme => ({
   },
 });
 
-class IntegrationReactSelect extends React.Component {
+class NeighborhoodComponent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      multiLabel: null,
-    };
+	    this.state = {
+	      multiLabel: null,
+	    };
   };
 
 
@@ -242,7 +242,7 @@ class IntegrationReactSelect extends React.Component {
           fullWidth
           value={city}
           onChange={handleCityChange}
-          placeholder="Select multiple countries"
+          placeholder="Select multiple"
           name="react-select-chip-label"
           label="City/Neighborhood"
           InputLabelProps={{
@@ -265,8 +265,8 @@ class IntegrationReactSelect extends React.Component {
   }
 }
 
-IntegrationReactSelect.propTypes = {
+NeighborhoodComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IntegrationReactSelect);
+export default withStyles(styles)(NeighborhoodComponent);

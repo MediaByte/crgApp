@@ -18,8 +18,13 @@ import HeaderLinks from "../components/Header/HeaderLinks.jsx";
 
 //Material-UI styles
 const styles = {
-    root: {
-        marginTop: 70,
+    bttmNav: {
+    	position: 'fixed',
+    	width: '100%',
+    	marginTop: 5,
+    	zIndex: +1,
+    	bottom: 0,
+    	height: 65,
     },
   };
 
@@ -68,12 +73,10 @@ render() {
               }}
               {...rest}
             />
-            <Paper elevation={15}>
+            <Paper className={classes.bttmNav} elevation={25}>
                   <BottomNavigation
                     value={value}
                     onChange={this.handleChange}
-                    showLabels
-                    className={classes.root}
                   >
                     <DateController 
                         handleDateChange={handleDateChange} 

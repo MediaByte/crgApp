@@ -14,7 +14,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 //Project Components
-import IntegrationDownshift from './NeighborhoodComponent'
+import NeighborhoodComponent from './NeighborhoodComponent'
 
 //Styles in JSS
 const styles = theme => ({
@@ -23,7 +23,7 @@ const styles = theme => ({
     paddingTop: 5,
     paddingBottom: 16,
     height: 250,
-    width: 500,
+    width: 660,
   }),
   slider: {
     margin: 60,
@@ -49,19 +49,17 @@ render() {
   const { classes, handleCityChange, city } = this.props;
     return (
       <div>
-        <BottomNavigationAction onClick={this.handleClickOpen} label="Locations" icon={<LocationOnIcon />} />
+        <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Neighborhoods" icon={<LocationOnIcon />} />
         <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <DialogTitle id="confirmation-dialog-title">Update Location?</DialogTitle>
-
 
               <Grid container justify={'center'}>
                 <Grid item xs={12} >
                   <div className={classes.slider}>
-                    <IntegrationDownshift city={city} handleCityChange={handleCityChange}/>
+                    <NeighborhoodComponent city={city} handleCityChange={handleCityChange}/>
                   </div>
                 </Grid>
               </Grid>
-
 
             <DialogActions>
               <Button onClick={this.handleClose} color="secondary">Done</Button>

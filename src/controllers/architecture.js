@@ -6,6 +6,9 @@ import GetListings from '../controllers/connect';
 import Layout from '../views/Layout';
 import ProgressComponent from '../components/progress/ProgressComponent';
 
+//CSS 
+import 'tachyons';
+
 //Converts XML handling
 const convert = require('xml-js');
 const options = {
@@ -45,12 +48,12 @@ class AppArchitecture extends Component {
   }
 
   handleDateChange = name => event => {
-    this.setState({ [name]: event.target.value });
-   fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&avail_from=${name === 'from' ? event.target.value : this.state.from}&avail_to=${name === 'to' ? event.target.value : this.state.to}&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
-      .then(xml => xml.text())
-      .then(xml => convert.xml2js(xml, options))
-      .then(data => { this.setState({ listings: data })})
-      .catch(err => console.log(err));
+  this.setState({ [name]: event.target.value });
+  fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&avail_from=${name === 'from' ? event.target.value : this.state.from}&avail_to=${name === 'to' ? event.target.value : this.state.to}&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
+    .then(xml => xml.text())
+    .then(xml => convert.xml2js(xml, options))
+    .then(data => { this.setState({ listings: data })})
+    .catch(err => console.log(err));
   };
 
   onChangeBed = (event) => {
@@ -96,37 +99,37 @@ class AppArchitecture extends Component {
   }
 
   render() {
-    let listArray = this.state.listings;
-    const { doWeHaveListings } = this
+	let listArray = this.state.listings;
+	const { doWeHaveListings } = this
 
-    if (listArray.length === 0) {
-      return <ProgressComponent />
-    } else {
-        return (
-          <div>
-            <Layout 
-            //Date Component Arguements
-              handleDateChange={this.handleDateChange}
-              from={this.state.from}
-              to={this.state.to}
-            //Bedroom Component Arguements
-              onChangeBed={this.onChangeBed} 
-              bedValue={this.state.bedValue}
-            //Location Component Arguments
-              handleCityChange={this.handleCityChange}
-              city={this.state.city}
-            //Pricing Component Arguements
-              handleMinPriceChange={this.handleMinPriceChange}
-              handleMaxPriceChange={this.handleMaxPriceChange}
-              minPrice={this.state.minPrice}
-              maxPrice={this.state.maxPrice}
-            />
-              <div>
-                { doWeHaveListings() ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
-              </div>
-          </div>
-        );
-      }      
+	    if (listArray.length === 0) {
+	      return <ProgressComponent />
+	    } else {
+	        return (
+	          <div>
+	            <Layout 
+	            //Date Component Arguements
+	              handleDateChange={this.handleDateChange}
+	              from={this.state.from}
+	              to={this.state.to}
+	            //Bedroom Component Arguements
+	              onChangeBed={this.onChangeBed} 
+	              bedValue={this.state.bedValue}
+	            //Location Component Arguments
+	              handleCityChange={this.handleCityChange}
+	              city={this.state.city}
+	            //Pricing Component Arguements
+	              handleMinPriceChange={this.handleMinPriceChange}
+	              handleMaxPriceChange={this.handleMaxPriceChange}
+	              minPrice={this.state.minPrice}
+	              maxPrice={this.state.maxPrice}
+	            />
+	              <div className={"mt5 pb5"}>
+	                { doWeHaveListings() ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
+	              </div>
+	          </div>
+	        );
+	      }      
   }
 
   componentDidMount() {
