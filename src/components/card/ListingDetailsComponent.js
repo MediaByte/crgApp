@@ -78,7 +78,7 @@ class ListingDetails extends React.Component {
             <Button variant="raised" size="large" color="secondary" onClick={this.handleClickOpen}>details</Button>
         </Grid>
         
-        <Dialog fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
+        <Dialog disableBackdropClick fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <AppBar position='fixed'>
             <Toolbar>
               <IconButton color="inherit" onClick={this.handleClose} aria-label="Close">

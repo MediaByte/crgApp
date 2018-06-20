@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 //Project Components
 import AppArchitecture from '../controllers/architecture';
+import CaptureLead from './LeadCapture/LeadCapture';
 
 //Back to top component
 import { BackTop } from 'antd';
@@ -18,6 +19,7 @@ class RentalApp extends Component {
       <div>
         <BackTop style={{paddingBottom: 150}}/>
         <AppArchitecture />
+        <CaptureLead />
       </div>
     )
   }
