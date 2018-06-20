@@ -2,9 +2,14 @@ import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import IconButton from '@material-ui/core/IconButton';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // @material-ui/icons
 import People from "@material-ui/icons/People";
-import LockOutline from "@material-ui/icons/LockOutline";
 import Email from "@material-ui/icons/Email";
 // core components
 import GridContainer from "../../components/Grid/GridContainer.jsx";
@@ -23,7 +28,8 @@ class SectionRegister extends React.Component {
     this.state = {
       email: '',
       password: '',
-      name: ''
+      name: '',
+      showPassword: false,
     }
   }
 
@@ -41,6 +47,14 @@ class SectionRegister extends React.Component {
     this.setState({ password: event.target.value })
     console.log(this.state.password)
   }
+
+    handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
+  handleClickShowPassword = () => {
+    this.setState({ showPassword: !this.state.showPassword });
+  };
 
   onSubmitRegister = () => {
     fetch('http://localhost:4000/register', {
@@ -67,59 +81,64 @@ class SectionRegister extends React.Component {
           <GridContainer justify="center">
             <GridItem xs={12} sm={12}>
               <Card>
-              <CardHeader color="danger" className={classes.cardHeader}>
-                    <h4>Regster</h4>
+              <CardHeader color="danger" style={{marginTop: 10}} className={classes.cardHeader}>
+                  <h4>Regster</h4>
               </CardHeader>
                 <div className={classes.form}>
                   <CardBody>
-                    <CustomInput
-                      labelText="Name..."
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: (event) => this.onNameChange(event),
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: (event) => this.onEmailChange(event),
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        onChange: (event) => this.onPasswordChange(event),
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <LockOutline className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
+                  <div style={{margin: 20}}>
+                  <InputLabel>Name</InputLabel>
+                  <Input
+                    fullWidth
+                    id="name"
+                    type='text'
+                    onChange={this.onNameChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton>
+                          <People />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  </div>
+                  <div style={{margin: 20}}>
+                  <InputLabel>Email</InputLabel>
+                  <Input
+                    fullWidth
+                    id="email"
+                    type='text'
+                    onChange={this.onEmailChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton>
+                          <Email />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  </div>
+                  <div style={{margin: 20}}>
+                  <InputLabel htmlFor="adornment-password">Password</InputLabel>
+                  <Input
+                    fullWidth
+                    id="adornment-password"
+                    type={this.state.showPassword ? 'text' : 'password'}
+                    value={this.state.password}
+                    onChange={this.onPasswordChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="Toggle password visibility"
+                          onClick={this.handleClickShowPassword}
+                          onMouseDown={this.handleMouseDownPassword}
+                        >
+                          {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  </div>
                   </CardBody>
                 </div>
               </Card>

@@ -58,7 +58,7 @@ class CaptureLead extends React.Component{
             className={classes.modalHeader}>
             <h5 className={classes.modalTitle}>Register</h5>
           </DialogTitle>
-          <DialogContent id="modal-slide-description" >
+          <DialogContent >
 
             <SectionRegister />
 
