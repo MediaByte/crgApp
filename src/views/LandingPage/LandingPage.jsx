@@ -3,6 +3,10 @@ import React from "react";
 import classNames from "classnames";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import Typography from '@material-ui/core/Typography';
+
+//React Router
+import { Link } from 'react-router-dom'
 
 // core components
 import Header from "../../components/Header/Header.jsx";
@@ -22,6 +26,7 @@ import GoogleMapComponent from '../../components/GoogleMap/GoogleMapComponent';
 const dashboardRoutes = [];
 
 class LandingPage extends React.Component {
+
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -52,9 +57,13 @@ class LandingPage extends React.Component {
                 <Button
                   color="danger"
                   size="lg"
-                  href="/rentals"
                   rel="noopener noreferrer"
-                >Find a Rental
+                >
+                <Link to='/rentals'>
+                  <Typography color={'primary'} variant="button" gutterBottom>
+                    Find a Rental
+                  </Typography>
+                </Link>
                 </Button>
               </GridItem>
             </GridContainer>

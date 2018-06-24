@@ -1,6 +1,11 @@
+//ReactJS
 import React from 'react';
 
-// material-ui components
+//State Management
+import { connect } from 'react-redux';
+import { isUserAuthorized } from '../../state/actions';
+
+//Material-UI components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
@@ -18,6 +23,19 @@ import SectionRegister from './SectionRegister';
 function Transition(props) {
   return <Slide direction="down" {...props} />;
 }
+
+const mapStateToProps = state => {
+  return {
+    userValid: state.userValid
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleSession: (props) => dispatch(isUserAuthorized(props))
+  }
+}
+
 
 class CaptureLead extends React.Component{
   constructor(props) {
@@ -54,7 +72,7 @@ class CaptureLead extends React.Component{
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  onSubmitRegister = () => {
+  onSubmitRegister = (toggleSession, userValid) => {
     fetch('http://127.0.0.1:4000/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -67,7 +85,9 @@ class CaptureLead extends React.Component{
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          this.handleClose("modal")
+          let toggleUser = !userValid;
+            toggleSession(toggleUser)
+              this.handleClose("modal")
         }
       })
   }  
@@ -83,7 +103,12 @@ class CaptureLead extends React.Component{
     this.setState(x);
   }
   render(){
-    const { classes } = this.props;
+    const { 
+      classes, 
+      userValid, 
+      toggleSession
+    } = this.props;
+
     return (
       <div>
         <Dialog
@@ -105,7 +130,6 @@ class CaptureLead extends React.Component{
             <h5 className={classes.modalTitle}>Register</h5>
           </DialogTitle>
           <DialogContent >
-
             <SectionRegister 
               onNameChange={this.onNameChange}
               onEmailChange={this.onEmailChange}
@@ -116,15 +140,10 @@ class CaptureLead extends React.Component{
               password={this.state.password}
               name={this.state.name}
               showPassword={this.state.showPassword}
-
             />
-
           </DialogContent>
-          <DialogActions
-            className={classes.modalFooter +" " + classes.modalFooterCenter}>
-            <Button
-              onClick={() => this.onSubmitRegister()}
-              color="danger">
+          <DialogActions className={classes.modalFooter +" " + classes.modalFooterCenter}>
+            <Button onClick={() => this.onSubmitRegister(toggleSession, userValid)} color="danger">
               Continue
             </Button>
           </DialogActions>
@@ -134,4 +153,6 @@ class CaptureLead extends React.Component{
   }
 }
 
-export default withStyles()(CaptureLead);
+export default withStyles()(connect(mapStateToProps, mapDispatchToProps)(CaptureLead));
+
+

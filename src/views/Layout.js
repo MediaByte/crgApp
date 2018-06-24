@@ -56,6 +56,7 @@ render() {
         minPrice, 
         maxPrice, 
         handleDateChange,
+        isUserAuthorized,
         ...rest
     } = this.props;
 

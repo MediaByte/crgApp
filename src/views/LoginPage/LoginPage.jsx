@@ -1,122 +1,135 @@
-import React from "react";
-// @material-ui/core components
+import React from 'react';
+
+// material-ui components
 import withStyles from "@material-ui/core/styles/withStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-// @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import LockOutline from "@material-ui/icons/LockOutline";
+import Slide from "@material-ui/core/Slide";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+
 // core components
-import Header from "../../components/Header/Header.jsx";
-import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
-import Footer from "../../components/Footer/Footer.jsx";
-import GridContainer from "../../components/Grid/GridContainer.jsx";
-import GridItem from "../../components/Grid/GridItem.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
-import Card from "../../components/card/Card.jsx";
-import CardBody from "../../components/card/CardBody.jsx";
-import CardHeader from "../../components/card/CardHeader.jsx";
-import CardFooter from "../../components/card/CardFooter.jsx";
-import CustomInput from "../../components/CustomInput/CustomInput.jsx";
 
-import loginPageStyle from "../../assets/jss/material-kit-react/views/loginPage.jsx";
+//Project Components
+import SectionRegister from './SectionLogin';
 
-import image from "../../assets/img/bg7.jpg";
 
-class LoginPage extends React.Component {
+function Transition(props) {
+  return <Slide direction="down" {...props} />;
+}
+
+class LoginPage extends React.Component{
   constructor(props) {
     super(props);
-      this.state = {
-        cardAnimaton: "cardHidden"
-      };
+    this.state = {
+      modal: true,
+      email: '',
+      password: '',
+      name: '',
+      showPassword: false,
+    };
   }
-  componentDidMount() {
-    setTimeout(
-      function() {
-        this.setState({ cardAnimaton: "" });
-      }.bind(this),
-      700
-    );
+
+ onNameChange = (event) => {
+    this.setState({ name: event.target.value })
+    console.log(this.state.name)
   }
-  render() {
-    const { classes, ...rest } = this.props;
+
+  onEmailChange = (event) => {
+    this.setState({ email: event.target.value })
+    console.log(this.state.email)
+  }
+
+  onPasswordChange = (event) => {
+    this.setState({ password: event.target.value })
+    console.log(this.state.password)
+  }
+
+    handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
+  handleClickShowPassword = () => {
+    this.setState({ showPassword: !this.state.showPassword });
+  };
+
+  onSubmitRegister = () => {
+    fetch('http://127.0.0.1:4000/signin', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user.id) {
+          this.handleClose("modal")
+        }
+      })
+  }  
+
+  handleClickOpen(modal) {
+    var x = [];
+    x[modal] = true;
+    this.setState(x);
+  }
+  handleClose(modal) {
+    var x = [];
+    x[modal] = false;
+    this.setState(x);
+  }
+  render(){
+    const { classes } = this.props;
     return (
       <div>
-        <Header
-          absolute
-          color="transparent"
-          brand="Common Realty Group"
-          rightLinks={<HeaderLinks />}
-          {...rest}
-        />
-        <div
-          className={classes.pageHeader}
-          style={{
-            backgroundImage: "url(" + image + ")",
-            backgroundSize: "cover",
-            backgroundPosition: "top center"
+        <Dialog
+          classes={{
+            root: classes.center,
+            paper: classes.modal
           }}
-        >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={4}>
-                <Card className={classes[this.state.cardAnimaton]}>
-                  <form className={classes.form}>
-                    <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>Login</h4>
-                      <div className={classes.socialLine}>
-                        <br/><br/>
-                      </div> 
-                    </CardHeader>
-                    <CardBody>
-                      <CustomInput
-                        labelText="Email..."
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                      <CustomInput
-                        labelText="Password"
-                        id="pass"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <LockOutline
-                                className={classes.inputIconsColor}
-                              />
-                            </InputAdornment>
-                          )
-                        }}
-                      />
-                    </CardBody>
-                    <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg" href='/rentals'>
-                        Log In
-                      </Button>
-                    </CardFooter>
-                  </form>
-                </Card>
-              </GridItem>
-            </GridContainer>
-          </div>
-          <br/><br/><br/><br/>
-          <Footer whiteFont />
-        </div>
+          open={this.state.modal}
+          disableBackdropClick
+          TransitionComponent={Transition}
+          keepMounted
+          onClose={() => this.handleClose("modal")}
+          aria-labelledby="modal-slide-title"
+          aria-describedby="modal-slide-description">
+          <DialogTitle
+            id="classic-modal-slide-title"
+            disableTypography
+            className={classes.modalHeader}>
+            <h5 className={classes.modalTitle}>Register</h5>
+          </DialogTitle>
+          <DialogContent >
+
+            <SectionRegister 
+              onNameChange={this.onNameChange}
+              onEmailChange={this.onEmailChange}
+              onPasswordChange={this.onPasswordChange}
+              handleMouseDownPassword={this.handleMouseDownPassword}
+              handleClickShowPassword={this.handleClickShowPassword}
+              email={this.state.email}
+              password={this.state.password}
+              name={this.state.name}
+              showPassword={this.state.showPassword}
+            />
+
+          </DialogContent>
+          <DialogActions
+            className={classes.modalFooter +" " + classes.modalFooterCenter}>
+            <Button
+              onClick={() => this.onSubmitRegister()}
+              color="danger">
+              Continue
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
 }
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withStyles()(LoginPage);

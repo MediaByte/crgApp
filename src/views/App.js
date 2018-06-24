@@ -1,6 +1,9 @@
 //ReactJS
 import React, { Component } from 'react';
 
+//State Management
+import { connect } from 'react-redux';
+
 //Project Components
 import AppArchitecture from '../controllers/architecture';
 import CaptureLead from './LeadCapture/LeadCapture';
@@ -12,17 +15,24 @@ import 'antd/dist/antd.css';
 //Styling
 import 'tachyons';
 
+const mapStateToProps = state => {
+  return {
+    userValid: state.userValid
+  }
+}
+
 class RentalApp extends Component {
-  
-  render() {  
+
+  render() {
+    const { userValid } = this.props
+    console.log('rentalApp Log ', userValid)
     return (
       <div>
-        <BackTop style={{paddingBottom: 150}}/>
         <AppArchitecture />
-        <CaptureLead />
+        { userValid ? <BackTop style={{paddingBottom: 150}}/> : <CaptureLead /> }
       </div>
     )
   }
 
 }
-export default RentalApp;
+export default connect(mapStateToProps, null)(RentalApp);

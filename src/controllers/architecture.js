@@ -123,6 +123,8 @@ class AppArchitecture extends Component {
 	              handleMaxPriceChange={this.handleMaxPriceChange}
 	              minPrice={this.state.minPrice}
 	              maxPrice={this.state.maxPrice}
+              //Authorization
+                isUserAuthorized={this.props.isUserAuthorized}
 	            />
 	              <div className={"mt5 pb5"}>
 	                { doWeHaveListings() ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
