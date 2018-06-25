@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
@@ -13,7 +12,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    minWidth: 190,
+    width: '100%',
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
@@ -30,13 +29,12 @@ class BedroomComponent extends React.Component {
 
     return (
       <div className={classes.root}>
-
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-native-helper">Bedrooms</InputLabel>
+        <br/>
           <NativeSelect
             value={bedValue}
             onChange={bedChange}
-            input={<Input id="age-native-helper" />}
+            input={<Input fullWidth id="age-native-helper" />}
           >
             <option value="" />
             <option value={0}>Studio</option>

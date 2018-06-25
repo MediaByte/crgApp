@@ -5,6 +5,7 @@ import NumberFormat from "react-number-format";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const styles = theme => ({
   container: {
@@ -12,7 +13,7 @@ const styles = theme => ({
     flexWrap: "wrap"
   },
   formControl: {
-    margin: theme.spacing.unit
+    width: '100%'
   }
 });
 
@@ -84,7 +85,6 @@ class PriceComponent extends React.Component {
       <div className={classes.container}>
         <TextField
           className={classes.formControl}
-          label="Min"
           value={minPrice}
           onChange={handleMinPriceChange}
           id="formatted-numberformat-input"
@@ -92,9 +92,10 @@ class PriceComponent extends React.Component {
             inputComponent: NumberFormatCustom
           }}
         />
+        <FormHelperText>Min Rent</FormHelperText>
+        <br/>
         <TextField
           className={classes.formControl}
-          label="Max"
           value={maxPrice}
           onChange={handleMaxPriceChange}
           id="formatted-numberformat-input"
@@ -102,6 +103,7 @@ class PriceComponent extends React.Component {
             inputComponent: NumberFormatCustom
           }}
         />
+        <FormHelperText>Max Rent</FormHelperText>
       </div>
     );
   }

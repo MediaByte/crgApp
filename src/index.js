@@ -43,7 +43,7 @@ const theme = createMuiTheme({
 //Redux Middleware
 const logger = createLogger();
 //Initialize Redux Store
-const store = createStore(isUserAuthorized, applyMiddleware(logger))
+const store = createStore(isUserAuthorized, applyMiddleware(logger));
 //React Router history
 const hist = createBrowserHistory();
 

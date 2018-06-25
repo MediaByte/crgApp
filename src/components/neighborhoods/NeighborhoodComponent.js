@@ -14,6 +14,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ClearIcon from '@material-ui/icons/Clear';
 import Chip from '@material-ui/core/Chip';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 //AutoComplete
 import Select from 'react-select';
@@ -232,8 +233,6 @@ class NeighborhoodComponent extends React.Component {
 	    };
   };
 
-
-
   render() {
     const { classes, handleCityChange, city } = this.props;
     return (
@@ -244,7 +243,7 @@ class NeighborhoodComponent extends React.Component {
           onChange={handleCityChange}
           placeholder="Select multiple"
           name="react-select-chip-label"
-          label="City/Neighborhood"
+
           InputLabelProps={{
             shrink: true,
           }}
@@ -260,6 +259,7 @@ class NeighborhoodComponent extends React.Component {
             },
           }}
         />
+        <FormHelperText>City/Neighborhood</FormHelperText>
       </div>
     );
   }

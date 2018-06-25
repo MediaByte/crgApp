@@ -9,9 +9,10 @@ import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import Grid from '@material-ui/core/Grid';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import MonetizationOn from '@material-ui/icons/MonetizationOn';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 //Project Components
 import PriceComponent from './PriceComponent';
@@ -45,21 +46,19 @@ class PriceController extends Component {
   }
 
 render() {
-  const { classes, handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice } = this.props;
+  const { handleMaxPriceChange, handleMinPriceChange, minPrice, maxPrice } = this.props;
     return (
       <div>
         <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Budget" icon={<MonetizationOn />} />
-        <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
+        <Dialog fullWidth open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
             <DialogTitle id="confirmation-dialog-title">Update Price?</DialogTitle>
-            
-            <Grid container justify={'center'}>
-              <Grid item xs={12}>
-                <div className={classes.slider}>
+              <DialogContent>
+                <DialogContentText>
+                  You can filter your search by bedroom.  We'll return all results from landlords & listings in your criteria.
+                </DialogContentText>   
+                <br/>           
                   <PriceComponent handleMaxPriceChange={handleMaxPriceChange} handleMinPriceChange={handleMinPriceChange} minPrice={minPrice} maxPrice={maxPrice} />
-                </div>
-              </Grid>
-            </Grid>
-
+              </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="secondary">Done</Button>
             </DialogActions>

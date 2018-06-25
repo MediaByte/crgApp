@@ -9,9 +9,10 @@ import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import Grid from '@material-ui/core/Grid';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 //Project Components
 import BedroomComponent from './BedroomComponent';
@@ -23,14 +24,7 @@ const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
-    height: 250,
-    width: 400,
   }),
-  slider: {
-    width: 250,
-    padding: 10,
-    margin: 60
-  },
 });
 
 const Transition = (props) => {
@@ -46,21 +40,18 @@ class BedroomController extends Component {
   }
 
 render() {
-  const { classes, bedChange, bedValue } = this.props;
+  const { bedChange, bedValue } = this.props;
     return (
       <div>
         <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Bedrooms" icon={<SupervisorAccount />} />
-        <Dialog open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
+        <Dialog fullWidth open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
           <DialogTitle id="confirmation-dialog-title">Update Bedrooms?</DialogTitle>
-            
-            <Grid container justify={'center'}>
-              <Grid item xs={12}>
-                <div className={classes.slider}>
-                  <BedroomComponent bedValue={bedValue} bedChange={bedChange}/>
-                </div>
-              </Grid>
-            </Grid>
-
+            <DialogContent>
+              <DialogContentText>
+                You can filter your search by budget.  We'll return all results from landlords & listings in your criteria.
+              </DialogContentText>
+                <BedroomComponent bedValue={bedValue} bedChange={bedChange}/>
+            </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="secondary">Done</Button>
             </DialogActions>

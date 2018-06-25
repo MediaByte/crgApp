@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 //Material-UI components
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 //Project
 import dateArray from './dateArray';
@@ -18,8 +18,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 199
+    width: '100%'
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
@@ -34,11 +33,11 @@ class DateComponent extends React.Component {
     return (
       <div className={classes.root}>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="name-native-disabled">Available from</InputLabel>
+        <br/>
           <NativeSelect
             value={this.props.from}
             onChange={handleDateChange('from')}
-            input={<Input name="name" id="name-native-disabled" />}
+            input={<Input fullWidth name="name" id="name-native-disabled" />}
           >
             <option value="" />
             {options.map((item, i) => {
@@ -48,13 +47,14 @@ class DateComponent extends React.Component {
             }
             )}
           </NativeSelect>
+        <FormHelperText>Max Rent</FormHelperText>
+        <br/>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="name-native-disabled">Available to</InputLabel>
           <NativeSelect
             value={this.props.to}
             onChange={handleDateChange('to')}
-            input={<Input name="name" id="name-native-disabled" />}
+            input={<Input fullWidth name="name" id="name-native-disabled" />}
           >
             <option value="" />
             {options.map((item, i) => {
@@ -64,6 +64,7 @@ class DateComponent extends React.Component {
             }
             )}
           </NativeSelect>
+          <FormHelperText>Max Rent</FormHelperText>
         </FormControl>      
       </div>
 
