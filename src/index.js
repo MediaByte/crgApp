@@ -19,8 +19,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createBrowserHistory } from "history";
 import { Route, Switch } from "react-router-dom";
 import { Router } from 'react-router'
-
 import LandingPage from "./views/LandingPage/LandingPage.jsx";
+import LoginPage from "./views/LoginPage/LoginPage.jsx";
+
 import RentalApp from "./views/App";
 
 import "./assets/scss/material-kit-react.css?v=1.1.0";
@@ -58,6 +59,7 @@ ReactDOM.render(
             <Route exact path='/' component={LandingPage}/>
             <Route path='/rentals' component={RentalApp}/>
             <Route path='/join' component={() => window.location = 'https://crgrecruit.github.io/'}/>
+            <Route path='/login' component={LoginPage}/>
           </Switch>
         </Router>
   	</MuiThemeProvider>

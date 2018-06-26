@@ -12,7 +12,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "../../components/CustomButtons/Button.jsx";
 
 //Project Components
-import SectionRegister from './SectionLogin';
+import SectionLogin from './SectionLogin';
 
 
 function Transition(props) {
@@ -105,7 +105,7 @@ class LoginPage extends React.Component{
           </DialogTitle>
           <DialogContent >
 
-            <SectionRegister 
+            <SectionLogin 
               onNameChange={this.onNameChange}
               onEmailChange={this.onEmailChange}
               onPasswordChange={this.onPasswordChange}

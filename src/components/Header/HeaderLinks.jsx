@@ -33,13 +33,18 @@ class HeaderLinks extends React.Component {
         </NavLink>
       </ListItem>
       <ListItem className={classes.listItem}>
+        <NavLink className={classes.navLink} to='/rentals'>
+          Find a Rental
+        </NavLink>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <NavLink className={classes.navLink} to='/join'>
           Join Our Team
         </NavLink>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <NavLink className={classes.navLink} to='/rentals'>
-          Find a Rental
+        <NavLink className={classes.navLink} to='/login'>
+          Sign in
         </NavLink>
       </ListItem>
     </List>
