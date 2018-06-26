@@ -16,7 +16,7 @@ import CustomDropdown from "../CustomDropdown/CustomDropdown.jsx";
 import Button from "../CustomButtons/Button.jsx";
 
 //React Router
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 import headerLinksStyle from "../../assets/jss/material-kit-react/components/headerLinksStyle.jsx";
@@ -28,50 +28,19 @@ class HeaderLinks extends React.Component {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-          <Link to='/'>
-            <Typography color={'secondary'} variant="button" gutterBottom>
-              Home
-            </Typography>
-          </Link>
-        </Button>
+        <NavLink className={classes.navLink} to='/'>
+          Home
+        </NavLink>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button
-          href="http://careers.commonrealtygroup.com"
-          target="_blank"
-          color="transparent"
-          className={classes.navLink}
-        >
-        <Typography color={'secondary'} variant="button" gutterBottom>
+        <NavLink className={classes.navLink} to='/join'>
           Join Our Team
-        </Typography>
-        </Button>
+        </NavLink>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-          <Link to='/rentals'>
-            <Typography color={'secondary'} variant="button" gutterBottom>
-              Find a Rental
-            </Typography>
-          </Link>
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          color="transparent"
-          className={classes.navLink}
-        >
-        <Typography color={'secondary'} variant="button" gutterBottom>
-          Sign in
-        </Typography>
-        </Button>
+        <NavLink className={classes.navLink} to='/rentals'>
+          Find a Rental
+        </NavLink>
       </ListItem>
     </List>
   );

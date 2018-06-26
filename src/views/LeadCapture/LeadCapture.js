@@ -123,13 +123,7 @@ class CaptureLead extends React.Component{
           onClose={() => this.handleClose("modal")}
           aria-labelledby="modal-slide-title"
           aria-describedby="modal-slide-description">
-          <DialogTitle
-            id="classic-modal-slide-title"
-            disableTypography
-            className={classes.modalHeader}>
-            <h5 className={classes.modalTitle}>Register</h5>
-          </DialogTitle>
-          <DialogContent >
+
             <SectionRegister 
               onNameChange={this.onNameChange}
               onEmailChange={this.onEmailChange}
@@ -141,7 +135,7 @@ class CaptureLead extends React.Component{
               name={this.state.name}
               showPassword={this.state.showPassword}
             />
-          </DialogContent>
+
           <DialogActions className={classes.modalFooter +" " + classes.modalFooterCenter}>
             <Button onClick={() => this.onSubmitRegister(toggleSession, userValid)} color="danger">
               Continue

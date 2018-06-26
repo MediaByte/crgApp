@@ -47,7 +47,7 @@ class DateComponent extends React.Component {
             }
             )}
           </NativeSelect>
-        <FormHelperText>Max Rent</FormHelperText>
+        <FormHelperText>Min Rent</FormHelperText>
         <br/>
         </FormControl>
         <FormControl className={classes.formControl}>

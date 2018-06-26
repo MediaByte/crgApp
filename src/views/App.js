@@ -29,7 +29,7 @@ class RentalApp extends Component {
     return (
       <div>
         <AppArchitecture />
-        { userValid ? <BackTop style={{paddingBottom: 160}}/> : <CaptureLead /> }
+        { !userValid ? <BackTop style={{paddingBottom: 160}}/> : <CaptureLead /> }
       </div>
     )
   }
