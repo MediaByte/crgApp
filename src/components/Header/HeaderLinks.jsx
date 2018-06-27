@@ -38,9 +38,14 @@ class HeaderLinks extends React.Component {
         </NavLink>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <NavLink className={classes.navLink} to='/join'>
-          Join Our Team
-        </NavLink>
+        <Button
+          onClick={() => window.open('https://crgrecruit.github.io/')}
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Join our Team
+        </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
         <NavLink className={classes.navLink} to='/login'>

@@ -58,7 +58,6 @@ ReactDOM.render(
           <Switch>
             <Route exact path='/' component={LandingPage}/>
             <Route path='/rentals' component={RentalApp}/>
-            <Route path='/join' component={() => window.location = 'https://crgrecruit.github.io/'}/>
             <Route path='/login' component={LoginPage}/>
           </Switch>
         </Router>

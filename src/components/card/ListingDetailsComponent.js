@@ -75,7 +75,7 @@ class ListingDetails extends React.Component {
     return (
       <div>
         <Grid container>
-            <Button variant="raised" size="large" color="secondary" onClick={this.handleClickOpen}>details</Button>
+            <Button size="large" color="secondary" onClick={this.handleClickOpen}>Learn More</Button>
         </Grid>
         
         <Dialog disableBackdropClick fullScreen open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
@@ -99,12 +99,12 @@ class ListingDetails extends React.Component {
           <div>
           <Grid container>
             <Grid item xs={12}>
-            <DetailsComponent price={price} movedate={movedate} beds={beds} features={features} />
+              <CarouselComponent title={title} subTitle={subTitle} photoArray={photoArray}/>
             </Grid>
           </Grid>
           <Grid container>
             <Grid item xs={12}>
-              <CarouselComponent photoArray={photoArray}/>
+            <DetailsComponent price={price} movedate={movedate} beds={beds} features={features} />
             </Grid>
           </Grid>
           <Grid container>

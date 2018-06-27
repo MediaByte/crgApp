@@ -2,22 +2,20 @@ import React from 'react';
 
 // material-ui components
 import withStyles from "@material-ui/core/styles/withStyles";
-import Slide from "@material-ui/core/Slide";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
 
 // core components
-import Button from "../../components/CustomButtons/Button.jsx";
+import Header from "../../components/Header/Header.jsx";
+import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 
 //Project Components
 import SectionLogin from './SectionLogin';
 
+import image from "../../assets/img/bg7.jpg";
 
-function Transition(props) {
-  return <Slide direction="down" {...props} />;
-}
+import loginPageStyle from "../../assets/jss/material-kit-react/views/loginPage.jsx";
+
+const dashboardRoutes = [];
 
 class LoginPage extends React.Component{
   constructor(props) {
@@ -30,6 +28,7 @@ class LoginPage extends React.Component{
       showPassword: false,
     };
   }
+
 
  onNameChange = (event) => {
     this.setState({ name: event.target.value })
@@ -66,70 +65,57 @@ class LoginPage extends React.Component{
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          this.handleClose("modal")
+          console.log(user)
         }
       })
   }  
 
-  handleClickOpen(modal) {
-    var x = [];
-    x[modal] = true;
-    this.setState(x);
-  }
-  handleClose(modal) {
-    var x = [];
-    x[modal] = false;
-    this.setState(x);
-  }
   render(){
-    const { classes } = this.props;
+    const { 
+      classes,
+      ...rest
+            } = this.props;
     return (
-      <div>
-        <Dialog
-          classes={{
-            root: classes.center,
-            paper: classes.modal
-          }}
-          open={this.state.modal}
-          disableBackdropClick
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={() => this.handleClose("modal")}
-          aria-labelledby="modal-slide-title"
-          aria-describedby="modal-slide-description">
-          <DialogTitle
-            id="classic-modal-slide-title"
-            disableTypography
-            className={classes.modalHeader}>
-            <h5 className={classes.modalTitle}>Register</h5>
-          </DialogTitle>
-          <DialogContent >
-
-            <SectionLogin 
-              onNameChange={this.onNameChange}
-              onEmailChange={this.onEmailChange}
-              onPasswordChange={this.onPasswordChange}
-              handleMouseDownPassword={this.handleMouseDownPassword}
-              handleClickShowPassword={this.handleClickShowPassword}
-              email={this.state.email}
-              password={this.state.password}
-              name={this.state.name}
-              showPassword={this.state.showPassword}
-            />
-
-          </DialogContent>
-          <DialogActions
-            className={classes.modalFooter +" " + classes.modalFooterCenter}>
-            <Button
-              onClick={() => this.onSubmitRegister()}
-              color="danger">
-              Continue
-            </Button>
-          </DialogActions>
-        </Dialog>
+    <div>
+      <Header
+        color="white"
+        routes={dashboardRoutes}
+        brand="Common Realty Group"
+        rightLinks={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
+        {...rest}
+      />
+      <div
+        className={classes.pageHeader}
+        style={{
+          backgroundImage: "url(" + image + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "top center"
+        }}
+      >
+      <div className={classes.container}>
+        <SectionLogin 
+          onNameChange={this.onNameChange}
+          onEmailChange={this.onEmailChange}
+          onPasswordChange={this.onPasswordChange}
+          handleMouseDownPassword={this.handleMouseDownPassword}
+          handleClickShowPassword={this.handleClickShowPassword}
+          email={this.state.email}
+          password={this.state.password}
+          name={this.state.name}
+          showPassword={this.state.showPassword}
+        />
       </div>
+      <br/><br/><br/>
+      <Footer whiteFont/>
+      </div>
+    </div>
     );
   }
 }
 
-export default withStyles()(LoginPage);
+export default withStyles(loginPageStyle)(LoginPage);

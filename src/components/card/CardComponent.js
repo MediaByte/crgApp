@@ -6,11 +6,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 //Components
 import ListingDetails from './ListingDetailsComponent';
+import PhotoPreview from './PhotoPreview'
 
 //Material-UI styles
 const styles = {
@@ -24,8 +23,7 @@ const styles = {
     paddingTop: '56.25%', // 16:9
   },
   actions: {
-    marginBottom: 10,
-    marginLeft: 195,
+    
   },
 };
 const MapListings = (props) => {
@@ -49,8 +47,23 @@ const MapListings = (props) => {
 
   return (
     <div>
-      <Card className={classes.card}>
-        <CardMedia className={classes.media} image={photo} title={`${title} #${unit}, ${subTitle} MA`} />
+      <Card raised className={classes.card}>
+        <PhotoPreview 
+          photo={photo} 
+          unit={unit}
+          photoArray={photoArray}
+          lat={lat}
+          long={long}
+          price={price}
+          movedate={movedate}
+          city={city}
+          beds={beds}
+          streetnumber={streetnumber}
+          streetname={streetname}
+          title={title}
+          subTitle={subTitle}
+          features={features}
+        />
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
             {title}
@@ -63,7 +76,6 @@ const MapListings = (props) => {
           </Typography>
         </CardContent>
         <CardActions className={classes.actions}>
-          <Paper elevation={8}>
             <ListingDetails 
               photoArray={photoArray}
               lat={lat}
@@ -79,7 +91,6 @@ const MapListings = (props) => {
               subTitle={subTitle}
               features={features}
             />
-          </Paper>
         </CardActions>
       </Card>
     </div>
