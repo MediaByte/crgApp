@@ -30,13 +30,10 @@ class SectionRegister extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={12}>
             <Card>
-            <CardHeader color="danger" style={{marginTop: 10}} className={classes.cardHeader}>
-                <h4>Regster</h4>
-            </CardHeader>
-            <p className='center'><Link to='/login'>Have an account? Login here.</Link></p>
+            <h6 className='center mt4'><Link to='/login'>Have an account? Login here.</Link></h6>
               <div className={classes.form}>
                 <CardBody>
-                <div style={{margin: 20}}>
+                <div>
                 <InputLabel>Name</InputLabel>
                 <Input
                   fullWidth
@@ -52,7 +49,7 @@ class SectionRegister extends React.Component {
                   }
                 />
                 </div>
-                <div style={{margin: 20}}>
+                <div style={{marginTop: 20}}>
                 <InputLabel>Email</InputLabel>
                 <Input
                   fullWidth
@@ -68,7 +65,7 @@ class SectionRegister extends React.Component {
                   }
                 />
                 </div>
-                <div style={{margin: 20}}>
+                <div style={{marginTop: 20, marginBottom: 20}}>
                 <InputLabel htmlFor="adornment-password">Password</InputLabel>
                 <Input
                   fullWidth

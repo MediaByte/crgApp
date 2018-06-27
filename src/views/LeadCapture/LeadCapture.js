@@ -10,9 +10,15 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from "@material-ui/core/IconButton";
+// @material-ui/icons
+import Close from "@material-ui/icons/Close";
 
 // core components
 import Button from "../../components/CustomButtons/Button.jsx";
+import modalStyle from "../../assets/jss/material-kit-react/modalStyle.jsx";
 
 //Project Components
 import SectionRegister from './SectionRegister';
@@ -121,6 +127,27 @@ class CaptureLead extends React.Component{
           onClose={() => this.handleClose("modal")}
           aria-labelledby="modal-slide-title"
           aria-describedby="modal-slide-description">
+          <DialogTitle 
+            id="classic-modal-slide-title"
+            disableTypography
+            className={classes.modalHeader}
+          >
+          <IconButton
+            className={classes.modalCloseButton}
+            key="close"
+            aria-label="Close"
+            color="inherit"
+            href='/'
+          >
+            <Close className={classes.modalClose} />
+          </IconButton>
+          <h4 className={classes.modalTitle}>Register</h4>
+          </DialogTitle>
+          <DialogContent 
+            styles={{margin: 0, padding: 0}}
+            id="modal-slide-description"
+            className={classes.modalBody}
+          >
 
             <SectionRegister 
               onNameChange={this.onNameChange}
@@ -133,7 +160,7 @@ class CaptureLead extends React.Component{
               name={this.state.name}
               showPassword={this.state.showPassword}
             />
-
+          </DialogContent>
           <DialogActions className={classes.modalFooter +" " + classes.modalFooterCenter}>
             <Button onClick={() => this.onSubmitRegister(toggleSession, userValid)} color="danger">
               Continue
@@ -145,6 +172,6 @@ class CaptureLead extends React.Component{
   }
 }
 
-export default withStyles()(connect(mapStateToProps, mapDispatchToProps)(CaptureLead));
+export default withStyles(modalStyle)(connect(mapStateToProps, mapDispatchToProps)(CaptureLead));
 
 

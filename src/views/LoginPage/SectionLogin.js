@@ -51,13 +51,13 @@ class SectionLogin extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={4}>
             <Card className={classes[this.state.cardAnimaton]}>
-            <CardHeader color="danger" style={{marginTop: 10}} className={classes.cardHeader}>
+            <CardHeader color="danger" className={classes.cardHeader}>
                 <h4>Login</h4>
             </CardHeader>
             <p className='center'><Link to='/rentals'>Don't have an account? Sign up.</Link></p>
               <div className={classes.form}>
                 <CardBody>
-                <div>
+                <div className={classes.form}>
                 <InputLabel>Email</InputLabel>
                 <Input
                   fullWidth
@@ -73,7 +73,7 @@ class SectionLogin extends React.Component {
                   }
                 />
                 </div>
-                <div className={classes.form}>
+                <div style={{marginTop: 20}} className={classes.form}>
                 <InputLabel htmlFor="adornment-password">Password</InputLabel>
                 <Input
                   fullWidth
@@ -96,7 +96,7 @@ class SectionLogin extends React.Component {
                 </div>
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
-                  <Button simple color="danger" size="lg">
+                  <Button onClick={() => this.props.onSubmitLogin} simple color="danger" size="lg">
                     Get started
                   </Button>
                 </CardFooter>

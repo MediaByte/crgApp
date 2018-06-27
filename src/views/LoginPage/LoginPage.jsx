@@ -21,10 +21,8 @@ class LoginPage extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      modal: true,
       email: '',
       password: '',
-      name: '',
       showPassword: false,
     };
   }
@@ -53,7 +51,7 @@ class LoginPage extends React.Component{
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  onSubmitRegister = () => {
+  onSubmitLogin = () => {
     fetch('http://127.0.0.1:4000/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -106,8 +104,8 @@ class LoginPage extends React.Component{
           handleClickShowPassword={this.handleClickShowPassword}
           email={this.state.email}
           password={this.state.password}
-          name={this.state.name}
           showPassword={this.state.showPassword}
+          onSubmitLogin={this.onSubmitLogin}
         />
       </div>
       <br/><br/><br/>
