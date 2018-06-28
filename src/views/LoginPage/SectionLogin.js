@@ -4,6 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
+import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -21,7 +22,7 @@ import Button from "../../components/CustomButtons/Button.jsx";
 
 import loginStyle from "../../assets/jss/material-kit-react/views/componentsSections/loginStyle.jsx";
 import 'tachyons'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class SectionLogin extends React.Component {
     constructor() {
@@ -31,7 +32,6 @@ class SectionLogin extends React.Component {
       }
     }
   componentDidMount() {
-    // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
       function() {
         this.setState({ cardAnimaton: "" });
@@ -45,7 +45,7 @@ class SectionLogin extends React.Component {
 
 
 
-    const { classes } = this.props;
+    const { classes, onSubmitLogin, toggleSession, userValid } = this.props;
     return (
       <div className={classes.container}>
         <GridContainer justify="center">
@@ -54,7 +54,13 @@ class SectionLogin extends React.Component {
             <CardHeader color="danger" className={classes.cardHeader}>
                 <h4>Login</h4>
             </CardHeader>
-            <p className='center'><Link to='/rentals'>Don't have an account? Sign up.</Link></p>
+              <NavLink to='/rentals'>
+                <Typography align='center' color='secondary' variant='body2'>
+                  <div style={{marginTop: 30, marginBottom: 10}}>
+                    Don't have an account? Register here.
+                  </div>
+                </Typography>
+              </NavLink>
               <div className={classes.form}>
                 <CardBody>
                 <div className={classes.form}>
@@ -96,7 +102,7 @@ class SectionLogin extends React.Component {
                 </div>
                 </CardBody>
                 <CardFooter className={classes.cardFooter}>
-                  <Button onClick={() => this.props.onSubmitLogin} simple color="danger" size="lg">
+                  <Button onClick={() => onSubmitLogin(toggleSession, userValid)} simple color="danger" size="lg">
                     Get started
                   </Button>
                 </CardFooter>

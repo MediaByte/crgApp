@@ -5,6 +5,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
+import Typography from '@material-ui/core/Typography';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // @material-ui/icons
@@ -15,11 +16,10 @@ import GridContainer from "../../components/Grid/GridContainer.jsx";
 import GridItem from "../../components/Grid/GridItem.jsx";
 import Card from "../../components/card/Card.jsx";
 import CardBody from "../../components/card/CardBody.jsx";
-import CardHeader from "../../components/card/CardHeader.jsx";
 
 import loginStyle from "../../assets/jss/material-kit-react/views/componentsSections/loginStyle.jsx";
 import 'tachyons'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 class SectionRegister extends React.Component {
   
@@ -30,7 +30,13 @@ class SectionRegister extends React.Component {
         <GridContainer justify="center">
           <GridItem xs={12} sm={12}>
             <Card>
-            <h6 className='center mt4'><Link to='/login'>Have an account? Login here.</Link></h6>
+              <NavLink to='/login'>
+                <Typography align='center' color='secondary' variant='button'>
+                  <div style={{marginTop: 30}}>
+                    Have an account? Login here.
+                  </div>
+                </Typography>
+              </NavLink>
               <div className={classes.form}>
                 <CardBody>
                 <div>

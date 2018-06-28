@@ -1,5 +1,9 @@
 import React from 'react';
 
+//State Management
+import { connect } from 'react-redux';
+import { isUserAuthorized } from '../../state/actions';
+
 // material-ui components
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -13,9 +17,23 @@ import SectionLogin from './SectionLogin';
 
 import image from "../../assets/img/bg7.jpg";
 
+import { Redirect } from 'react-router-dom';
+
 import loginPageStyle from "../../assets/jss/material-kit-react/views/loginPage.jsx";
 
 const dashboardRoutes = [];
+
+const mapStateToProps = state => {
+  return {
+    userValid: state.userValid
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleSession: (props) => dispatch(isUserAuthorized(props))
+  }
+}
 
 class LoginPage extends React.Component{
   constructor(props) {
@@ -25,12 +43,6 @@ class LoginPage extends React.Component{
       password: '',
       showPassword: false,
     };
-  }
-
-
- onNameChange = (event) => {
-    this.setState({ name: event.target.value })
-    console.log(this.state.name)
   }
 
   onEmailChange = (event) => {
@@ -51,7 +63,7 @@ class LoginPage extends React.Component{
     this.setState({ showPassword: !this.state.showPassword });
   };
 
-  onSubmitLogin = () => {
+  onSubmitLogin = (toggleSession, userValid) => {
     fetch('http://127.0.0.1:4000/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
@@ -63,7 +75,8 @@ class LoginPage extends React.Component{
       .then(response => response.json())
       .then(user => {
         if (user.id) {
-          console.log(user)
+          let toggleUser = !userValid;
+            toggleSession(toggleUser)
         }
       })
   }  
@@ -71,8 +84,15 @@ class LoginPage extends React.Component{
   render(){
     const { 
       classes,
+      userValid, 
+      toggleSession,
       ...rest
-            } = this.props;
+      } = this.props;
+
+      if (userValid) {
+        return <Redirect to='/rentals'/>;
+      } else
+
     return (
     <div>
       <Header
@@ -97,7 +117,6 @@ class LoginPage extends React.Component{
       >
       <div className={classes.container}>
         <SectionLogin 
-          onNameChange={this.onNameChange}
           onEmailChange={this.onEmailChange}
           onPasswordChange={this.onPasswordChange}
           handleMouseDownPassword={this.handleMouseDownPassword}
@@ -106,6 +125,8 @@ class LoginPage extends React.Component{
           password={this.state.password}
           showPassword={this.state.showPassword}
           onSubmitLogin={this.onSubmitLogin}
+          userValid={userValid}
+          toggleSession={toggleSession}
         />
       </div>
       <br/><br/><br/>
@@ -113,7 +134,8 @@ class LoginPage extends React.Component{
       </div>
     </div>
     );
+
   }
 }
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withStyles(loginPageStyle)(connect(mapStateToProps, mapDispatchToProps)(LoginPage));

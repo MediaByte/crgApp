@@ -23,8 +23,10 @@ import modalStyle from "../../assets/jss/material-kit-react/modalStyle.jsx";
 //Project Components
 import SectionRegister from './SectionRegister';
 
+import { NavLink } from 'react-router-dom'
 
-function Transition(props) {
+
+const Transition = (props) => {
   return <Slide direction="down" {...props} />;
 }
 
@@ -132,15 +134,15 @@ class CaptureLead extends React.Component{
             disableTypography
             className={classes.modalHeader}
           >
-          <IconButton
-            className={classes.modalCloseButton}
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            href='/'
-          >
-            <Close className={classes.modalClose} />
-          </IconButton>
+          <NavLink className={classes.modalClose} to='/'>
+            <IconButton
+              className={classes.modalCloseButton}
+              key="close"
+              aria-label="Close"
+            >
+              <Close className={classes.modalClose} />
+            </IconButton>
+          </NavLink>
           <h4 className={classes.modalTitle}>Register</h4>
           </DialogTitle>
           <DialogContent 
