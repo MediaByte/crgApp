@@ -79,7 +79,7 @@ class CaptureLead extends React.Component{
   };
 
   onSubmitRegister = (toggleSession, userValid) => {
-    fetch('http://127.0.0.1:4000/register', {
+    fetch('http://crg-server.herokuapp.com/register', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -124,6 +124,7 @@ class CaptureLead extends React.Component{
           }}
           open={this.state.modal}
           disableBackdropClick
+          disableEscapeKeyDown
           TransitionComponent={Transition}
           keepMounted
           onClose={() => this.handleClose("modal")}
@@ -146,7 +147,6 @@ class CaptureLead extends React.Component{
           <h4 className={classes.modalTitle}>Register</h4>
           </DialogTitle>
           <DialogContent 
-            styles={{margin: 0, padding: 0}}
             id="modal-slide-description"
             className={classes.modalBody}
           >
@@ -163,7 +163,7 @@ class CaptureLead extends React.Component{
               showPassword={this.state.showPassword}
             />
           </DialogContent>
-          <DialogActions className={classes.modalFooter +" " + classes.modalFooterCenter}>
+          <DialogActions disableActionSpacing className={classes.modalFooter + " " + classes.modalFooterCenter}>
             <Button onClick={() => this.onSubmitRegister(toggleSession, userValid)} color="danger">
               Continue
             </Button>

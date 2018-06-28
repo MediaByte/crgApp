@@ -64,7 +64,7 @@ class LoginPage extends React.Component{
   };
 
   onSubmitLogin = (toggleSession, userValid) => {
-    fetch('http://127.0.0.1:4000/signin', {
+    fetch('http://crg-server.herokuapp.com/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

@@ -8,7 +8,8 @@ const modalStyle = {
     paddingRight: "24px",
     paddingBottom: "0",
     paddingLeft: "24px",
-    minHeight: "16.43px"
+    minHeight: "16.43px",
+    marginBottom: "0"
   },
   modalTitle: {
     margin: "0",
@@ -36,7 +37,9 @@ const modalStyle = {
   modalBody: {
     paddingRight: "24px",
     paddingLeft: "24px",
-    position: "relative"
+    position: "relative",
+    marginBottom: "0",
+    paddingBottom: "0",
   },
   modalFooter: {
     padding: "15px",

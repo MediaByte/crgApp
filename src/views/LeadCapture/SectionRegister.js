@@ -37,64 +37,64 @@ class SectionRegister extends React.Component {
                   </div>
                 </Typography>
               </NavLink>
-              <div className={classes.form}>
-                <CardBody>
-                <div>
-                <InputLabel>Name</InputLabel>
-                <Input
-                  fullWidth
-                  id="name"
-                  type='text'
-                  onChange={this.props.onNameChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <People />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
+                <div className={classes.form}>
+                  <CardBody>
+                  <div>
+                  <InputLabel>Name</InputLabel>
+                  <Input
+                    fullWidth
+                    id="name"
+                    type='text'
+                    onChange={this.props.onNameChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton>
+                          <People />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  </div>
+                  <div style={{marginTop: 20}}>
+                  <InputLabel>Email</InputLabel>
+                  <Input
+                    fullWidth
+                    id="email"
+                    type='text'
+                    onChange={this.props.onEmailChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton>
+                          <Email />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  </div>
+                  <div style={{marginTop: 20, marginBottom: 20}}>
+                  <InputLabel htmlFor="adornment-password">Password</InputLabel>
+                  <Input
+                    fullWidth
+                    id="adornment-password"
+                    type={this.props.showPassword ? 'text' : 'password'}
+                    value={this.props.password}
+                    onChange={this.props.onPasswordChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="Toggle password visibility"
+                          onClick={this.props.handleClickShowPassword}
+                          onMouseDown={this.props.handleMouseDownPassword}
+                        >
+                          {this.props.showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  </div>
+                  </CardBody>
                 </div>
-                <div style={{marginTop: 20}}>
-                <InputLabel>Email</InputLabel>
-                <Input
-                  fullWidth
-                  id="email"
-                  type='text'
-                  onChange={this.props.onEmailChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <Email />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-                </div>
-                <div style={{marginTop: 20, marginBottom: 20}}>
-                <InputLabel htmlFor="adornment-password">Password</InputLabel>
-                <Input
-                  fullWidth
-                  id="adornment-password"
-                  type={this.props.showPassword ? 'text' : 'password'}
-                  value={this.props.password}
-                  onChange={this.props.onPasswordChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="Toggle password visibility"
-                        onClick={this.props.handleClickShowPassword}
-                        onMouseDown={this.props.handleMouseDownPassword}
-                      >
-                        {this.props.showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-                </div>
-                </CardBody>
-              </div>
-            </Card>
+              </Card>
           </GridItem>
         </GridContainer>
       </div>

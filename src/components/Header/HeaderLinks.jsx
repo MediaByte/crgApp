@@ -69,7 +69,8 @@ class HeaderLinks extends React.Component {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-      { userValid ? (
+      { 
+        userValid ? (
           <Button 
             onClick={() => window.location = '/'}
             color="transparent"
@@ -77,8 +78,7 @@ class HeaderLinks extends React.Component {
           >
             Log out
           </Button>
-        )
-        : (
+        ) : (
           <NavLink className={classes.navLink} to='/login'>
             Sign in
           </NavLink>
