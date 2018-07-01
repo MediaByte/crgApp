@@ -6,8 +6,9 @@ import registerServiceWorker from './registerServiceWorker';
 //State Management
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { isUserAuthorized } from './state/reducers';
+import { isUserAuthorized, requestListings } from './state/reducers';
 import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
 //Material-UI theme and style components
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -42,10 +43,12 @@ const theme = createMuiTheme({
   },
 });
 
+//Reducers
+const rootReducers = combineReducers({ isUserAuthorized, requestListings })
 //Redux Middleware
 const logger = createLogger();
 //Initialize Redux Store
-const store = createStore(isUserAuthorized, applyMiddleware(logger));
+const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger));
 //React Router history
 const hist = createBrowserHistory();
 

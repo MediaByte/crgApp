@@ -1,6 +1,13 @@
-import { USER_VALID } from './constants.js'
+import { 
+	USER_VALID,
+	REQUEST_LISTINGS_PENDING,
+	REQUEST_LISTINGS_SUCCESS,
+	REQUEST_LISTINGS_FAILED
+ } from './constants.js'
 
-const initialState = {userValid: false}
+const initialState = {
+	userValid: false,
+}
 
 export const isUserAuthorized = (state=initialState, action={}) => {
 	switch(action.type) {
@@ -9,4 +16,22 @@ export const isUserAuthorized = (state=initialState, action={}) => {
 		default: 
 			return state;
 	}
+}
+
+const initialStateListings = {
+  listings: [],
+  isPending: true
+}
+
+export const requestListings = (state=initialStateListings, action={}) => {
+  switch (action.type) {
+    case REQUEST_LISTINGS_PENDING:
+      return Object.assign({}, state, {isPending: true})
+    case REQUEST_LISTINGS_SUCCESS:
+      return Object.assign({}, state, {listings: action.payload, isPending: false})
+    case REQUEST_LISTINGS_FAILED:
+      return Object.assign({}, state, {error: action.payload})
+    default:
+      return state
+  }
 }
