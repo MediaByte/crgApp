@@ -8,9 +8,17 @@ import {
 
 export const isUserAuthorized = (status) => ({ type: USER_VALID, payload: status });
 
-export const requestListings = () => (dispatch) => {
-	dispatch({ type: REQUEST_LISTINGS_PENDING })
-	apiCall('https://jsonplaceholder.typicode.com/users')
-	    .then(data => dispatch({ type: REQUEST_LISTINGS_SUCCESS, payload: data }))
-	    .catch(error => dispatch({ type: REQUEST_LISTINGS_FAILED, payload: error }))
+export const requestListings = (api) => (dispatch) => {
+	dispatch({ 
+		type: REQUEST_LISTINGS_PENDING 
+	})
+		apiCall(api)
+		    .then(data => dispatch({ 
+		    	type: REQUEST_LISTINGS_SUCCESS, 
+		    	payload: data 
+		    }))
+		    .catch(error => dispatch({ 
+		    	type: REQUEST_LISTINGS_FAILED, 
+		    	payload: error 
+		    }))
 }
