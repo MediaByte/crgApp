@@ -9,19 +9,6 @@ import ProgressComponent from '../components/progress/ProgressComponent';
 //CSS 
 import 'tachyons';
 
-//Converts XML handling
-const convert = require('xml-js');
-const options = {
-    ignoreComment: true, 
-    compact: true, 
-    ignoreDeclaration: true, 
-    alwaysArray: true, 
-    ignoreAttributes: true, 
-    ignoreCdata: true, 
-    alwaysChildren: false, 
-    nativeType: true, 
-    trim: true
-};
 
 class AppArchitecture extends Component {
   constructor(props) {
@@ -50,8 +37,6 @@ class AppArchitecture extends Component {
   handleDateChange = name => event => {
   this.setState({ [name]: event.target.value });
   fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&avail_from=${name === 'from' ? event.target.value : this.state.from}&avail_to=${name === 'to' ? event.target.value : this.state.to}&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
-    .then(xml => xml.text())
-    .then(xml => convert.xml2js(xml, options))
     .then(data => { this.setState({ listings: data })})
     .catch(err => console.log(err));
   };
@@ -59,8 +44,6 @@ class AppArchitecture extends Component {
   onChangeBed = (event) => {
     this.setState({ minBeds: event.target.value, maxBeds: event.target.value, bedValue: event.target.value });
     fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${event.target.value}&max_bed=${event.target.value}&include_mls=1`)
-      .then(xml => xml.text())
-      .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
   }
@@ -68,8 +51,6 @@ class AppArchitecture extends Component {
   handleCityChange = (event) => {
     this.setState({ city: event, });
     fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
-      .then(xml => xml.text())
-      .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
   };
@@ -77,8 +58,6 @@ class AppArchitecture extends Component {
   handleMaxPriceChange = (event) => {
     this.setState({ maxPrice: event.target.value });
     fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${this.state.minPrice}&max_rent=${event.target.value}&include_mls=1`)
-      .then(xml => xml.text())
-      .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
   }
@@ -86,8 +65,6 @@ class AppArchitecture extends Component {
   handleMinPriceChange = (event) => {
     this.setState({ minPrice: event.target.value});
     fetch(`https://crg-server.herokuapp.com/rentals&detail_level=2&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&min_rent=${event.target.value}&max_rent=${this.state.maxPrice}&include_mls=1`)
-      .then(xml => xml.text())
-      .then(xml => convert.xml2js(xml, options))
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
   };
@@ -135,9 +112,8 @@ class AppArchitecture extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
-      .then(xml => xml.text())
-      .then(xml => convert.xml2js(xml, options))
+    fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
+      .then(data => data.json())
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
   }
