@@ -5,7 +5,6 @@ import NumberFormat from "react-number-format";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 const styles = theme => ({
   container: {
@@ -66,10 +65,10 @@ function NumberFormatCustom(props) {
       }}
       thousandSeparator
       prefix="$"
+      placeholder={'Price'}
     />
   );
 }
-
 NumberFormatCustom.propTypes = {
   inputRef: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired
@@ -78,24 +77,21 @@ NumberFormatCustom.propTypes = {
 class PriceComponent extends React.Component {
 
   render() {
-    const { classes } = this.props;
-    const { minPrice, maxPrice, handleMinPriceChange, handleMaxPriceChange } = this.props;
-
-    return (
-      <div className={classes.container}>
-        <TextField
-          className={classes.formControl}
-          value={maxPrice}
-          onChange={handleMaxPriceChange}
-          id="formatted-numberformat-input"
-          InputProps={{
-            inputComponent: NumberFormatCustom,
-            disableUnderline: true
-
-          }}
-        />
-      </div>
-    );
+    const { classes, maxPrice, handleMaxPriceChange } = this.props;
+      return (
+        <div className={classes.container}>
+          <TextField
+            className={classes.formControl}
+            value={maxPrice}
+            onChange={handleMaxPriceChange}
+            id="formatted-numberformat-input"
+            InputProps={{
+              inputComponent: NumberFormatCustom,
+              disableUnderline: true
+            }}
+          />
+        </div>
+      );
   }
 }
 

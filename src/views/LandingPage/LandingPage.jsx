@@ -56,7 +56,7 @@ class LandingPage extends React.Component {
                 </GridContainer>
                 <Button
                   color="danger"
-                  size="lg"
+                  size="md"
                   rel="noopener noreferrer"
                 >
                 <Link to='/rentals'>

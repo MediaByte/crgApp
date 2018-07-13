@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
@@ -30,8 +29,13 @@ class BedroomComponent extends React.Component {
           <NativeSelect
             value={bedValue}
             onChange={bedChange}
-            input={<Input disableUnderline={true} fullWidth id="age-native-helper" />}
-
+            input={
+              <Input
+                disableUnderline={true} 
+                fullWidth 
+                id="age-native-helper" 
+              />
+            }
           >
             <option value="">Beds</option>
             <option value={0}>Studio</option>

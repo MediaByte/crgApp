@@ -47,13 +47,6 @@ class GoogleMapComponent extends React.Component {
         <div>
           <GridContainer>
             <GridItem xs={12}>
-<<<<<<< HEAD
-            { doWeHaveListings() 
-              ? <RenderMarkers 
-                data={this.state.listings.YGLResponse[0].Listings[0].Listing}
-                isMarkerShown 
-              /> : 'Loading...'
-=======
             { 
               doWeHaveListings() 
                 ? <RenderMarkers 
@@ -61,7 +54,6 @@ class GoogleMapComponent extends React.Component {
                     isMarkerShown 
                   /> 
                 : 'Loading...'
->>>>>>> 8a63451f1994bc1c5357908198212067a60445f7
             }
             </GridItem>
           </GridContainer>

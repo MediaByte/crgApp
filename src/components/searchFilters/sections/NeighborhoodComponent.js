@@ -14,7 +14,6 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ClearIcon from '@material-ui/icons/Clear';
 import Chip from '@material-ui/core/Chip';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 //AutoComplete
 import Select from 'react-select';

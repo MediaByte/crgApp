@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 //Material-UI
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import grey from '@material-ui/core/colors/grey';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 //project files
 import NeighborhoodComponent from './sections/NeighborhoodComponent';
@@ -27,7 +24,6 @@ const styles = theme => ({
     backgroundColor: theme.palette.common.white,
     border: '1px solid #ced4da',
     padding: '8px 12px',
-    marginRight: 0,
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     '&:focus': {
       borderColor: '#80bdff',
@@ -43,45 +39,29 @@ render() {
 	const {classes} = this.props
 	return (
 		<div>
-			<Paper style={{backgroundColor: '#FFFFFF50'}} rounded className={classes.root} elevation={20}>
-
+			<Paper style={{backgroundColor: '#FFFFFF40'}} rounded className={classes.root} elevation={20}>
 				<Grid container spacing={0}>
 					<Grid item xs={12} sm={12} md={12}>
-
 						<div className={classes.search}>
 							<NeighborhoodComponent/>
+
 						</div>
-
-							<Grid container spacing={0}>
-
+							<Grid container style={{marginTop: 4}} spacing={8}>
 								<Grid item xs={4} sm={4} md={3}>
-
 									<div className={classes.search}>
 										<BedroomComponent/>
 									</div>
-
 								</Grid>
-
 								<Grid item xs={4} sm={4} md={3}>
-
 									<div className={classes.search}>
 										<PriceComponent />
 									</div>
-								</Grid>
-
-								<Grid item xs={4} sm={4} md={3}>
-
-									<div className={classes.search}>
-										<PriceComponent />
-									</div>
-
 								</Grid>
 							</Grid>
 					</Grid>
-
 				</Grid>
-
 			</Paper>
+			<br/>
 		</div>
 	)
 
