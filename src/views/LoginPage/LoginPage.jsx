@@ -25,7 +25,7 @@ const dashboardRoutes = [];
 
 const mapStateToProps = state => {
   return {
-    userValid: state.userValid
+    userValid: state.isUserAuthorized.userValid
   }
 }
 

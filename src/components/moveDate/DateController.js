@@ -40,31 +40,30 @@ const Transition = (props) => {
 class BedroomController extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      open: false
-    };
+      this.state = {
+        open: false
+      };
   }
 
 render() {
   const {handleDateChange } = this.props;
     return (
       <div>
-      <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Move Date" icon={<RestoreIcon />} />
-        <Dialog fullWidth open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
-          <DialogTitle id="confirmation-dialog-title">Update Move-in Date?</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Filter your search by Move-Date.  
-                We'll return all results from landlords & 
-                listings in your specified move-in date.
-              </DialogContentText>
-                <DateComponent from={this.props.from} to={this.props.to} handleDateChange={handleDateChange}/>
-              </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="secondary">Done</Button>
-            </DialogActions>
-        </Dialog>
-
+        <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Move Date" icon={<RestoreIcon />} />
+          <Dialog fullWidth open={this.state.open} onClose={this.handleClose} TransitionComponent={Transition}>
+            <DialogTitle id="confirmation-dialog-title">Update Move-in Date?</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Filter your search by Move-Date.  
+                  We'll return all results from landlords & 
+                  listings in your specified move-in date.
+                </DialogContentText>
+                  <DateComponent from={this.props.from} to={this.props.to} handleDateChange={handleDateChange}/>
+                </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose} color="secondary">Done</Button>
+              </DialogActions>
+          </Dialog>
       </div>
     );
   }

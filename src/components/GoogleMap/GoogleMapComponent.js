@@ -1,4 +1,5 @@
 import React from "react";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -6,22 +7,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import GridContainer from "../Grid/GridContainer.jsx";
 import GridItem from "../Grid/GridItem.jsx";
 
+//Styles
 import productStyle from "../../assets/jss/material-kit-react/views/landingPageSections/productStyle.jsx";
-import RenderMarkers from './renderMarkers';
 
-//Converts XML response to JS array
-const convert = require('xml-js');
-const options = {
-    ignoreComment: true, 
-    compact: true, 
-    ignoreDeclaration: true, 
-    alwaysArray: true, 
-    ignoreAttributes: true, 
-    ignoreCdata: true, 
-    alwaysChildren: false, 
-    nativeType: true, 
-    trim: true
-};
+//Project Files
+import RenderMarkers from './renderMarkers';
 
 
 class GoogleMapComponent extends React.Component {
@@ -29,7 +19,7 @@ class GoogleMapComponent extends React.Component {
   constructor() {
     super();
       this.state = {
-        listings: '',
+        listings: [],
       }
   }
 
@@ -57,11 +47,14 @@ class GoogleMapComponent extends React.Component {
         <div>
           <GridContainer>
             <GridItem xs={12}>
-            { doWeHaveListings() ? 
-              <RenderMarkers 
-                data={this.state.listings.YGLResponse[0].Listings[0].Listing}
-                isMarkerShown 
-              /> : 'Loading...'}
+            { 
+              doWeHaveListings() 
+                ? <RenderMarkers 
+                    data={this.state.listings.YGLResponse[0].Listings[0].Listing}
+                    isMarkerShown 
+                  /> 
+                : 'Loading...'
+            }
             </GridItem>
           </GridContainer>
         </div>
@@ -70,13 +63,10 @@ class GoogleMapComponent extends React.Component {
   }
 
    componentDidMount() {
-      fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=Cambridge,Somerville,Medford&include_mls=1&detail_level=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
+      fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=Cambridge,Somerville&include_mls=1&detail_level=1`)
+        .then(xml => xml.json())
         .then(data => { this.setState({ listings: data })})
         .catch(err => console.log(err));
-        console.log(this.state.listings)
-
     }
   }
 
