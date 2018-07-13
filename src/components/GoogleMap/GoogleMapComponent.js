@@ -1,4 +1,5 @@
 import React from "react";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -6,22 +7,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import GridContainer from "../Grid/GridContainer.jsx";
 import GridItem from "../Grid/GridItem.jsx";
 
+//Styles
 import productStyle from "../../assets/jss/material-kit-react/views/landingPageSections/productStyle.jsx";
-import RenderMarkers from './renderMarkers';
 
-//Converts XML response to JS array
-const convert = require('xml-js');
-const options = {
-    ignoreComment: true, 
-    compact: true, 
-    ignoreDeclaration: true, 
-    alwaysArray: true, 
-    ignoreAttributes: true, 
-    ignoreCdata: true, 
-    alwaysChildren: false, 
-    nativeType: true, 
-    trim: true
-};
+//Project Files
+import RenderMarkers from './renderMarkers';
 
 
 class GoogleMapComponent extends React.Component {
@@ -29,7 +19,7 @@ class GoogleMapComponent extends React.Component {
   constructor() {
     super();
       this.state = {
-        listings: '',
+        listings: [],
       }
   }
 
@@ -57,11 +47,21 @@ class GoogleMapComponent extends React.Component {
         <div>
           <GridContainer>
             <GridItem xs={12}>
+<<<<<<< HEAD
             { doWeHaveListings() 
               ? <RenderMarkers 
                 data={this.state.listings.YGLResponse[0].Listings[0].Listing}
                 isMarkerShown 
               /> : 'Loading...'
+=======
+            { 
+              doWeHaveListings() 
+                ? <RenderMarkers 
+                    data={this.state.listings.YGLResponse[0].Listings[0].Listing}
+                    isMarkerShown 
+                  /> 
+                : 'Loading...'
+>>>>>>> 8a63451f1994bc1c5357908198212067a60445f7
             }
             </GridItem>
           </GridContainer>
@@ -75,8 +75,6 @@ class GoogleMapComponent extends React.Component {
         .then(xml => xml.json())
         .then(data => { this.setState({ listings: data })})
         .catch(err => console.log(err));
-        console.log(this.state.listings)
-
     }
   }
 
