@@ -30,7 +30,7 @@ import headerLinksStyle from "../../assets/jss/material-kit-react/components/hea
 
 const mapStateToProps = state => {
   return {
-    userValid: state.userValid
+    userValid: state.isUserAuthorized.userValid
   }
 }
 

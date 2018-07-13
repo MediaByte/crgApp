@@ -57,11 +57,12 @@ class GoogleMapComponent extends React.Component {
         <div>
           <GridContainer>
             <GridItem xs={12}>
-            { doWeHaveListings() ? 
-              <RenderMarkers 
+            { doWeHaveListings() 
+              ? <RenderMarkers 
                 data={this.state.listings.YGLResponse[0].Listings[0].Listing}
                 isMarkerShown 
-              /> : 'Loading...'}
+              /> : 'Loading...'
+            }
             </GridItem>
           </GridContainer>
         </div>
@@ -70,9 +71,8 @@ class GoogleMapComponent extends React.Component {
   }
 
    componentDidMount() {
-      fetch(`https://crg-server.herokuapp.com/rentals&city_neighborhood=Cambridge,Somerville,Medford&include_mls=1&detail_level=1`)
-        .then(xml => xml.text())
-        .then(xml => convert.xml2js(xml, options))
+      fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=Cambridge,Somerville&include_mls=1&detail_level=1`)
+        .then(xml => xml.json())
         .then(data => { this.setState({ listings: data })})
         .catch(err => console.log(err));
         console.log(this.state.listings)

@@ -15,17 +15,14 @@ import 'antd/dist/antd.css';
 //Styling
 import 'tachyons';
 
-const mapStateToProps = state => {
-  return {
-    userValid: state.userValid
-  }
-}
-
 class RentalApp extends Component {
 
   render() {
+
     const { userValid } = this.props
-    console.log('rentalApp Log ', userValid)
+
+    console.log('rentalApp Log', this.props)
+
     return (
       <div>
         <AppArchitecture />
@@ -35,4 +32,9 @@ class RentalApp extends Component {
   }
 
 }
-export default connect(mapStateToProps, null)(RentalApp);
+
+const mapStateToProps = (state) => {
+  return { userValid: state.isUserAuthorized.userValid }
+}
+
+export default connect(mapStateToProps)(RentalApp);

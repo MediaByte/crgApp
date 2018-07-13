@@ -16,6 +16,7 @@ import GridItem from "../../components/Grid/GridItem.jsx";
 import Button from "../../components/CustomButtons/Button.jsx";
 import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
 import Parallax from "../../components/Parallax/Parallax.jsx";
+import SearchFilters from '../../components/searchFilters/searchFilters'
 
 import landingPageStyle from "../../assets/jss/material-kit-react/views/landingPage.jsx";
 
@@ -46,22 +47,21 @@ class LandingPage extends React.Component {
         <Parallax filter image={require("../../assets/img/landing-bg.jpg")}>
           <div className={classes.container}>
             <GridContainer>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={12} md={7}>
                 <h1 className={classes.title}>LESS HUNT, MORE FIND.</h1>
-                <h4>
-                  Whether you're a Harvard or MIT student or working professional 
-                  looking to lease an apartment, Common Realty Group will meet your 
-                  needs. 
-                </h4>
-                <br />
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <SearchFilters />
+                 </GridItem>
+                </GridContainer>
                 <Button
                   color="danger"
                   size="lg"
                   rel="noopener noreferrer"
                 >
                 <Link to='/rentals'>
-                  <Typography color={'primary'} variant="button" gutterBottom>
-                    Find a Rental
+                  <Typography color={'primary'} variant="button">
+                    Search
                   </Typography>
                 </Link>
                 </Button>

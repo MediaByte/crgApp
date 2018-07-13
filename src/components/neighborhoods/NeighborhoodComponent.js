@@ -234,14 +234,14 @@ class NeighborhoodComponent extends React.Component {
   };
 
   render() {
-    const { classes, handleCityChange, city } = this.props;
+    const { classes, handleCityChange, city, showFormHelper=true } = this.props;
     return (
       <div className={classes.root}>
         <TextField
           fullWidth
           value={city}
           onChange={handleCityChange}
-          placeholder="Select multiple"
+          placeholder="Cambridge"
           name="react-select-chip-label"
 
           InputLabelProps={{
@@ -259,7 +259,7 @@ class NeighborhoodComponent extends React.Component {
             },
           }}
         />
-        <FormHelperText>City/Neighborhood</FormHelperText>
+        {showFormHelper ? <FormHelperText>City/Neighborhood</FormHelperText> : ''}
       </div>
     );
   }
