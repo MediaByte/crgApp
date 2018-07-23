@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 //State Management
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { isUserAuthorized, requestListings } from './state/reducers';
+import { isUserAuthorized, requestListings, userSettings } from './state/reducers';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
@@ -44,7 +44,7 @@ const theme = createMuiTheme({
 });
 
 //Reducers
-const rootReducers = combineReducers({ isUserAuthorized, requestListings })
+const rootReducers = combineReducers({ isUserAuthorized, requestListings, userSettings })
 //Redux Middleware
 const logger = createLogger();
 //Initialize Redux Store

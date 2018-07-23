@@ -26,11 +26,10 @@ export const isUserAuthorized = (state=initialState, action={}) => {
 const userState = {
   from: '08/01/2018',
   to: '09/01/2018',
-  bedValue: 1,
   minBeds: 1,
   maxBeds: 1,
-  city: '',
-  minPrice: '',
+  city: 'Somerville',
+  minPrice: '1750',
   maxPrice: '',
 }
 export const userSettings = (state=userState, action={}) => {

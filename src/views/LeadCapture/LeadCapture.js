@@ -32,7 +32,7 @@ const Transition = (props) => {
 
 const mapStateToProps = state => {
   return {
-    userValid: state.userValid
+    userValid: state.isUserAuthorized.userValid
   }
 }
 
@@ -84,7 +84,7 @@ class CaptureLead extends React.Component{
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         name: this.state.name,
-        email: this.state.email,
+        email: this.state.email.toLowerCase(),
         password: this.state.password
       })
     })

@@ -1,6 +1,10 @@
 //ReactJS
 import React, { Component } from 'react';
 
+//State
+import { connect } from 'react-redux';
+import { city } from '../state/actions'
+
 //Project Components
 import GetListings from '../controllers/connect';
 import Layout from '../views/Layout';
@@ -9,6 +13,17 @@ import ProgressComponent from '../components/progress/ProgressComponent';
 //CSS 
 import 'tachyons';
 
+const mapStateToProps = state => {
+  return {
+    city: state.userSettings.city
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCity: (props) => dispatch(city(props))
+  }
+}
 
 class AppArchitecture extends Component {
   constructor(props) {
@@ -19,7 +34,6 @@ class AppArchitecture extends Component {
         bedValue: 1,
         minBeds: 1,
         maxBeds: 1,
-        city: 'Somerville',
         open: false,
         listings: [],
         left: false,
@@ -27,11 +41,17 @@ class AppArchitecture extends Component {
         maxPrice: '',
       };
     this.onChangeBed = this.onChangeBed.bind(this);
-    this.handleCityChange = this.handleCityChange.bind(this);
     this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
     this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
     this.doWeHaveListings = this.doWeHaveListings.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+  }
+
+  handleCityChange = (event) => {
+    this.props.changeCity(event)
+    fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
+      .then(data => data.json())
+      .then(data => { this.setState({ listings: data })})
   }
 
   handleDateChange = name => event => {
@@ -49,14 +69,6 @@ class AppArchitecture extends Component {
       .then(data => { this.setState({ listings: data })})
       .catch(err => console.log(err));
   }
-
-  handleCityChange = (event) => {
-    this.setState({ city: event, });
-    fetch(`https://crg-server.herokuapp.com/rentals?detail_level=2&city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&include_mls=1`)
-      .then(data => data.json())
-      .then(data => { this.setState({ listings: data })})
-      .catch(err => console.log(err));
-  };
 
   handleMaxPriceChange = (event) => {
     this.setState({ maxPrice: event.target.value });
@@ -81,10 +93,10 @@ class AppArchitecture extends Component {
   }
 
   render() {
-	let listArray = this.state.listings;
+	const { listings } = this.state
 	const { doWeHaveListings } = this
 
-	    if (listArray.length === 0) {
+	    if (listings.length === 0) {
 	      return <ProgressComponent />
 	    } else {
 	        return (
@@ -99,7 +111,7 @@ class AppArchitecture extends Component {
 	              bedValue={this.state.bedValue}
 	            //Location Component Arguments
 	              handleCityChange={this.handleCityChange}
-	              city={this.state.city}
+	              city={this.props.city}
 	            //Pricing Component Arguements
 	              handleMinPriceChange={this.handleMinPriceChange}
 	              handleMaxPriceChange={this.handleMaxPriceChange}
@@ -109,7 +121,7 @@ class AppArchitecture extends Component {
                 isUserAuthorized={this.props.isUserAuthorized}
 	            />
 	              <div className={"mt5 pb5"}>
-	                { doWeHaveListings() ? <GetListings listings={this.state.listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
+	                { doWeHaveListings() ? <GetListings listings={listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
 	              </div>
 	          </div>
 	        );
@@ -117,12 +129,11 @@ class AppArchitecture extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.state.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
+    fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.props.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
       .then(data => data.json())
       .then(data => { this.setState({ listings: data })})
-      .catch(err => console.log(err));
   }
 }
 
-export default AppArchitecture;
+export default connect(mapStateToProps, mapDispatchToProps)(AppArchitecture);
 

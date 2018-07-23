@@ -68,7 +68,7 @@ class LoginPage extends React.Component{
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        email: this.state.email,
+        email: this.state.email.toLowerCase(),
         password: this.state.password
       })
     })
