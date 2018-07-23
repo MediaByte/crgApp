@@ -5,12 +5,15 @@ import {
 	REQUEST_LISTINGS_FAILED,
   USER_INPUT_BEDROOMS_MIN,
   USER_INPUT_BEDROOMS_MAX,
- } from './constants.js'
-
+  USER_INPUT_DATE_FROM,
+  USER_INPUT_DATE_TO,
+  USER_INPUT_PRICE_MIN,
+  USER_INPUT_PRICE_MAX,
+  USER_INPUT_CITY,
+ } from './constants.js';
 const initialState = {
 	userValid: false,
 }
-
 export const isUserAuthorized = (state=initialState, action={}) => {
 	switch(action.type) {
 		case USER_VALID:
@@ -29,26 +32,32 @@ const userState = {
   city: '',
   minPrice: '',
   maxPrice: '',
-
 }
-
 export const userSettings = (state=userState, action={}) => {
     switch(action.type) {
-    case USER_INPUT_BEDROOMS_MIN:
-      return Object.assign({}, state, { userValid: action.payload });
-    case USER_INPUT_BEDROOMS_MAX:
-      return Object.assign({}, state, { userValid: action.payload });
-    default: 
-      return state;
-  }
+      case USER_INPUT_BEDROOMS_MIN:
+        return Object.assign({}, state, { minBeds: action.payload });
+      case USER_INPUT_BEDROOMS_MAX:
+        return Object.assign({}, state, { maxBeds: action.payload });
+      case USER_INPUT_PRICE_MIN:
+        return Object.assign({}, state, { minPrice: action.payload });
+      case USER_INPUT_PRICE_MAX:
+        return Object.assign({}, state, { maxPrice: action.payload });
+      case USER_INPUT_DATE_FROM:
+        return Object.assign({}, state, { from: action.payload });
+      case USER_INPUT_DATE_TO:
+        return Object.assign({}, state, { to: action.payload });
+      case USER_INPUT_CITY:
+        return Object.assign({}, state, { city: action.payload });
+      default: 
+        return state;
+    }
 }
 
 const initialStateListings = {
   listings: [],
   isPending: true,
-
 }
-
 export const requestListings = (state=initialStateListings, action={}) => {
   switch (action.type) {
     case REQUEST_LISTINGS_PENDING:
