@@ -24,8 +24,8 @@ export const isUserAuthorized = (state=initialState, action={}) => {
 }
 
 const userState = {
-  from: '08/01/2018',
-  to: '09/01/2018',
+  fromDate: '09/01/2018',
+  toDate: '09/01/2018',
   minBeds: 1,
   maxBeds: 1,
   city: 'Somerville',
@@ -43,9 +43,9 @@ export const userSettings = (state=userState, action={}) => {
       case USER_INPUT_PRICE_MAX:
         return Object.assign({}, state, { maxPrice: action.payload });
       case USER_INPUT_DATE_FROM:
-        return Object.assign({}, state, { from: action.payload });
+        return Object.assign({}, state, { fromDate: action.payload });
       case USER_INPUT_DATE_TO:
-        return Object.assign({}, state, { to: action.payload });
+        return Object.assign({}, state, { toDate: action.payload });
       case USER_INPUT_CITY:
         return Object.assign({}, state, { city: action.payload });
       default: 
@@ -55,7 +55,7 @@ export const userSettings = (state=userState, action={}) => {
 
 const initialStateListings = {
   listings: [],
-  isPending: true,
+  isPending: true
 }
 export const requestListings = (state=initialStateListings, action={}) => {
   switch (action.type) {
@@ -69,3 +69,4 @@ export const requestListings = (state=initialStateListings, action={}) => {
       return state
   }
 }
+

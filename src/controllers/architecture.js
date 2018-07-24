@@ -3,7 +3,16 @@ import React, { Component } from 'react';
 
 //State
 import { connect } from 'react-redux';
-import { city } from '../state/actions'
+import { 
+  city, 
+  fromDate, 
+  toDate, 
+  minBeds, 
+  maxBeds, 
+  minPrice, 
+  maxPrice, 
+  requestListings 
+} from '../state/actions'
 
 //Project Components
 import GetListings from '../controllers/connect';
@@ -15,13 +24,27 @@ import 'tachyons';
 
 const mapStateToProps = state => {
   return {
-    city: state.userSettings.city
+    city: state.userSettings.city,
+    fromDate: state.userSettings.fromDate,
+    toDate: state.userSettings.toDate,
+    minBeds: state.userSettings.minBeds,
+    maxBeds: state.userSettings.maxBeds,
+    minPrice: state.userSettings.minPrice,
+    maxPrice: state.userSettings.maxPrice,
+    listings: state.requestListings.listings
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCity: (props) => dispatch(city(props))
+    changeCity: (props) => dispatch(city(props)),
+    onFromDateChange: (event) => dispatch(fromDate(event.target.value)),
+    onToDateChange: (event) => dispatch(toDate(event.target.value)),
+    onMinBedsChange: (event) => dispatch(minBeds(event.target.value)),
+    onMaxBedsChange: (event) => dispatch(maxBeds(event.target.value)),
+    onMinRentChange: (event) => dispatch(minPrice(event.target.value)),
+    onMaxRentChange: (event) => dispatch(maxPrice(event.target.value)),
+    requestListings: (link) => dispatch(requestListings(link))
   }
 }
 
@@ -29,29 +52,17 @@ class AppArchitecture extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        from: '08/01/2018',
-        to: '09/01/2018',
         bedValue: 1,
-        minBeds: 1,
-        maxBeds: 1,
         open: false,
-        listings: [],
         left: false,
-        minPrice: '',
-        maxPrice: '',
       };
-    this.onChangeBed = this.onChangeBed.bind(this);
-    this.handleMinPriceChange = this.handleMinPriceChange.bind(this);
-    this.handleMaxPriceChange = this.handleMaxPriceChange.bind(this);
-    this.doWeHaveListings = this.doWeHaveListings.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
+
   }
 
   handleCityChange = (event) => {
     this.props.changeCity(event)
-    fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${event}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
-      .then(data => data.json())
-      .then(data => { this.setState({ listings: data })})
+    this.props.requestListings(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.props.city}&min_bed=${this.props.minBeds}&max_bed=${this.props.maxBeds}&detail_level=2&avail_from=${this.props.fromDate}&avail_to=${this.props.toDate}`)
+    this.forceUpdate();
   }
 
   handleDateChange = name => event => {
@@ -86,14 +97,14 @@ class AppArchitecture extends Component {
       .catch(err => console.log(err));
   };
 
-  doWeHaveListings = (responseYGL) => {
-    if (this.state.listings.YGLResponse[0].hasOwnProperty('Listings')) {
+  doWeHaveListings = () => {
+    if (this.props.listings.YGLResponse[0].hasOwnProperty('Listings')) {
       return true;
     } else return false;
   }
 
   render() {
-	const { listings } = this.state
+	const { listings } = this.props
 	const { doWeHaveListings } = this
 
 	    if (listings.length === 0) {
@@ -104,19 +115,19 @@ class AppArchitecture extends Component {
 	            <Layout 
 	            //Date Component Arguements
 	              handleDateChange={this.handleDateChange}
-	              from={this.state.from}
-	              to={this.state.to}
+	              from={this.props.from}
+	              to={this.props.to}
 	            //Bedroom Component Arguements
 	              onChangeBed={this.onChangeBed} 
-	              bedValue={this.state.bedValue}
+	              bedValue={this.props.bedValue}
 	            //Location Component Arguments
 	              handleCityChange={this.handleCityChange}
 	              city={this.props.city}
 	            //Pricing Component Arguements
 	              handleMinPriceChange={this.handleMinPriceChange}
 	              handleMaxPriceChange={this.handleMaxPriceChange}
-	              minPrice={this.state.minPrice}
-	              maxPrice={this.state.maxPrice}
+	              minPrice={this.props.minPrice}
+	              maxPrice={this.props.maxPrice}
               //Authorization
                 isUserAuthorized={this.props.isUserAuthorized}
 	            />
@@ -129,9 +140,8 @@ class AppArchitecture extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.props.city}&min_bed=${this.state.minBeds}&max_bed=${this.state.maxBeds}&detail_level=2&avail_from=${this.state.from}&avail_to=${this.state.to}`)
-      .then(data => data.json())
-      .then(data => { this.setState({ listings: data })})
+    const { requestListings } = this.props
+      requestListings(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.props.city}&min_bed=${this.props.minBeds}&max_bed=${this.props.maxBeds}&detail_level=2&avail_from=${this.props.fromDate}&avail_to=${this.props.toDate}`)
   }
 }
 
