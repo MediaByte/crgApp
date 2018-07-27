@@ -17,6 +17,28 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 //Project Components
 import PriceComponent from './PriceComponent';
 
+//State
+import { connect } from 'react-redux';
+import { requestListings } from '../../state/actions';
+
+const mapStateToProps = state => {
+  return {
+    city: state.userSettings.city,
+    fromDate: state.userSettings.fromDate,
+    toDate: state.userSettings.toDate,
+    minBeds: state.userSettings.minBeds,
+    maxBeds: state.userSettings.maxBeds,
+    minPrice: state.userSettings.minPrice,
+    maxPrice: state.userSettings.maxPrice
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    requestListings: (link) => dispatch(requestListings(link))
+  }
+}
+
 //Styles in JSS
 const styles = theme => ({
 
@@ -73,6 +95,7 @@ render() {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.requestListings(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.props.city}&min_bed=${this.props.minBeds}&max_bed=${this.props.maxBeds}&detail_level=2&avail_from=${this.props.fromDate}&avail_to=${this.props.toDate}&max_rent=${this.props.maxPrice}&min_rent=${this.props.minPrice}`)
   };
 }
 
@@ -80,4 +103,6 @@ PriceController.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(PriceController);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PriceController));
+
+

@@ -10,6 +10,31 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 
 //Project
 import dateArray from './dateArray';
+
+//State
+import { connect } from 'react-redux';
+import { 
+  fromDate,
+  toDate
+} from '../../state/actions'
+
+
+const mapStateToProps = state => {
+  return {
+    fromDate: state.userSettings.fromDate,
+    toDate: state.userSettings.toDate,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    moveDateFrom: (value) => dispatch(fromDate(value)),
+    moveDateTo: (value) => dispatch(toDate(value))
+  }
+}
+
+
+
 let options = dateArray();
 
 const styles = theme => ({
@@ -27,8 +52,20 @@ const styles = theme => ({
 
 class DateComponent extends React.Component {
 
+
+  handleDateChange = name => event => {
+    switch (name){
+      case 'from':
+        return this.props.moveDateFrom(event.target.value);
+      case 'to':
+        return this.props.moveDateTo(event.target.value);
+      default: 
+        break;
+    }
+  };
+
   render() {
-    const { classes, handleDateChange } = this.props;
+    const { classes } = this.props
     
     return (
       <div className={classes.root}>
@@ -36,7 +73,7 @@ class DateComponent extends React.Component {
         <br/>
           <NativeSelect
             value={this.props.from}
-            onChange={handleDateChange('from')}
+            onChange={this.handleDateChange('from')}
             input={<Input fullWidth name="name" id="name-native-disabled" />}
           >
             <option value="" />
@@ -47,13 +84,13 @@ class DateComponent extends React.Component {
             }
             )}
           </NativeSelect>
-        <FormHelperText>Min Rent</FormHelperText>
+        <FormHelperText>From</FormHelperText>
         <br/>
         </FormControl>
         <FormControl className={classes.formControl}>
           <NativeSelect
             value={this.props.to}
-            onChange={handleDateChange('to')}
+            onChange={this.handleDateChange('to')}
             input={<Input fullWidth name="name" id="name-native-disabled" />}
           >
             <option value="" />
@@ -64,7 +101,7 @@ class DateComponent extends React.Component {
             }
             )}
           </NativeSelect>
-          <FormHelperText>Max Rent</FormHelperText>
+          <FormHelperText>To</FormHelperText>
         </FormControl>      
       </div>
 
@@ -76,4 +113,4 @@ DateComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DateComponent);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DateComponent));

@@ -6,6 +6,24 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
+//State
+import { connect } from 'react-redux';
+import { minBeds, maxBeds } from '../../state/actions'
+
+
+const mapStateToProps = state => {
+  return {
+    maxBeds: state.userSettings.maxBeds,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onMinBedsChange: (event) => dispatch(minBeds(event)),
+    onMaxBedsChange: (event) => dispatch(maxBeds(event)),
+  }
+}
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -20,20 +38,21 @@ const styles = theme => ({
 });
 
 class BedroomComponent extends React.Component {
-  state = {
-    beds: 0,
-  };
+
+  onChange = (event) => {
+    this.props.onMinBedsChange(event.target.value)
+    this.props.onMaxBedsChange(event.target.value)
+  }
 
   render() {
-    const { classes, bedValue, bedChange } = this.props;
+    const { classes, maxBeds } = this.props;
 
     return (
       <div className={classes.root}>
-        <FormControl className={classes.formControl}>
-        <br/>
+        <FormControl className={classes.formControl}><br/>
           <NativeSelect
-            value={bedValue}
-            onChange={bedChange}
+            value={maxBeds}
+            onChange={this.onChange}
             input={<Input fullWidth id="age-native-helper" />}
           >
             <option value="" />
@@ -60,4 +79,4 @@ BedroomComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BedroomComponent);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(BedroomComponent));

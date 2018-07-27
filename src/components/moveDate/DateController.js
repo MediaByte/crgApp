@@ -1,7 +1,6 @@
 //ReactJS
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 //Material-UI v1 Components
 import { withStyles } from '@material-ui/core/styles';
 import Slide from '@material-ui/core/Slide';
@@ -13,15 +12,29 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-
-
 //Project Components
 import DateComponent from './DateComponent';
-
-
+//State
+import { connect } from 'react-redux';
+import { requestListings } from '../../state/actions'
+const mapStateToProps = state => {
+  return {
+    city: state.userSettings.city,
+    fromDate: state.userSettings.fromDate,
+    toDate: state.userSettings.toDate,
+    minBeds: state.userSettings.minBeds,
+    maxBeds: state.userSettings.maxBeds,
+    minPrice: state.userSettings.minPrice,
+    maxPrice: state.userSettings.maxPrice,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    requestListings: (link) => dispatch(requestListings(link))
+  }
+}
 //Styles in JSS
 const styles = theme => ({
-
   root: theme.mixins.gutters({
     paddingTop: 16,
     paddingBottom: 16,
@@ -32,21 +45,17 @@ const styles = theme => ({
     margin: 60
   },
 });
-
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
 }
-
-class BedroomController extends Component {
+class DateController extends Component {
   constructor(props) {
     super(props)
       this.state = {
         open: false
       };
   }
-
 render() {
-  const {handleDateChange } = this.props;
     return (
       <div>
         <BottomNavigationAction showLabel onClick={this.handleClickOpen} label="Move Date" icon={<RestoreIcon />} />
@@ -58,7 +67,7 @@ render() {
                   We'll return all results from landlords & 
                   listings in your specified move-in date.
                 </DialogContentText>
-                  <DateComponent from={this.props.from} to={this.props.to} handleDateChange={handleDateChange}/>
+                  <DateComponent />
                 </DialogContent>
               <DialogActions>
                 <Button onClick={this.handleClose} color="secondary">Done</Button>
@@ -67,18 +76,15 @@ render() {
       </div>
     );
   }
-
   handleClickOpen = () => {
     this.setState({ open: true });
   };
-
   handleClose = () => {
     this.setState({ open: false });
+    this.props.requestListings(`https://crg-server.herokuapp.com/rentals?city_neighborhood=${this.props.city}&min_bed=${this.props.minBeds}&max_bed=${this.props.maxBeds}&detail_level=2&avail_from=${this.props.fromDate}&avail_to=${this.props.toDate}&max_rent=${this.props.maxPrice}&min_rent=${this.props.minPrice}`)
   };
 }
-
-BedroomController.propTypes = {
+DateController.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-export default withStyles(styles)(BedroomController);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(DateController));

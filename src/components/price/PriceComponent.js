@@ -7,6 +7,25 @@ import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+//State
+import { connect } from 'react-redux';
+import { minPrice, maxPrice } from '../../state/actions'
+
+
+const mapStateToProps = state => {
+  return {
+    maxPrice: state.userSettings.maxPrice,
+    minPrice: state.userSettings.minPrice,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onMinRentChange: (event) => dispatch(minPrice(event)),
+    onMaxRentChange: (event) => dispatch(maxPrice(event))
+  }
+}
+
 const styles = theme => ({
   container: {
     display: "flex",
@@ -77,35 +96,42 @@ NumberFormatCustom.propTypes = {
 
 class PriceComponent extends React.Component {
 
+  handleMaxPriceChange = (event) => {
+    this.props.onMaxRentChange(event.target.value);
+  }
+
+  handleMinPriceChange = (event) => {
+    this.props.onMinRentChange(event.target.value);
+  };
+
+
   render() {
     const { classes } = this.props;
-    const { minPrice, maxPrice, handleMinPriceChange, handleMaxPriceChange } = this.props;
-
-    return (
-      <div className={classes.container}>
-        <TextField
-          className={classes.formControl}
-          value={minPrice}
-          onChange={handleMinPriceChange}
-          id="formatted-numberformat-input"
-          InputProps={{
-            inputComponent: NumberFormatCustom
-          }}
-        />
-        <FormHelperText>Min Rent</FormHelperText>
-        <br/>
-        <TextField
-          className={classes.formControl}
-          value={maxPrice}
-          onChange={handleMaxPriceChange}
-          id="formatted-numberformat-input"
-          InputProps={{
-            inputComponent: NumberFormatCustom
-          }}
-        />
-        <FormHelperText>Max Rent</FormHelperText>
-      </div>
-    );
+      return (
+        <div className={classes.container}>
+          <TextField
+            className={classes.formControl}
+            value={this.props.minPrice}
+            onChange={this.handleMinPriceChange}
+            id="formatted-numberformat-input"
+            InputProps={{
+              inputComponent: NumberFormatCustom
+            }}
+          />
+          <FormHelperText>Min Rent</FormHelperText>
+          <br/>
+          <TextField
+            className={classes.formControl}
+            value={this.props.maxPrice}
+            onChange={this.handleMaxPriceChange}
+            id="formatted-numberformat-input"
+            InputProps={{
+              inputComponent: NumberFormatCustom
+            }}
+          />
+          <FormHelperText>Max Rent</FormHelperText>
+        </div>
+      );
   }
 }
 
@@ -113,4 +139,4 @@ PriceComponent.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(PriceComponent);
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(PriceComponent));

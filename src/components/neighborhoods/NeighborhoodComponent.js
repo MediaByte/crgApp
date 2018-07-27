@@ -20,6 +20,34 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
+//State
+import { connect } from 'react-redux';
+import { 
+  city, 
+  requestListings 
+} from '../../state/actions'
+
+const mapStateToProps = state => {
+  return {
+    city: state.userSettings.city,
+    fromDate: state.userSettings.fromDate,
+    toDate: state.userSettings.toDate,
+    minBeds: state.userSettings.minBeds,
+    maxBeds: state.userSettings.maxBeds,
+    minPrice: state.userSettings.minPrice,
+    maxPrice: state.userSettings.maxPrice,
+    listings: state.requestListings.listings
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCity: (props) => dispatch(city(props)),
+    requestListings: (link) => dispatch(requestListings(link))
+  }
+}
+
+
 const suggestions = [
   { label: "Cambridge" },
   { label: "Cambridge:Agassiz" },
@@ -125,10 +153,6 @@ const styles = theme => ({
   chip: {
     margin: theme.spacing.unit / 4,
   },
-  // We had to use a lot of global selectors in order to style react-select.
-  // We are waiting on https://github.com/JedWatson/react-select/issues/1679
-  // to provide a much better implementation.
-  // Also, we had to reset the default style injected by the library.
   '@global': {
     '.Select-control': {
       display: 'flex',
@@ -228,40 +252,48 @@ const styles = theme => ({
 class NeighborhoodComponent extends React.Component {
   constructor(props) {
     super(props);
-	    this.state = {
-	      multiLabel: null,
-	    };
+      this.state = {
+        multiLabel: null,
+      };
   };
 
-  render() {
-    const { classes, handleCityChange, city, showFormHelper=true } = this.props;
-    return (
-      <div className={classes.root}>
-        <TextField
-          fullWidth
-          value={city}
-          onChange={handleCityChange}
-          placeholder="Cambridge"
-          name="react-select-chip-label"
 
-          InputLabelProps={{
-            shrink: true,
-          }}
-          InputProps={{
-            inputComponent: SelectWrapped,
-            inputProps: {
-              classes,
-              multi: true,
-              instanceId: 'react-select-chip-label',
-              id: 'react-select-chip-label',
-              simpleValue: true,
-              options: suggestions,
-            },
-          }}
-        />
-        {showFormHelper ? <FormHelperText>City/Neighborhood</FormHelperText> : ''}
-      </div>
-    );
+  handleCityChange = (event) => {
+    this.props.changeCity(event)
+  }
+
+  render() {
+    const { classes, city, showFormHelper=true } = this.props;
+      return (
+        <div className={classes.root}>
+          <TextField
+            fullWidth
+            value={city}
+            onChange={this.handleCityChange}
+            placeholder="Cambridge"
+            name="react-select-chip-label"
+            InputLabelProps={
+              {
+                shrink: true,
+              }
+            }
+            InputProps={
+              {
+                inputComponent: SelectWrapped,
+                inputProps: {
+                  classes,
+                  multi: true,
+                  instanceId: 'react-select-chip-label',
+                  id: 'react-select-chip-label',
+                  simpleValue: true,
+                  options: suggestions,
+                }
+              }
+            }
+          />
+          {showFormHelper ? <FormHelperText>City/Neighborhood</FormHelperText> : ''}
+        </div>
+      );
   }
 }
 
@@ -269,4 +301,10 @@ NeighborhoodComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(NeighborhoodComponent);
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(NeighborhoodComponent));
+
+
+
+
+
