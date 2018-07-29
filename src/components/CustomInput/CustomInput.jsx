@@ -71,6 +71,7 @@ function CustomInput({ ...props }) {
           underline: underlineClasses
         }}
         id={id}
+        autoComplete={this.props.autoComplete.toString()}
         {...inputProps}
       />
       {error ? (

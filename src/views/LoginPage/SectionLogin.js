@@ -60,19 +60,20 @@ class SectionLogin extends React.Component {
                 <CardBody>
                 <div className={classes.form}>
                 <InputLabel>Email</InputLabel>
-                <Input
-                  fullWidth
-                  id="email"
-                  type='text'
-                  onChange={this.props.onEmailChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <Email />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
+                  <Input
+                    fullWidth
+                    autoComplete='email'
+                    id="email"
+                    type='text'
+                    onChange={this.props.onEmailChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton>
+                          <Email />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
                 </div>
                 <div style={{marginTop: 20}} className={classes.form}>
                 <InputLabel htmlFor="adornment-password">Password</InputLabel>
@@ -80,6 +81,7 @@ class SectionLogin extends React.Component {
                   fullWidth
                   id="adornment-password"
                   type={this.props.showPassword ? 'text' : 'password'}
+                  autoComplete='current-password'
                   value={this.props.password}
                   onChange={this.props.onPasswordChange}
                   endAdornment={

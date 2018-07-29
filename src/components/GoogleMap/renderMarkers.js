@@ -6,7 +6,6 @@ import {
   GoogleMap,
   Marker
 } from "react-google-maps";
-
 const RenderMarkers = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCfts7ICdfHE1B_5_FAwYR9OchyGr5_9VE&v=3.exp&libraries=geometry,drawing,places",
@@ -23,5 +22,4 @@ const RenderMarkers = compose(
     })}
   </GoogleMap>
 ));
-
 export default RenderMarkers;

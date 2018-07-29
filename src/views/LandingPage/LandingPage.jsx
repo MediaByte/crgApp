@@ -4,10 +4,8 @@ import classNames from "classnames";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from '@material-ui/core/Typography';
-
 //React Router
 import { Link } from 'react-router-dom'
-
 // core components
 import Header from "../../components/Header/Header.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
@@ -17,17 +15,12 @@ import Button from "../../components/CustomButtons/Button.jsx";
 import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
 import Parallax from "../../components/Parallax/Parallax.jsx";
 import SearchFilters from '../../components/searchFilters/searchFilters'
-
 import landingPageStyle from "../../assets/jss/material-kit-react/views/landingPage.jsx";
-
 // Sections for this page
 import InfoSection from "./Sections/InfoSection.jsx";
 import GoogleMapComponent from '../../components/GoogleMap/GoogleMapComponent';
-
 const dashboardRoutes = [];
-
 class LandingPage extends React.Component {
-
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -56,7 +49,7 @@ class LandingPage extends React.Component {
                 </GridContainer>
                 <Button
                   color="danger"
-                  size="md"
+                  size="lg"
                   rel="noopener noreferrer"
                 >
                 <Link to='/rentals'>
@@ -76,7 +69,6 @@ class LandingPage extends React.Component {
           </div>
         </div>
           <Footer />
-        
       </div>
     );
   }

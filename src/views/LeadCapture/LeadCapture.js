@@ -1,10 +1,8 @@
 //ReactJS
 import React from 'react';
-
 //State Management
 import { connect } from 'react-redux';
 import { isUserAuthorized } from '../../state/actions';
-
 //Material-UI components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
@@ -15,34 +13,26 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from "@material-ui/core/IconButton";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
-
 // core components
 import Button from "../../components/CustomButtons/Button.jsx";
 import modalStyle from "../../assets/jss/material-kit-react/modalStyle.jsx";
-
 //Project Components
 import SectionRegister from './SectionRegister';
-
+//React Router
 import { NavLink } from 'react-router-dom'
-
-
 const Transition = (props) => {
   return <Slide direction="down" {...props} />;
 }
-
 const mapStateToProps = state => {
   return {
     userValid: state.isUserAuthorized.userValid
   }
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleSession: (props) => dispatch(isUserAuthorized(props))
   }
 }
-
-
 class CaptureLead extends React.Component{
   constructor(props) {
     super(props);
@@ -54,30 +44,24 @@ class CaptureLead extends React.Component{
       showPassword: false,
     };
   }
-
  onNameChange = (event) => {
     this.setState({ name: event.target.value })
     console.log(this.state.name)
   }
-
   onEmailChange = (event) => {
     this.setState({ email: event.target.value })
     console.log(this.state.email)
   }
-
   onPasswordChange = (event) => {
     this.setState({ password: event.target.value })
     console.log(this.state.password)
   }
-
-    handleMouseDownPassword = event => {
+  handleMouseDownPassword = event => {
     event.preventDefault();
   };
-
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
   };
-
   onSubmitRegister = (toggleSession, userValid) => {
     fetch('http://crg-server.herokuapp.com/register', {
       method: 'post',
@@ -97,7 +81,6 @@ class CaptureLead extends React.Component{
         }
       })
   }  
-
   handleClickOpen(modal) {
     var x = [];
     x[modal] = true;
@@ -109,12 +92,7 @@ class CaptureLead extends React.Component{
     this.setState(x);
   }
   render(){
-    const { 
-      classes, 
-      userValid, 
-      toggleSession
-    } = this.props;
-
+    const { classes, userValid, toggleSession } = this.props;
     return (
       <div>
         <Dialog
@@ -150,7 +128,6 @@ class CaptureLead extends React.Component{
             id="modal-slide-description"
             className={classes.modalBody}
           >
-
             <SectionRegister 
               onNameChange={this.onNameChange}
               onEmailChange={this.onEmailChange}
@@ -173,7 +150,4 @@ class CaptureLead extends React.Component{
     );
   }
 }
-
 export default withStyles(modalStyle)(connect(mapStateToProps, mapDispatchToProps)(CaptureLead));
-
-

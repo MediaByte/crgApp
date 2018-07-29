@@ -8,7 +8,7 @@ import GridContainer from "../Grid/GridContainer.jsx";
 import GridItem from "../Grid/GridItem.jsx";
 import Card from "./Card.jsx";
 import carouselStyle from "../../assets/jss/material-kit-react/views/componentsSections/carouselStyle.jsx";
-import withStyles from "material-ui/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 class CarouselComponent extends React.Component {
   render() {

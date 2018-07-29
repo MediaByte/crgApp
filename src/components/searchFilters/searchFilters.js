@@ -39,7 +39,7 @@ render() {
 	const {classes} = this.props
 	return (
 		<div>
-			<Paper style={{backgroundColor: '#FFFFFF40'}} rounded className={classes.root} elevation={20}>
+			<Paper style={{backgroundColor: '#FFFFFF40'}} rounded='true' className={classes.root} elevation={20}>
 				<Grid container spacing={0}>
 					<Grid item xs={12} sm={12} md={12}>
 						<div className={classes.search}>

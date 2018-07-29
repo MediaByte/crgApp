@@ -16,7 +16,6 @@ import Typography from '@material-ui/core/Typography';
 import { Apps, CloudDownload } from "@material-ui/icons";
 
 // core components
-import CustomDropdown from "../CustomDropdown/CustomDropdown.jsx";
 import Button from "../CustomButtons/Button.jsx";
 
 //React Router
@@ -84,7 +83,6 @@ class HeaderLinks extends React.Component {
           </NavLink>
           )
       }
-
       </ListItem>
     </List>
   );

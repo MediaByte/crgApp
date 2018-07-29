@@ -10,8 +10,7 @@ import Typography from '@material-ui/core/Typography';
 //Components
 import ListingDetails from './ListingDetailsComponent';
 import PhotoPreview from './PhotoPreview'
-
-//Material-UI styles
+//JSS styles
 const styles = {
   card: {
     maxWidth: 345,
@@ -21,9 +20,6 @@ const styles = {
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
-  },
-  actions: {
-    
   },
 };
 const MapListings = (props) => {
@@ -44,7 +40,6 @@ const MapListings = (props) => {
   	const title = `${streetnumber} ${streetname}, ${unit}`
   	const subTitle = `${city}`
     const features = [props.heat, props.hotwater, props.electric]
-
   return (
     <div>
       <Card raised className={classes.card}>
@@ -96,7 +91,6 @@ const MapListings = (props) => {
     </div>
   );
 }
-
 MapListings.propTypes = {
   classes: PropTypes.object.isRequired,
 };

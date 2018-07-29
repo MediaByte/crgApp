@@ -12,12 +12,10 @@ import Hidden from "@material-ui/core/Hidden";
 import Drawer from "@material-ui/core/Drawer";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
-
+//React Router
 import { NavLink } from 'react-router-dom'
-
 // core components
 import headerStyle from "../../assets/jss/material-kit-react/components/headerStyle.jsx";
-
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -60,15 +58,7 @@ class Header extends React.Component {
     }
   }
   render() {
-    const {
-      classes,
-      color,
-      rightLinks,
-      leftLinks,
-      brand,
-      fixed,
-      absolute
-    } = this.props;
+    const { classes, color, rightLinks, leftLinks, brand, fixed, absolute } = this.props;
     const appBarClasses = classNames({
       [classes.appBar]: true,
       [classes[color]]: color,

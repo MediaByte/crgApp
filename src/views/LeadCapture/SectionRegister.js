@@ -1,3 +1,4 @@
+//ReactJS
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -16,13 +17,12 @@ import GridContainer from "../../components/Grid/GridContainer.jsx";
 import GridItem from "../../components/Grid/GridItem.jsx";
 import Card from "../../components/card/Card.jsx";
 import CardBody from "../../components/card/CardBody.jsx";
-
 import loginStyle from "../../assets/jss/material-kit-react/views/componentsSections/loginStyle.jsx";
+//CSS
 import 'tachyons'
+//React Router
 import { NavLink } from 'react-router-dom'
-
 class SectionRegister extends React.Component {
-  
   render() {
     const { classes } = this.props;
     return (
@@ -37,11 +37,12 @@ class SectionRegister extends React.Component {
                   </div>
                 </Typography>
               </NavLink>
-                <div className={classes.form}>
+                <form className={classes.form}>
                   <CardBody>
                   <div>
                   <InputLabel>Name</InputLabel>
                   <Input
+                    autoComplete='name'
                     fullWidth
                     id="name"
                     type='text'
@@ -58,6 +59,7 @@ class SectionRegister extends React.Component {
                   <div style={{marginTop: 20}}>
                   <InputLabel>Email</InputLabel>
                   <Input
+                    autoComplete='email'
                     fullWidth
                     id="email"
                     type='text'
@@ -74,6 +76,7 @@ class SectionRegister extends React.Component {
                   <div style={{marginTop: 20, marginBottom: 20}}>
                   <InputLabel htmlFor="adornment-password">Password</InputLabel>
                   <Input
+                    autoComplete='current-password'
                     fullWidth
                     id="adornment-password"
                     type={this.props.showPassword ? 'text' : 'password'}
@@ -81,11 +84,7 @@ class SectionRegister extends React.Component {
                     onChange={this.props.onPasswordChange}
                     endAdornment={
                       <InputAdornment position="end">
-                        <IconButton
-                          aria-label="Toggle password visibility"
-                          onClick={this.props.handleClickShowPassword}
-                          onMouseDown={this.props.handleMouseDownPassword}
-                        >
+                        <IconButton aria-label="Toggle password visibility" onClick={this.props.handleClickShowPassword} onMouseDown={this.props.handleMouseDownPassword}>
                           {this.props.showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
@@ -93,7 +92,7 @@ class SectionRegister extends React.Component {
                   />
                   </div>
                   </CardBody>
-                </div>
+                </form>
               </Card>
           </GridItem>
         </GridContainer>
