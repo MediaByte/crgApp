@@ -1,6 +1,6 @@
 //ReactJS
-import React, { Component } from 'react';
-//State Management
+import React from 'react';
+//State
 import { connect } from 'react-redux';
 //Project Components
 import AppArchitecture from '../controllers/architecture';
@@ -10,21 +10,15 @@ import { BackTop } from 'antd';
 import 'antd/dist/antd.css';
 //Styling
 import 'tachyons';
-class RentalApp extends Component {
-
-  render() {
-
-    const { userValid } = this.props
+const RentalApp = (props) => {
+  const { userValid } = props
     return (
-      <div>
-        <AppArchitecture />
-        { userValid ? <BackTop style={{paddingBottom: 160}}/> : <CaptureLead /> }
-      </div>
+        <div>
+          <AppArchitecture />
+          { userValid ? <BackTop style={{paddingBottom: 160}}/> : <CaptureLead /> }
+        </div>
     )
-  }
-
 }
-
 const mapStateToProps = (state) => {
   return { userValid: state.isUserAuthorized.userValid }
 }

@@ -64,7 +64,7 @@ class AppArchitecture extends Component {
 	        return (
 	          <div>
 	             <Layout isUserAuthorized={this.props.isUserAuthorized}/>
-	              <div className={"mt5 pb5"}>
+	              <div className={"pt5 pb5"}>
 	                { doWeHaveListings() ? <GetListings listings={listings.YGLResponse[0].Listings[0].Listing} /> : <ProgressComponent /> }
 	              </div>
 	          </div>

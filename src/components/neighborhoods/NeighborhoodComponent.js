@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
-
 //ReactJS
 import React from 'react';
 import PropTypes from 'prop-types';
-
 //Material-UI Components
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -15,18 +13,17 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ClearIcon from '@material-ui/icons/Clear';
 import Chip from '@material-ui/core/Chip';
 import FormHelperText from '@material-ui/core/FormHelperText';
-
+//Project Components
+import fetchCities from './fetchCities';
 //AutoComplete
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-
 //State
 import { connect } from 'react-redux';
 import { 
   city, 
   requestListings 
 } from '../../state/actions'
-
 const mapStateToProps = state => {
   return {
     city: state.userSettings.city,
@@ -39,7 +36,6 @@ const mapStateToProps = state => {
     listings: state.requestListings.listings
   }
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCity: (props) => dispatch(city(props)),
@@ -47,47 +43,18 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-const suggestions = [
-  { label: "Cambridge" },
-  { label: "Cambridge:Agassiz" },
-  { label: "Cambridge:Cambridge Highlands" },
-  { label: "Cambridge:Cambridgeport" },
-  { label: "Cambridge:Central Square" },
-  { label: "Cambridge:East Cambridge" },
-  { label: "Cambridge:Harvard Square" },
-  { label: "Cambridge:Inman Square" },
-  { label: "Cambridge:Kendall Square" },
-  { label: "Cambridge:Mid Cambridge" },
-  { label: "Cambridge:North Cambridge" },
-  { label: "Cambridge:Porter Square" },
-  { label: "Cambridge:Riverside" },
-  { label: "Cambridge:West Cambridge" },
-  { label: "Somerville" },
-  { label: "Somerville:Ball Square" },
-  { label: "Somerville:Davis Square" },
-  { label: "Somerville:East Somerville" },
-  { label: "Somerville:Inman Square" },
-  { label: "Somerville:Powderhouse Square" },
-  { label: "Somerville:Prospect Hill" },
-  { label: "Somerville:Spring Hill" },
-  { label: "Somerville:Teele Square" },
-  { label: "Somerville:Union Square" },
-  { label: "Somerville:West Somerville" },
-  { label: "Somerville:Winter Hill" },
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label,
-}));
-
 class Option extends React.Component {
+  constructor(props) {
+    super(props);
+      this.state = {
+        suggestions: {}
+      }
+  }
   handleClick = event => {
     this.props.onSelect(this.props.option, event);
   };
-
   render() {
     const { children, isFocused, isSelected, onFocus } = this.props;
-
     return (
       <MenuItem
         onFocus={onFocus}
@@ -103,10 +70,8 @@ class Option extends React.Component {
     );
   }
 }
-
 function SelectWrapped(props) {
   const { classes, ...other } = props;
-
   return (
     <Select
       optionComponent={Option}
@@ -117,13 +82,11 @@ function SelectWrapped(props) {
       clearRenderer={() => <ClearIcon />}
       valueComponent={valueProps => {
         const { value, children, onRemove } = valueProps;
-
         const onDelete = event => {
           event.preventDefault();
           event.stopPropagation();
           onRemove(value);
         };
-
         if (onRemove) {
           return (
             <Chip
@@ -135,20 +98,16 @@ function SelectWrapped(props) {
             />
           );
         }
-
         return <div className="Select-value">{children}</div>;
       }}
       {...other}
     />
   );
 }
-
 const ITEM_HEIGHT = 48;
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
-
   },
   chip: {
     margin: theme.spacing.unit / 4,
@@ -254,14 +213,15 @@ class NeighborhoodComponent extends React.Component {
     super(props);
       this.state = {
         multiLabel: null,
+        suggestions: []
       };
   };
-
-
+  componentDidMount() {
+    fetchCities().then(data => {this.setState({suggestions: data})})
+  };
   handleCityChange = (event) => {
     this.props.changeCity(event)
   }
-
   render() {
     const { classes, city, showFormHelper=true } = this.props;
       return (
@@ -286,7 +246,7 @@ class NeighborhoodComponent extends React.Component {
                   instanceId: 'react-select-chip-label',
                   id: 'react-select-chip-label',
                   simpleValue: true,
-                  options: suggestions,
+                  options: this.state.suggestions,
                 }
               }
             }
@@ -296,12 +256,9 @@ class NeighborhoodComponent extends React.Component {
       );
   }
 }
-
 NeighborhoodComponent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
-
-
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(NeighborhoodComponent));
 
 
