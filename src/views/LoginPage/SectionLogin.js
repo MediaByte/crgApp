@@ -17,12 +17,12 @@ import Card from "../../components/card/Card.jsx";
 import CardBody from "../../components/card/CardBody.jsx";
 import CardHeader from "../../components/card/CardHeader.jsx";
 import CardFooter from "../../components/card/CardFooter.jsx";
-
 import Button from "../../components/CustomButtons/Button.jsx";
-
 import loginStyle from "../../assets/jss/material-kit-react/views/componentsSections/loginStyle.jsx";
+//Javascript library for CSS
 import 'tachyons'
-import { NavLink } from 'react-router-dom'
+//Javascript framework for single page application routing
+import { NavLink } from 'react-router-dom';
 
 class SectionLogin extends React.Component {
     constructor() {
@@ -39,12 +39,7 @@ class SectionLogin extends React.Component {
       700
     );
   }
-
-
   render() {
-
-
-
     const { classes, onSubmitLogin, toggleSession, userValid } = this.props;
     return (
       <div className={classes.container}>
@@ -61,7 +56,7 @@ class SectionLogin extends React.Component {
                   </div>
                 </Typography>
               </NavLink>
-              <div className={classes.form}>
+              <form className={classes.form}>
                 <CardBody>
                 <div className={classes.form}>
                 <InputLabel>Email</InputLabel>
@@ -106,7 +101,7 @@ class SectionLogin extends React.Component {
                     Get started
                   </Button>
                 </CardFooter>
-              </div>
+              </form>
             </Card>
           </GridItem>
         </GridContainer>

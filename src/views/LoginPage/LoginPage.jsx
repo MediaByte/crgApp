@@ -1,40 +1,29 @@
 import React from 'react';
-
 //State Management
 import { connect } from 'react-redux';
 import { isUserAuthorized } from '../../state/actions';
-
 // material-ui components
 import withStyles from "@material-ui/core/styles/withStyles";
-
 // core components
 import Header from "../../components/Header/Header.jsx";
 import HeaderLinks from "../../components/Header/HeaderLinks.jsx";
 import Footer from "../../components/Footer/Footer.jsx";
-
 //Project Components
 import SectionLogin from './SectionLogin';
-
 import image from "../../assets/img/bg7.jpg";
-
 import { Redirect } from 'react-router-dom';
-
 import loginPageStyle from "../../assets/jss/material-kit-react/views/loginPage.jsx";
-
 const dashboardRoutes = [];
-
 const mapStateToProps = state => {
   return {
     userValid: state.isUserAuthorized.userValid
   }
 }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleSession: (props) => dispatch(isUserAuthorized(props))
   }
 }
-
 class LoginPage extends React.Component{
   constructor(props) {
     super(props);
@@ -80,19 +69,11 @@ class LoginPage extends React.Component{
         }
       })
   }  
-
   render(){
-    const { 
-      classes,
-      userValid, 
-      toggleSession,
-      ...rest
-      } = this.props;
-
+    const { classes, userValid, toggleSession, ...rest } = this.props;
       if (userValid) {
         return <Redirect to='/rentals'/>;
       } else
-
     return (
     <div>
       <Header
@@ -134,7 +115,6 @@ class LoginPage extends React.Component{
       </div>
     </div>
     );
-
   }
 }
 
